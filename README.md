@@ -25,12 +25,22 @@ Lightweight WordPress build for Arthur Ray Law Offices, aligned to the approved 
 ## Local workflow
 
 1. Start the site in Local so MySQL is available.
-2. Activate the `Memphis Law` theme.
-3. Activate the `Memphis Law Core` plugin.
-4. Run `.\scripts\wp-local.ps1 plugin activate memphislaw-core`.
-5. Run `.\scripts\wp-local.ps1 theme activate memphislaw`.
+2. Run `.\scripts\setup-demo-site.ps1` for the first-time site bootstrap.
+3. Use `.\scripts\wp-local.ps1 <wp-cli args>` for ongoing local WordPress operations.
 
 If the Local site is down, WP-CLI will fail with a database connection error until Local is started.
+
+## Bootstrap command
+
+The setup script is idempotent and handles the initial site state:
+
+- activates the `Memphis Law Core` plugin
+- activates the `Memphis Law` theme
+- creates or reuses the `Home` page
+- sets WordPress to show a static front page
+- creates and assigns the primary navigation menu
+- removes default starter content
+- seeds starter attorneys and testimonials
 
 ## Git remote
 

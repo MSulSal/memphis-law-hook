@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.1.0
+ * Version: 0.2.0
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -145,7 +145,13 @@ function memphislaw_core_save_post_meta(int $post_id): void
     $post_type = get_post_type($post_id);
 
     if ($post_type === 'ml_attorney') {
-        if (!isset($_POST['memphislaw_attorney_meta_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['memphislaw_attorney_meta_nonce'])), 'memphislaw_save_attorney_meta')) {
+        if (
+            !isset($_POST['memphislaw_attorney_meta_nonce']) ||
+            !wp_verify_nonce(
+                sanitize_text_field(wp_unslash($_POST['memphislaw_attorney_meta_nonce'])),
+                'memphislaw_save_attorney_meta'
+            )
+        ) {
             return;
         }
 
@@ -155,7 +161,13 @@ function memphislaw_core_save_post_meta(int $post_id): void
     }
 
     if ($post_type === 'ml_testimonial') {
-        if (!isset($_POST['memphislaw_testimonial_meta_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['memphislaw_testimonial_meta_nonce'])), 'memphislaw_save_testimonial_meta')) {
+        if (
+            !isset($_POST['memphislaw_testimonial_meta_nonce']) ||
+            !wp_verify_nonce(
+                sanitize_text_field(wp_unslash($_POST['memphislaw_testimonial_meta_nonce'])),
+                'memphislaw_save_testimonial_meta'
+            )
+        ) {
             return;
         }
 
@@ -246,7 +258,13 @@ add_shortcode('memphislaw_consultation_form', 'memphislaw_core_render_consultati
 
 function memphislaw_core_handle_consultation_submission(): void
 {
-    if (!isset($_POST['memphislaw_consultation_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['memphislaw_consultation_nonce'])), 'memphislaw_submit_consultation')) {
+    if (
+        !isset($_POST['memphislaw_consultation_nonce']) ||
+        !wp_verify_nonce(
+            sanitize_text_field(wp_unslash($_POST['memphislaw_consultation_nonce'])),
+            'memphislaw_submit_consultation'
+        )
+    ) {
         wp_die(esc_html__('Invalid submission.', 'memphislaw-core'));
     }
 
@@ -307,7 +325,7 @@ function memphislaw_core_seed_starter_content(): void
                 'post_type' => 'ml_attorney',
                 'post_status' => 'publish',
                 'post_title' => 'Arthur Ray, Esq.',
-                'post_excerpt' => 'Arthur Ray has practiced bankruptcy law in Memphis for decades and built a respected personal injury and workers’ compensation practice serving the Mid-South.',
+                'post_excerpt' => "Arthur Ray has practiced bankruptcy law in Memphis for decades and built a respected personal injury and workers' compensation practice serving the Mid-South.",
                 'menu_order' => 0,
             ]
         );
@@ -323,15 +341,15 @@ function memphislaw_core_seed_starter_content(): void
                 'post_type' => 'ml_attorney',
                 'post_status' => 'publish',
                 'post_title' => 'Associate Attorney',
-                'post_excerpt' => 'Focused personal injury and workers’ compensation advocacy backed by attentive case preparation and responsive client care.',
+                'post_excerpt' => "Focused personal injury and workers' compensation advocacy backed by attentive case preparation and responsive client care.",
                 'menu_order' => 1,
             ]
         );
 
         if (!is_wp_error($associate_id) && $associate_id > 0) {
-            update_post_meta($associate_id, 'memphislaw_role', 'Personal Injury and Workers’ Compensation');
+            update_post_meta($associate_id, 'memphislaw_role', "Personal Injury and Workers' Compensation");
             update_post_meta($associate_id, 'memphislaw_badge', '');
-            update_post_meta($associate_id, 'memphislaw_credentials', "Licensed in Tennessee\nPersonal injury litigation\nWorkers’ compensation claims and appeals");
+            update_post_meta($associate_id, 'memphislaw_credentials', "Licensed in Tennessee\nPersonal injury litigation\nWorkers' compensation claims and appeals");
         }
     }
 
@@ -353,10 +371,10 @@ function memphislaw_core_seed_starter_content(): void
             ],
             [
                 'title' => 'Workers Compensation Testimonial One',
-                'excerpt' => 'My workers’ compensation claim was denied after a serious back injury on the job. Mr. Ray appealed the decision and we won.',
+                'excerpt' => "My workers' compensation claim was denied after a serious back injury on the job. Mr. Ray appealed the decision and we won.",
                 'client' => 'R. Thomas',
                 'location' => 'Bartlett, TN',
-                'matter' => 'Workers’ Compensation Client',
+                'matter' => "Workers' Compensation Client",
             ],
         ];
 
@@ -378,13 +396,159 @@ function memphislaw_core_seed_starter_content(): void
             }
         }
     }
+}
 
-    flush_rewrite_rules();
+function memphislaw_core_get_or_create_page(string $title, string $slug): int
+{
+    $existing = get_page_by_path($slug, OBJECT, 'page');
+
+    if ($existing instanceof WP_Post) {
+        return (int) $existing->ID;
+    }
+
+    $page_id = wp_insert_post(
+        [
+            'post_type' => 'page',
+            'post_status' => 'publish',
+            'post_title' => $title,
+            'post_name' => $slug,
+        ]
+    );
+
+    return is_wp_error($page_id) ? 0 : (int) $page_id;
+}
+
+function memphislaw_core_remove_default_content(): void
+{
+    $default_post = get_page_by_path('hello-world', OBJECT, 'post');
+    if ($default_post instanceof WP_Post && $default_post->post_title === 'Hello world!') {
+        wp_delete_post($default_post->ID, true);
+    }
+
+    $default_page = get_page_by_path('sample-page', OBJECT, 'page');
+    if ($default_page instanceof WP_Post && $default_page->post_title === 'Sample Page') {
+        wp_delete_post($default_page->ID, true);
+    }
+
+    foreach (get_comments(['status' => 'all', 'number' => 20]) as $comment) {
+        if (
+            $comment instanceof WP_Comment &&
+            $comment->comment_author === 'A WordPress Commenter' &&
+            strpos($comment->comment_content, 'Hi, this is a comment.') !== false
+        ) {
+            wp_delete_comment((int) $comment->comment_ID, true);
+        }
+    }
+}
+
+function memphislaw_core_ensure_primary_menu(): int
+{
+    $menu_name = 'Primary Navigation';
+    $menu = wp_get_nav_menu_object($menu_name);
+
+    if (!$menu) {
+        $menu_id = wp_create_nav_menu($menu_name);
+    } else {
+        $menu_id = (int) $menu->term_id;
+    }
+
+    if (is_wp_error($menu_id) || $menu_id <= 0) {
+        return 0;
+    }
+
+    $locations = get_theme_mod('nav_menu_locations');
+    if (!is_array($locations)) {
+        $locations = [];
+    }
+
+    $locations['primary'] = $menu_id;
+    set_theme_mod('nav_menu_locations', $locations);
+
+    $existing_items = wp_get_nav_menu_items($menu_id);
+    if (!empty($existing_items)) {
+        return $menu_id;
+    }
+
+    $menu_items = [
+        ['title' => 'Practice Areas', 'url' => home_url('/#practice-areas')],
+        ['title' => "Workers' Comp", 'url' => home_url('/#workers-comp')],
+        ['title' => 'Our Team', 'url' => home_url('/#team')],
+        ['title' => 'Testimonials', 'url' => home_url('/#testimonials')],
+        ['title' => 'Contact', 'url' => home_url('/#consultation')],
+    ];
+
+    foreach ($menu_items as $item) {
+        wp_update_nav_menu_item(
+            $menu_id,
+            0,
+            [
+                'menu-item-title' => $item['title'],
+                'menu-item-url' => $item['url'],
+                'menu-item-status' => 'publish',
+            ]
+        );
+    }
+
+    return $menu_id;
+}
+
+function memphislaw_core_apply_site_setup(): array
+{
+    memphislaw_core_register_post_types();
+    memphislaw_core_seed_starter_content();
+    memphislaw_core_remove_default_content();
+
+    update_option('blogname', 'Arthur Ray Law Offices');
+    update_option('blogdescription', 'Trusted legal counsel for Memphis families since 1974.');
+    update_option('timezone_string', 'America/Chicago');
+    update_option('date_format', 'F j, Y');
+    update_option('time_format', 'g:i A');
+
+    $home_page_id = memphislaw_core_get_or_create_page('Home', 'home');
+    if ($home_page_id > 0) {
+        update_option('show_on_front', 'page');
+        update_option('page_on_front', $home_page_id);
+        update_option('page_for_posts', 0);
+    }
+
+    global $wp_rewrite;
+    $wp_rewrite->set_permalink_structure('/%postname%/');
+    $wp_rewrite->flush_rules();
+
+    $menu_id = memphislaw_core_ensure_primary_menu();
+
+    return [
+        'home_page_id' => $home_page_id,
+        'menu_id' => $menu_id,
+    ];
+}
+
+function memphislaw_core_register_wp_cli_commands(): void
+{
+    WP_CLI::add_command(
+        'memphislaw setup-site',
+        function (): void {
+            $result = memphislaw_core_apply_site_setup();
+
+            WP_CLI::success(
+                sprintf(
+                    'Memphis Law site configured. Home page ID: %1$d. Menu ID: %2$d.',
+                    (int) $result['home_page_id'],
+                    (int) $result['menu_id']
+                )
+            );
+        }
+    );
 }
 
 function memphislaw_core_activate(): void
 {
     memphislaw_core_register_post_types();
     memphislaw_core_seed_starter_content();
+    flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'memphislaw_core_activate');
+
+if (defined('WP_CLI') && WP_CLI) {
+    memphislaw_core_register_wp_cli_commands();
+}
