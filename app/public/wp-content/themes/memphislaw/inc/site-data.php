@@ -6,9 +6,41 @@ function memphislaw_get_consultation_url(): string
     return home_url('/#consultation');
 }
 
+function memphislaw_get_site_page_by_slug(string $slug): ?WP_Post
+{
+    static $cache = [];
+
+    if (array_key_exists($slug, $cache)) {
+        return $cache[$slug];
+    }
+
+    $pages = get_posts(
+        [
+            'post_type' => 'page',
+            'post_status' => 'publish',
+            'posts_per_page' => 1,
+            'meta_key' => 'memphislaw_practice_area_key',
+            'meta_value' => $slug,
+            'orderby' => 'menu_order title',
+            'order' => 'ASC',
+        ]
+    );
+
+    if (!empty($pages) && $pages[0] instanceof WP_Post) {
+        $cache[$slug] = $pages[0];
+
+        return $cache[$slug];
+    }
+
+    $page = get_page_by_path($slug, OBJECT, 'page');
+    $cache[$slug] = $page instanceof WP_Post ? $page : null;
+
+    return $cache[$slug];
+}
+
 function memphislaw_get_page_url_by_path(string $slug, string $fallback): string
 {
-    $page = get_page_by_path($slug, OBJECT, 'page');
+    $page = memphislaw_get_site_page_by_slug($slug);
 
     if ($page instanceof WP_Post) {
         $permalink = get_permalink($page);
@@ -30,6 +62,59 @@ function memphislaw_get_primary_navigation_items(): array
         ['label' => __('Testimonials', 'memphislaw'), 'url' => home_url('/#testimonials')],
         ['label' => __('Contact', 'memphislaw'), 'url' => memphislaw_get_consultation_url()],
     ];
+}
+
+function memphislaw_get_multiline_meta_values(int $post_id, string $meta_key): array
+{
+    $raw_value = trim((string) get_post_meta($post_id, $meta_key, true));
+
+    if ($raw_value === '') {
+        return [];
+    }
+
+    return array_values(
+        array_filter(
+            array_map(
+                static fn(string $line): string => sanitize_text_field(trim($line)),
+                preg_split('/\r\n|\r|\n/', $raw_value) ?: []
+            )
+        )
+    );
+}
+
+function memphislaw_hydrate_practice_area_page(string $slug, array $page): array
+{
+    $wp_page = memphislaw_get_site_page_by_slug($slug);
+    $page['slug'] = $slug;
+    $page['link'] = memphislaw_get_page_url_by_path($slug, $page['fallback_link']);
+
+    if (!$wp_page instanceof WP_Post) {
+        return $page;
+    }
+
+    $page['page_id'] = (int) $wp_page->ID;
+
+    $title = trim((string) get_the_title($wp_page));
+    if ($title !== '') {
+        $page['title'] = $title;
+    }
+
+    $summary = trim((string) $wp_page->post_excerpt);
+    if ($summary !== '') {
+        $page['summary'] = $summary;
+    }
+
+    $icon = trim((string) get_post_meta($wp_page->ID, 'memphislaw_card_icon', true));
+    if ($icon !== '') {
+        $page['icon'] = sanitize_text_field($icon);
+    }
+
+    $bullets = memphislaw_get_multiline_meta_values($wp_page->ID, 'memphislaw_card_bullets');
+    if (!empty($bullets)) {
+        $page['bullets'] = $bullets;
+    }
+
+    return $page;
 }
 
 function memphislaw_get_practice_area_pages(): array
@@ -214,7 +299,11 @@ function memphislaw_get_practice_area_page(string $slug): ?array
 {
     $pages = memphislaw_get_practice_area_pages();
 
-    return $pages[$slug] ?? null;
+    if (!isset($pages[$slug])) {
+        return null;
+    }
+
+    return memphislaw_hydrate_practice_area_page($slug, $pages[$slug]);
 }
 
 function memphislaw_get_related_practice_areas(string $current_slug): array
@@ -232,13 +321,15 @@ function memphislaw_get_practice_areas(): array
     $areas = [];
 
     foreach (memphislaw_get_practice_area_pages() as $slug => $page) {
+        $page = memphislaw_hydrate_practice_area_page($slug, $page);
+
         $areas[] = [
             'id' => $slug,
             'icon' => $page['icon'],
             'title' => $page['title'],
             'summary' => $page['summary'],
             'bullets' => $page['bullets'],
-            'link' => memphislaw_get_page_url_by_path($slug, $page['fallback_link']),
+            'link' => $page['link'],
         ];
     }
 
@@ -401,10 +492,22 @@ function memphislaw_get_attorneys(): array
 function memphislaw_get_site_stats(): array
 {
     return [
-        ['value' => '50+', 'label' => __('Years of Bankruptcy Practice', 'memphislaw')],
-        ['value' => '5,000+', 'label' => __('Bankruptcy Cases Filed', 'memphislaw')],
-        ['value' => '$Millions', 'label' => __('Recovered for Injured Clients', 'memphislaw')],
-        ['value' => '3', 'label' => __('Core Practice Areas', 'memphislaw')],
+        [
+            'value' => memphislaw_get_string_theme_mod('memphislaw_site_stat_1_value', 'site_stat_1_value'),
+            'label' => memphislaw_get_string_theme_mod('memphislaw_site_stat_1_label', 'site_stat_1_label'),
+        ],
+        [
+            'value' => memphislaw_get_string_theme_mod('memphislaw_site_stat_2_value', 'site_stat_2_value'),
+            'label' => memphislaw_get_string_theme_mod('memphislaw_site_stat_2_label', 'site_stat_2_label'),
+        ],
+        [
+            'value' => memphislaw_get_string_theme_mod('memphislaw_site_stat_3_value', 'site_stat_3_value'),
+            'label' => memphislaw_get_string_theme_mod('memphislaw_site_stat_3_label', 'site_stat_3_label'),
+        ],
+        [
+            'value' => memphislaw_get_string_theme_mod('memphislaw_site_stat_4_value', 'site_stat_4_value'),
+            'label' => memphislaw_get_string_theme_mod('memphislaw_site_stat_4_label', 'site_stat_4_label'),
+        ],
     ];
 }
 
@@ -496,11 +599,13 @@ function memphislaw_get_testimonials(): array
 
 function memphislaw_get_contact_details(): array
 {
+    $defaults = memphislaw_get_customizer_defaults();
+
     return [
-        'address_line_1' => __('6244 Poplar Ave, Suite 150', 'memphislaw'),
-        'address_line_2' => __('Memphis, TN 38119', 'memphislaw'),
-        'phone' => '901-475-8200',
-        'email' => 'info@memphislaw.com',
-        'hours' => __('Mon-Fri: 8:30 AM - 5:30 PM | Sat: By appointment', 'memphislaw'),
+        'address_line_1' => memphislaw_get_string_theme_mod('memphislaw_contact_address_line_1', 'contact_address_line_1'),
+        'address_line_2' => memphislaw_get_string_theme_mod('memphislaw_contact_address_line_2', 'contact_address_line_2'),
+        'phone' => memphislaw_get_string_theme_mod('memphislaw_contact_phone', 'contact_phone'),
+        'email' => memphislaw_get_string_theme_mod('memphislaw_contact_email', 'contact_email', 'email') ?: $defaults['contact_email'],
+        'hours' => memphislaw_get_string_theme_mod('memphislaw_contact_hours', 'contact_hours', 'textarea'),
     ];
 }

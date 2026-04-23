@@ -9,6 +9,15 @@ function memphislaw_setup(): void
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support(
+        'custom-logo',
+        [
+            'height' => 96,
+            'width' => 96,
+            'flex-height' => true,
+            'flex-width' => true,
+        ]
+    );
+    add_theme_support(
         'html5',
         [
             'comment-form',
@@ -26,6 +35,8 @@ function memphislaw_setup(): void
             'primary' => __('Primary Navigation', 'memphislaw'),
         ]
     );
+
+    add_post_type_support('page', 'excerpt');
 }
 add_action('after_setup_theme', 'memphislaw_setup');
 
@@ -89,4 +100,32 @@ function memphislaw_render_consultation_form(): string
 function memphislaw_get_phone_href(): string
 {
     return 'tel:' . preg_replace('/[^0-9+]/', '', memphislaw_get_contact_details()['phone']);
+}
+
+function memphislaw_get_brand_logo_markup(): string
+{
+    $logo_id = (int) get_theme_mod('custom_logo');
+
+    if ($logo_id > 0) {
+        $markup = wp_get_attachment_image(
+            $logo_id,
+            'full',
+            false,
+            [
+                'class' => 'brand__image',
+                'loading' => 'eager',
+                'alt' => get_bloginfo('name'),
+            ]
+        );
+
+        if (is_string($markup) && $markup !== '') {
+            return $markup;
+        }
+    }
+
+    return sprintf(
+        '<img class="brand__image" src="%1$s" alt="%2$s" loading="eager">',
+        esc_url(get_theme_file_uri('/assets/images/logo.png')),
+        esc_attr(get_bloginfo('name'))
+    );
 }

@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.3.0
+ * Version: 0.4.0
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -86,8 +86,31 @@ function memphislaw_core_register_meta_boxes(): void
         'normal',
         'high'
     );
+
+    add_meta_box(
+        'memphislaw_practice_page_details',
+        __('Practice Area Card Details', 'memphislaw-core'),
+        'memphislaw_core_render_practice_page_meta_box',
+        'page',
+        'normal',
+        'high'
+    );
 }
 add_action('add_meta_boxes', 'memphislaw_core_register_meta_boxes');
+
+function memphislaw_core_is_practice_area_page(WP_Post $post): bool
+{
+    if ($post->post_type !== 'page') {
+        return false;
+    }
+
+    $page_key = (string) get_post_meta($post->ID, 'memphislaw_practice_area_key', true);
+    if ($page_key !== '') {
+        return in_array($page_key, ['bankruptcy', 'personal-injury', 'workers-compensation'], true);
+    }
+
+    return in_array($post->post_name, ['bankruptcy', 'personal-injury', 'workers-compensation'], true);
+}
 
 function memphislaw_core_render_attorney_meta_box(WP_Post $post): void
 {
@@ -128,6 +151,28 @@ function memphislaw_core_render_testimonial_meta_box(WP_Post $post): void
     <p>
         <label for="memphislaw_testimonial_rating"><strong><?php esc_html_e('Star Rating', 'memphislaw-core'); ?></strong></label><br>
         <input type="number" min="1" max="5" class="small-text" id="memphislaw_testimonial_rating" name="memphislaw_testimonial_rating" value="<?php echo esc_attr((string) get_post_meta($post->ID, 'memphislaw_testimonial_rating', true)); ?>">
+    </p>
+    <?php
+}
+
+function memphislaw_core_render_practice_page_meta_box(WP_Post $post): void
+{
+    if (!memphislaw_core_is_practice_area_page($post)) {
+        echo '<p>' . esc_html__("This box is used only for the Bankruptcy, Personal Injury, and Workers' Compensation pages.", 'memphislaw-core') . '</p>';
+        return;
+    }
+
+    wp_nonce_field('memphislaw_save_practice_page_meta', 'memphislaw_practice_page_meta_nonce');
+    ?>
+    <p><?php esc_html_e('Page title controls the card title. Page excerpt controls the homepage card summary. Page content remains available for long-form details on the practice area page itself.', 'memphislaw-core'); ?></p>
+    <p>
+        <label for="memphislaw_card_icon"><strong><?php esc_html_e('Homepage Card Icon', 'memphislaw-core'); ?></strong></label><br>
+        <input type="text" class="regular-text" id="memphislaw_card_icon" name="memphislaw_card_icon" value="<?php echo esc_attr((string) get_post_meta($post->ID, 'memphislaw_card_icon', true)); ?>" maxlength="4">
+    </p>
+    <p>
+        <label for="memphislaw_card_bullets"><strong><?php esc_html_e('Homepage Card Bullets', 'memphislaw-core'); ?></strong></label><br>
+        <textarea class="widefat" rows="6" id="memphislaw_card_bullets" name="memphislaw_card_bullets"><?php echo esc_textarea((string) get_post_meta($post->ID, 'memphislaw_card_bullets', true)); ?></textarea>
+        <small><?php esc_html_e('Enter one bullet per line.', 'memphislaw-core'); ?></small>
     </p>
     <?php
 }
@@ -175,6 +220,25 @@ function memphislaw_core_save_post_meta(int $post_id): void
         update_post_meta($post_id, 'memphislaw_testimonial_location', sanitize_text_field(wp_unslash($_POST['memphislaw_testimonial_location'] ?? '')));
         update_post_meta($post_id, 'memphislaw_testimonial_matter', sanitize_text_field(wp_unslash($_POST['memphislaw_testimonial_matter'] ?? '')));
         update_post_meta($post_id, 'memphislaw_testimonial_rating', max(1, min(5, (int) ($_POST['memphislaw_testimonial_rating'] ?? 5))));
+    }
+
+    if ($post_type === 'page') {
+        $post = get_post($post_id);
+
+        if (
+            !$post instanceof WP_Post ||
+            !memphislaw_core_is_practice_area_page($post) ||
+            !isset($_POST['memphislaw_practice_page_meta_nonce']) ||
+            !wp_verify_nonce(
+                sanitize_text_field(wp_unslash($_POST['memphislaw_practice_page_meta_nonce'])),
+                'memphislaw_save_practice_page_meta'
+            )
+        ) {
+            return;
+        }
+
+        update_post_meta($post_id, 'memphislaw_card_icon', sanitize_text_field(wp_unslash($_POST['memphislaw_card_icon'] ?? '')));
+        update_post_meta($post_id, 'memphislaw_card_bullets', sanitize_textarea_field(wp_unslash($_POST['memphislaw_card_bullets'] ?? '')));
     }
 }
 add_action('save_post', 'memphislaw_core_save_post_meta');
@@ -447,6 +511,45 @@ function memphislaw_core_ensure_practice_area_pages(): array
     return $page_ids;
 }
 
+function memphislaw_core_seed_practice_area_page_fields(array $page_ids): void
+{
+    if (!function_exists('memphislaw_get_practice_area_pages')) {
+        return;
+    }
+
+    $defaults = memphislaw_get_practice_area_pages();
+
+    foreach ($page_ids as $slug => $page_id) {
+        if ($page_id <= 0 || empty($defaults[$slug])) {
+            continue;
+        }
+
+        $page = get_post($page_id);
+        if (!$page instanceof WP_Post) {
+            continue;
+        }
+
+        update_post_meta($page_id, 'memphislaw_practice_area_key', $slug);
+
+        if (trim((string) get_post_meta($page_id, 'memphislaw_card_icon', true)) === '') {
+            update_post_meta($page_id, 'memphislaw_card_icon', $defaults[$slug]['icon']);
+        }
+
+        if (trim((string) get_post_meta($page_id, 'memphislaw_card_bullets', true)) === '') {
+            update_post_meta($page_id, 'memphislaw_card_bullets', implode("\n", $defaults[$slug]['bullets']));
+        }
+
+        if (trim((string) $page->post_excerpt) === '') {
+            wp_update_post(
+                [
+                    'ID' => $page_id,
+                    'post_excerpt' => wp_strip_all_tags((string) $defaults[$slug]['summary']),
+                ]
+            );
+        }
+    }
+}
+
 function memphislaw_core_remove_default_content(): void
 {
     $default_post = get_page_by_path('hello-world', OBJECT, 'post');
@@ -535,6 +638,7 @@ function memphislaw_core_apply_site_setup(): array
 
     $home_page_id = memphislaw_core_get_or_create_page('Home', 'home');
     $practice_page_ids = memphislaw_core_ensure_practice_area_pages();
+    memphislaw_core_seed_practice_area_page_fields($practice_page_ids);
 
     if ($home_page_id > 0) {
         update_option('show_on_front', 'page');

@@ -2,19 +2,20 @@
 declare(strict_types=1);
 
 $contact = memphislaw_get_contact_details();
+$brand = memphislaw_get_brand_settings();
 ?>
 <footer class="site-footer">
     <div class="container site-footer__grid">
         <div>
             <a class="brand brand--footer" href="<?php echo esc_url(home_url('/')); ?>">
-                <span class="brand__mark" aria-hidden="true">A</span>
+                <span class="brand__mark" aria-hidden="true"><?php echo wp_kses_post(memphislaw_get_brand_logo_markup()); ?></span>
                 <span class="brand__text">
                     <strong>Arthur Ray</strong>
                     <span><?php esc_html_e('Law Offices', 'memphislaw'); ?></span>
                 </span>
             </a>
             <p class="site-footer__blurb">
-                <?php esc_html_e('Trusted legal counsel for Memphis families since 1974.', 'memphislaw'); ?>
+                <?php echo esc_html($brand['tagline']); ?>
             </p>
         </div>
 
@@ -49,7 +50,7 @@ $contact = memphislaw_get_contact_details();
 
     <div class="container site-footer__legal">
         <p>&copy; <?php echo esc_html(date_i18n('Y')); ?> Arthur Ray Law Offices, PLLC. <?php esc_html_e('All rights reserved.', 'memphislaw'); ?></p>
-        <p><?php esc_html_e('Attorney advertising. This website is for general information only and does not create an attorney-client relationship.', 'memphislaw'); ?></p>
+        <p><?php echo esc_html($brand['footer_disclaimer']); ?></p>
     </div>
 </footer>
 <?php wp_footer(); ?>

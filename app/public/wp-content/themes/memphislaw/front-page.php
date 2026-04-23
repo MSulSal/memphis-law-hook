@@ -12,6 +12,8 @@ $testimonials = memphislaw_get_testimonials();
 $contact = memphislaw_get_contact_details();
 $hero = memphislaw_get_homepage_hero_content();
 $hero_image_url = memphislaw_get_homepage_hero_image_url();
+$sections = memphislaw_get_homepage_sections();
+$brand = memphislaw_get_brand_settings();
 ?>
 <main id="primary" class="site-main">
     <section class="hero" id="top">
@@ -68,9 +70,9 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
     <section class="section section--dark" id="practice-areas">
         <div class="container">
             <div class="section__intro">
-                <p class="eyebrow"><?php esc_html_e('Practice Areas', 'memphislaw'); ?></p>
-                <h2><?php esc_html_e('Comprehensive Legal Services for Memphis Families', 'memphislaw'); ?></h2>
-                <p><?php esc_html_e("Whether you're facing financial hardship, recovering from an injury, or navigating a workplace accident, Arthur Ray Law Offices provides experienced, compassionate representation.", 'memphislaw'); ?></p>
+                <p class="eyebrow"><?php echo esc_html($sections['practice']['eyebrow']); ?></p>
+                <h2><?php echo esc_html($sections['practice']['title']); ?></h2>
+                <p><?php echo esc_html($sections['practice']['intro']); ?></p>
             </div>
 
             <div class="card-grid">
@@ -94,26 +96,26 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
     <section class="section section--blue" id="workers-comp">
         <div class="container workers-comp">
             <div class="workers-comp__main">
-                <p class="eyebrow"><?php esc_html_e('Tennessee Law', 'memphislaw'); ?></p>
-                <h2><?php esc_html_e("Workers' Compensation in Tennessee: Know Your Rights", 'memphislaw'); ?></h2>
+                <p class="eyebrow"><?php echo esc_html($sections['workers_comp']['eyebrow']); ?></p>
+                <h2><?php echo esc_html($sections['workers_comp']['title']); ?></h2>
                 <p>
-                    <?php esc_html_e("Tennessee's workers' compensation system provides important protections for employees injured on the job. Understanding your eligibility and benefits is the first step toward recovery.", 'memphislaw'); ?>
+                    <?php echo esc_html($sections['workers_comp']['intro']); ?>
                 </p>
 
                 <div class="workers-comp__split">
                     <div>
-                        <h3><?php esc_html_e('Who Is Covered?', 'memphislaw'); ?></h3>
-                        <p><?php esc_html_e("Under Tennessee Code Annotated Section 50-6-102, employers with five or more employees are required to carry workers' compensation insurance. This coverage protects employees in virtually all industries.", 'memphislaw'); ?></p>
+                        <h3><?php echo esc_html($sections['workers_comp']['covered_heading']); ?></h3>
+                        <p><?php echo esc_html($sections['workers_comp']['covered_copy']); ?></p>
                     </div>
                     <aside class="info-card">
-                        <h3><?php esc_html_e('Was Your Claim Denied?', 'memphislaw'); ?></h3>
-                        <p><?php esc_html_e('Insurance companies often deny valid claims. We fight back at no cost unless you win.', 'memphislaw'); ?></p>
-                        <a class="button" href="<?php echo esc_url(memphislaw_get_page_url_by_path('workers-compensation', home_url('/#workers-comp'))); ?>"><?php esc_html_e('Get Help Now', 'memphislaw'); ?></a>
+                        <h3><?php echo esc_html($sections['workers_comp']['denied_title']); ?></h3>
+                        <p><?php echo esc_html($sections['workers_comp']['denied_copy']); ?></p>
+                        <a class="button" href="<?php echo esc_url(memphislaw_get_page_url_by_path('workers-compensation', home_url('/#workers-comp'))); ?>"><?php echo esc_html($sections['workers_comp']['denied_button_label']); ?></a>
                         <a class="info-card__phone" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>"><?php echo esc_html($contact['phone']); ?></a>
                     </aside>
                 </div>
 
-                <h3><?php esc_html_e('What Benefits Are Available?', 'memphislaw'); ?></h3>
+                <h3><?php echo esc_html($sections['workers_comp']['benefits_heading']); ?></h3>
                 <div class="benefit-grid">
                     <?php foreach ($benefits as $benefit) : ?>
                         <article class="benefit-card">
@@ -127,13 +129,13 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
                 </div>
 
                 <div class="deadline-note">
-                    <strong><?php esc_html_e('Important deadline:', 'memphislaw'); ?></strong>
-                    <span><?php esc_html_e("You must report your injury quickly and file your claim within the required time. Don't wait to ask for guidance.", 'memphislaw'); ?></span>
+                    <strong><?php echo esc_html($sections['workers_comp']['deadline_label']); ?></strong>
+                    <span><?php echo esc_html($sections['workers_comp']['deadline_copy']); ?></span>
                 </div>
             </div>
 
             <aside class="steps-card">
-                <p class="eyebrow"><?php esc_html_e('Steps After a Work Injury', 'memphislaw'); ?></p>
+                <p class="eyebrow"><?php echo esc_html($sections['workers_comp']['steps_eyebrow']); ?></p>
                 <ol>
                     <?php foreach ($steps as $step) : ?>
                         <li>
@@ -149,9 +151,9 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
     <section class="section section--dark" id="team">
         <div class="container">
             <div class="section__intro">
-                <p class="eyebrow"><?php esc_html_e('Our Team', 'memphislaw'); ?></p>
-                <h2><?php esc_html_e('Experience You Can Trust', 'memphislaw'); ?></h2>
-                <p><?php esc_html_e('The attorneys at Arthur Ray Law Offices bring decades of combined experience and a genuine commitment to the people of Memphis and surrounding communities.', 'memphislaw'); ?></p>
+                <p class="eyebrow"><?php echo esc_html($sections['team']['eyebrow']); ?></p>
+                <h2><?php echo esc_html($sections['team']['title']); ?></h2>
+                <p><?php echo esc_html($sections['team']['intro']); ?></p>
             </div>
 
             <div class="attorney-grid">
@@ -191,8 +193,8 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
     <section class="section section--dark section--testimonials" id="testimonials">
         <div class="container">
             <div class="section__intro">
-                <p class="eyebrow"><?php esc_html_e('Client Stories', 'memphislaw'); ?></p>
-                <h2><?php esc_html_e('What Our Clients Say', 'memphislaw'); ?></h2>
+                <p class="eyebrow"><?php echo esc_html($sections['testimonials']['eyebrow']); ?></p>
+                <h2><?php echo esc_html($sections['testimonials']['title']); ?></h2>
             </div>
 
             <div class="testimonial-grid">
@@ -213,9 +215,9 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
     <section class="section section--blue" id="consultation">
         <div class="container consultation">
             <div class="consultation__details">
-                <p class="eyebrow"><?php esc_html_e('Get in Touch', 'memphislaw'); ?></p>
-                <h2><?php esc_html_e('Free Consultation. No Fees Unless You Win.', 'memphislaw'); ?></h2>
-                <p><?php esc_html_e("Tell us about your situation. We'll review your case at no charge and advise you on the strongest next step.", 'memphislaw'); ?></p>
+                <p class="eyebrow"><?php echo esc_html($sections['consultation']['eyebrow']); ?></p>
+                <h2><?php echo esc_html($sections['consultation']['title']); ?></h2>
+                <p><?php echo esc_html($sections['consultation']['intro']); ?></p>
 
                 <dl class="contact-list">
                     <div>
@@ -237,7 +239,7 @@ $hero_image_url = memphislaw_get_homepage_hero_image_url();
                 </dl>
 
                 <div class="consultation__map">
-                    <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/office-map.jpg')); ?>" alt="<?php esc_attr_e('Map showing the office area around Arthur Ray Law Offices in Memphis.', 'memphislaw'); ?>">
+                    <img src="<?php echo esc_url($brand['contact_map_image']); ?>" alt="<?php esc_attr_e('Map showing the office area around Arthur Ray Law Offices in Memphis.', 'memphislaw'); ?>">
                 </div>
             </div>
 

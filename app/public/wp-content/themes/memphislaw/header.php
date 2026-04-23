@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 $contact = memphislaw_get_contact_details();
+$brand = memphislaw_get_brand_settings();
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -16,7 +17,7 @@ $contact = memphislaw_get_contact_details();
 <header class="site-header">
     <div class="container site-header__inner">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-            <span class="brand__mark" aria-hidden="true">A</span>
+            <span class="brand__mark" aria-hidden="true"><?php echo wp_kses_post(memphislaw_get_brand_logo_markup()); ?></span>
             <span class="brand__text">
                 <strong>Arthur Ray</strong>
                 <span><?php esc_html_e('Law Offices', 'memphislaw'); ?></span>
@@ -58,7 +59,7 @@ $contact = memphislaw_get_contact_details();
                 <?php echo esc_html($contact['phone']); ?>
             </a>
             <a class="button button--small" href="<?php echo esc_url(home_url('/#consultation')); ?>">
-                <?php esc_html_e('Free Consultation', 'memphislaw'); ?>
+                <?php echo esc_html($brand['header_consultation_label']); ?>
             </a>
         </div>
     </div>

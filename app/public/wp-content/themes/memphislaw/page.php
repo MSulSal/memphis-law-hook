@@ -3,7 +3,13 @@ declare(strict_types=1);
 
 get_header();
 
-$practice_area = memphislaw_get_practice_area_page((string) get_post_field('post_name', get_the_ID()));
+$practice_area_key = (string) get_post_meta(get_the_ID(), 'memphislaw_practice_area_key', true);
+
+if ($practice_area_key === '') {
+    $practice_area_key = (string) get_post_field('post_name', get_the_ID());
+}
+
+$practice_area = memphislaw_get_practice_area_page($practice_area_key);
 
 if (is_array($practice_area)) {
     get_template_part('template-parts/practice-area-page', null, ['practice_area' => $practice_area]);

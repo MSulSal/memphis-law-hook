@@ -29,6 +29,12 @@ The site must not depend on a page builder or non-WordPress handoff workflow. Ho
 
 The current theme now uses the Customizer for hero content and core brand colors. Remaining homepage sections should keep moving away from hardcoded fallback copy and into WordPress-managed fields.
 
+The homepage editing model is now split in a client-friendly way:
+
+- `Appearance > Customize` handles hero content, section headings, contact details, shared stats, logo replacement, and key brand styling.
+- `Pages > Bankruptcy`, `Pages > Personal Injury`, and `Pages > Workers' Compensation` handle the homepage practice cards through the page title, excerpt, and a small "Practice Area Card Details" meta box.
+- `Attorneys` and `Testimonials` remain managed through the companion plugin post types.
+
 ## First commit architecture
 
 - Custom theme handles the full presentation layer.
