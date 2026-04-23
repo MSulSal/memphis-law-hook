@@ -23,6 +23,12 @@ The immediate business goal is simple: get a client-ready demo close enough to t
 6. Contact section with consultation form and office details.
 7. Legal footer.
 
+## WordPress-native editing direction
+
+The site must not depend on a page builder or non-WordPress handoff workflow. Homepage content and appearance controls should move into native WordPress editing surfaces wherever practical so the client can update copy, images, and brand styling without code changes.
+
+The current theme now uses the Customizer for hero content and core brand colors. Remaining homepage sections should keep moving away from hardcoded fallback copy and into WordPress-managed fields.
+
 ## First commit architecture
 
 - Custom theme handles the full presentation layer.

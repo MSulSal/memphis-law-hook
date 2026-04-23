@@ -14,8 +14,12 @@ Dedicated practice area pages and stronger internal linking.
 
 ## Commit 4
 
-SEO polish, favicon, social preview image, legal review pass, and migration rehearsal.
+Move the remaining homepage sections out of theme fallback copy and into WordPress-managed content that is easier for the client to maintain.
 
 ## Commit 5
+
+SEO polish, favicon, social preview image, legal review pass, and migration rehearsal.
+
+## Commit 6
 
 Client handoff packet update after final copy and contact details are approved.

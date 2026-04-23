@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/inc/site-data.php';
+require_once __DIR__ . '/inc/customizer.php';
 
 function memphislaw_setup(): void
 {
@@ -34,11 +35,20 @@ function memphislaw_enqueue_assets(): void
     $version = $theme->get('Version') ?: '0.1.0';
 
     wp_enqueue_style(
+        'memphislaw-fonts',
+        'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700;1,800&display=swap',
+        [],
+        null
+    );
+
+    wp_enqueue_style(
         'memphislaw-theme',
         get_theme_file_uri('/assets/css/site.css'),
-        [],
+        ['memphislaw-fonts'],
         $version
     );
+
+    wp_add_inline_style('memphislaw-theme', memphislaw_get_dynamic_styles());
 
     wp_enqueue_script(
         'memphislaw-theme',

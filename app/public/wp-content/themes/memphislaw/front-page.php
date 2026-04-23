@@ -10,34 +10,54 @@ $attorneys = memphislaw_get_attorneys();
 $stats = memphislaw_get_site_stats();
 $testimonials = memphislaw_get_testimonials();
 $contact = memphislaw_get_contact_details();
+$hero = memphislaw_get_homepage_hero_content();
+$hero_image_url = memphislaw_get_homepage_hero_image_url();
 ?>
 <main id="primary" class="site-main">
     <section class="hero" id="top">
-        <div class="hero__overlay"></div>
+        <div class="hero__media" aria-hidden="true">
+            <img src="<?php echo esc_url($hero_image_url); ?>" alt="">
+        </div>
+        <div class="hero__wash" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
         <div class="container hero__inner">
-            <div class="hero__content">
-                <p class="eyebrow"><?php esc_html_e('Memphis, Tennessee - Since 1974', 'memphislaw'); ?></p>
-                <h1 class="hero__title">
-                    <?php esc_html_e('Trusted Legal Counsel', 'memphislaw'); ?>
-                    <span><?php esc_html_e('When It Matters Most', 'memphislaw'); ?></span>
-                </h1>
-                <p class="hero__lead">
-                    <?php esc_html_e("Bankruptcy, personal injury, and workers' compensation representation for Memphis families and Mid-South workers.", 'memphislaw'); ?>
+            <div class="hero__panel">
+                <p class="hero__pill">
+                    <span><?php echo esc_html($hero['pill_location']); ?></span>
+                    <span aria-hidden="true">&bull;</span>
+                    <span><?php echo esc_html($hero['pill_since']); ?></span>
                 </p>
+                <h1 class="hero__title">
+                    <span class="hero__title-line"><?php echo esc_html($hero['title_lines'][0]); ?></span>
+                    <span class="hero__title-line"><?php echo esc_html($hero['title_lines'][1]); ?></span>
+                    <span class="hero__title-line hero__title-line--accent"><?php echo esc_html($hero['title_lines'][2]); ?></span>
+                    <span class="hero__title-line hero__title-line--accent"><?php echo esc_html($hero['title_lines'][3]); ?></span>
+                </h1>
+                <div class="hero__summary">
+                    <p class="hero__practice-line">
+                        <span><?php echo esc_html($hero['practice_areas'][0]); ?></span>
+                        <span aria-hidden="true">&bull;</span>
+                        <span><?php echo esc_html($hero['practice_areas'][1]); ?></span>
+                        <span aria-hidden="true">&bull;</span>
+                    </p>
+                    <p class="hero__practice-line"><?php echo esc_html($hero['practice_areas'][2]); ?></p>
+                    <p class="hero__support-line"><?php echo esc_html($hero['support_lines'][0]); ?></p>
+                    <p class="hero__support-line"><?php echo esc_html($hero['support_lines'][1]); ?></p>
+                </div>
                 <div class="hero__actions">
-                    <a class="button" href="<?php echo esc_url(memphislaw_get_consultation_url()); ?>">
-                        <?php esc_html_e('Get a Free Consultation', 'memphislaw'); ?>
+                    <a class="button" href="<?php echo esc_url($hero['primary_button_url']); ?>">
+                        <?php echo esc_html($hero['primary_button_label']); ?>
                     </a>
-                    <a class="button button--ghost" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>">
-                        <?php echo esc_html(sprintf(__('Call %s', 'memphislaw'), $contact['phone'])); ?>
+                    <a class="button button--ghost" href="<?php echo esc_url($hero['secondary_button_url']); ?>">
+                        <?php echo esc_html($hero['secondary_button_label']); ?>
                     </a>
                 </div>
 
-                <div class="hero__stats">
-                    <?php foreach (array_slice($stats, 0, 3) as $stat) : ?>
-                        <div class="hero__stat">
-                            <strong><?php echo esc_html($stat['value']); ?></strong>
-                            <span><?php echo esc_html($stat['label']); ?></span>
+                <div class="hero__metrics" aria-label="<?php esc_attr_e('Firm highlights', 'memphislaw'); ?>">
+                    <?php foreach ($hero['metrics'] as $metric) : ?>
+                        <div class="hero__metric">
+                            <strong><?php echo esc_html($metric['value']); ?></strong>
+                            <span><?php echo esc_html($metric['label']); ?></span>
                         </div>
                     <?php endforeach; ?>
                 </div>

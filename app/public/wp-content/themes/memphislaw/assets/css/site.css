@@ -11,8 +11,8 @@
     --ml-border: rgba(138, 163, 218, 0.18);
     --ml-shadow: 0 24px 60px rgba(3, 10, 22, 0.35);
     --ml-radius: 22px;
-    --ml-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-    --ml-sans: "Aptos", "Segoe UI", Tahoma, sans-serif;
+    --ml-serif: "Playfair Display", Georgia, serif;
+    --ml-sans: "Manrope", "Segoe UI", Tahoma, sans-serif;
 }
 
 *,
@@ -245,72 +245,191 @@ ol {
 .hero {
     position: relative;
     overflow: hidden;
-    min-height: clamp(40rem, 82vh, 52rem);
-    background:
-        linear-gradient(90deg, rgba(8, 13, 24, 0.96) 0%, rgba(8, 13, 24, 0.86) 32%, rgba(8, 13, 24, 0.5) 58%, rgba(8, 13, 24, 0.72) 100%),
-        url("../images/hero-courthouse.jpg") 82% center / cover no-repeat,
-        linear-gradient(180deg, #10244d, #0a1020);
+    min-height: clamp(42rem, 86vh, 50rem);
+    background: linear-gradient(180deg, #10244d 0%, #0a1020 100%);
 }
 
-.hero__overlay {
+.hero__media,
+.hero__wash,
+.hero__glow {
     position: absolute;
     inset: 0;
+}
+
+.hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 57% 54%;
+    transform: scale(1.02);
+}
+
+.hero__wash {
     background:
-        radial-gradient(circle at top right, rgba(94, 136, 230, 0.26), transparent 36%),
-        linear-gradient(180deg, transparent 70%, rgba(8, 13, 24, 0.72) 100%);
+        linear-gradient(90deg, rgba(8, 13, 24, 0.92) 0%, rgba(9, 17, 31, 0.82) 28%, rgba(10, 18, 34, 0.48) 54%, rgba(8, 13, 24, 0.68) 100%),
+        linear-gradient(180deg, rgba(10, 18, 34, 0.28) 0%, rgba(10, 18, 34, 0.18) 54%, rgba(8, 13, 24, 0.72) 100%);
+}
+
+.hero__glow {
+    background:
+        radial-gradient(circle at 24% 32%, rgba(94, 136, 230, 0.18), transparent 28%),
+        linear-gradient(180deg, rgba(8, 13, 24, 0) 68%, rgba(8, 13, 24, 0.72) 100%);
 }
 
 .hero__inner {
     position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
-    min-height: clamp(40rem, 82vh, 52rem);
-    padding: 5rem 0 4rem;
+    min-height: clamp(42rem, 86vh, 50rem);
+    padding: clamp(5.75rem, 11vw, 7rem) 0 clamp(3.8rem, 7vw, 5rem);
 }
 
-.hero__content {
-    position: relative;
-    z-index: 1;
-    max-width: 39rem;
+.hero__panel {
+    width: min(100%, 42rem);
+    margin-left: clamp(0rem, 9vw, 8rem);
+}
+
+.hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.55rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid rgba(239, 183, 37, 0.34);
+    border-radius: 999px;
+    background: rgba(19, 31, 57, 0.7);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    color: var(--ml-gold);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.hero__pill span[aria-hidden="true"] {
+    font-size: 0.55rem;
+    opacity: 0.8;
 }
 
 .hero__title {
-    font-size: clamp(3rem, 8vw, 5.6rem);
+    margin-bottom: 1.35rem;
+    color: white;
+    font-size: clamp(3.5rem, 6vw, 5.8rem);
+    line-height: 0.93;
+    letter-spacing: -0.05em;
+}
+
+.hero__title-line {
+    display: block;
+}
+
+.hero__title-line--accent {
+    color: var(--ml-gold);
+    font-style: italic;
+    font-weight: 700;
+}
+
+.hero__summary {
+    max-width: 31rem;
     color: white;
 }
 
-.hero__title span {
-    display: block;
-    color: var(--ml-gold);
-    font-style: italic;
-    font-weight: 400;
+.hero__practice-line,
+.hero__support-line {
+    margin-bottom: 0;
+    font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+    font-weight: 500;
 }
 
-.hero__lead {
-    max-width: 34rem;
-    color: var(--ml-text);
-    font-size: 1.18rem;
+.hero__practice-line {
+    letter-spacing: -0.02em;
+}
+
+.hero__practice-line + .hero__practice-line {
+    margin-top: 0.15rem;
+}
+
+.hero__practice-line span[aria-hidden="true"] {
+    margin: 0 0.3rem;
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.hero__support-line {
+    color: rgba(245, 247, 252, 0.94);
+}
+
+.hero__support-line:first-of-type {
+    margin-top: 0.5rem;
+}
+
+.hero__support-line + .hero__support-line {
+    margin-top: 0.1rem;
 }
 
 .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin: 2rem 0;
+    gap: 0.95rem;
+    margin: 1.8rem 0 0;
 }
 
-.hero__stats,
+.hero__actions .button {
+    min-height: 3.25rem;
+    padding: 0.95rem 1.4rem;
+    border-radius: 0.7rem;
+    font-size: 0.95rem;
+}
+
+.hero__actions .button--ghost {
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.hero__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    margin-top: 2.35rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.hero__metric {
+    min-width: 8.4rem;
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero__metric:last-child {
+    padding-right: 0;
+    border-right: 0;
+}
+
+.hero__metric strong {
+    display: block;
+    color: var(--ml-gold);
+    font-family: var(--ml-serif);
+    font-size: clamp(2rem, 3.4vw, 2.6rem);
+    line-height: 0.92;
+}
+
+.hero__metric span {
+    display: block;
+    margin-top: 0.25rem;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
 .stat-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
 }
 
-.hero__stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.hero__stat,
 .stat-card {
     padding: 1.1rem 1.25rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -319,7 +438,6 @@ ol {
     backdrop-filter: blur(10px);
 }
 
-.hero__stat strong,
 .stat-card strong {
     display: block;
     color: var(--ml-gold);
@@ -328,7 +446,6 @@ ol {
     line-height: 1;
 }
 
-.hero__stat span,
 .stat-card span {
     display: block;
     margin-top: 0.45rem;
@@ -1028,7 +1145,6 @@ body.nav-open {
 }
 
 @media (max-width: 1100px) {
-    .hero__stats,
     .stat-grid,
     .card-grid,
     .testimonial-grid,
@@ -1043,6 +1159,10 @@ body.nav-open {
     .practice-hero__inner,
     .site-footer__grid {
         grid-template-columns: 1fr;
+    }
+
+    .hero__panel {
+        margin-left: clamp(0rem, 3vw, 1.5rem);
     }
 
     .consultation__details {
@@ -1093,21 +1213,83 @@ body.nav-open {
         flex-wrap: wrap;
         padding-top: 0.4rem;
     }
+
+    .hero__media img {
+        object-position: 61% 52%;
+    }
+
+    .hero__panel {
+        max-width: 38rem;
+        margin-left: 0;
+    }
+
+    .hero__metrics {
+        gap: 0.9rem 1rem;
+    }
+
+    .hero__metric {
+        min-width: 7.4rem;
+        padding-right: 1rem;
+    }
 }
 
 @media (max-width: 720px) {
     .hero {
-        min-height: 38rem;
-        background-position: 76% center;
+        min-height: 42rem;
+    }
+
+    .hero__media img {
+        object-position: 66% 50%;
     }
 
     .hero__inner {
-        min-height: 38rem;
+        min-height: 42rem;
+        align-items: flex-end;
         padding-top: 4.5rem;
     }
 
-    .hero__lead {
+    .hero__panel {
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .hero__pill {
+        font-size: 0.67rem;
+        letter-spacing: 0.15em;
+    }
+
+    .hero__summary {
+        max-width: 20rem;
+    }
+
+    .hero__practice-line,
+    .hero__support-line {
         font-size: 1rem;
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero__actions .button {
+        width: min(100%, 18rem);
+    }
+
+    .hero__metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .hero__metric {
+        min-width: 0;
+        padding-right: 0;
+        border-right: 0;
+    }
+
+    .hero__metric:last-child {
+        grid-column: 1 / -1;
     }
 
     .attorney-card {
@@ -1125,5 +1307,23 @@ body.nav-open {
 
     .consultation-form__grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero {
+        min-height: 40.5rem;
+    }
+
+    .hero__media img {
+        object-position: 72% 50%;
+    }
+
+    .hero__title {
+        font-size: clamp(2.8rem, 15vw, 4rem);
+    }
+
+    .hero__summary {
+        max-width: none;
     }
 }

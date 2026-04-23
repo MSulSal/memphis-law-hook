@@ -27,12 +27,21 @@ After activation and content entry, the client or operator should be able to:
 - Edit attorney bios in WordPress admin
 - Edit testimonials in WordPress admin
 - Receive consultation requests without a heavy form plugin
+- Update the homepage hero copy, hero image, and core brand colors in `Appearance > Customize`
 
 Items still best handled by a developer or power user:
 
 - Major homepage layout changes
 - CSS or spacing refinements
 - Deployment and migration packaging
+
+## Styling controls already exposed
+
+The current Customizer controls cover:
+
+- Hero image
+- Hero heading, supporting copy, CTA labels, and stat row
+- Accent gold, action blue, page background, and panel surface colors
 
 ## Recommended client-facing plugin policy
 
