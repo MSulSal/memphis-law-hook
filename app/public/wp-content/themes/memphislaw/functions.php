@@ -125,7 +125,7 @@ function memphislaw_get_brand_logo_markup(): string
 
     return sprintf(
         '<img class="brand__image" src="%1$s" alt="%2$s" loading="eager">',
-        esc_url(get_theme_file_uri('/assets/images/logo.png')),
+        esc_url(get_theme_file_uri('/assets/images/logo-nobg.png')),
         esc_attr(get_bloginfo('name'))
     );
 }
