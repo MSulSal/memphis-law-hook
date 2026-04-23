@@ -16,7 +16,7 @@ $contact = memphislaw_get_contact_details();
         <div class="hero__overlay"></div>
         <div class="container hero__inner">
             <div class="hero__content">
-                <p class="eyebrow"><?php esc_html_e('Memphis, Tennessee • Since 1974', 'memphislaw'); ?></p>
+                <p class="eyebrow"><?php esc_html_e('Memphis, Tennessee - Since 1974', 'memphislaw'); ?></p>
                 <h1 class="hero__title">
                     <?php esc_html_e('Trusted Legal Counsel', 'memphislaw'); ?>
                     <span><?php esc_html_e('When It Matters Most', 'memphislaw'); ?></span>
@@ -25,7 +25,7 @@ $contact = memphislaw_get_contact_details();
                     <?php esc_html_e("Bankruptcy, personal injury, and workers' compensation representation for Memphis families and Mid-South workers.", 'memphislaw'); ?>
                 </p>
                 <div class="hero__actions">
-                    <a class="button" href="<?php echo esc_url(home_url('/#consultation')); ?>">
+                    <a class="button" href="<?php echo esc_url(memphislaw_get_consultation_url()); ?>">
                         <?php esc_html_e('Get a Free Consultation', 'memphislaw'); ?>
                     </a>
                     <a class="button button--ghost" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>">
@@ -64,7 +64,7 @@ $contact = memphislaw_get_contact_details();
                                 <li><?php echo esc_html($bullet); ?></li>
                             <?php endforeach; ?>
                         </ul>
-                        <a href="<?php echo esc_url($area['link']); ?>"><?php esc_html_e('Discuss Your Case', 'memphislaw'); ?></a>
+                        <a href="<?php echo esc_url($area['link']); ?>"><?php esc_html_e('View Practice Page', 'memphislaw'); ?></a>
                     </article>
                 <?php endforeach; ?>
             </div>
@@ -83,12 +83,12 @@ $contact = memphislaw_get_contact_details();
                 <div class="workers-comp__split">
                     <div>
                         <h3><?php esc_html_e('Who Is Covered?', 'memphislaw'); ?></h3>
-                        <p><?php esc_html_e("Under Tennessee Code Annotated § 50-6-102, employers with five or more employees are required to carry workers' compensation insurance. This coverage protects employees in virtually all industries.", 'memphislaw'); ?></p>
+                        <p><?php esc_html_e("Under Tennessee Code Annotated Section 50-6-102, employers with five or more employees are required to carry workers' compensation insurance. This coverage protects employees in virtually all industries.", 'memphislaw'); ?></p>
                     </div>
                     <aside class="info-card">
                         <h3><?php esc_html_e('Was Your Claim Denied?', 'memphislaw'); ?></h3>
                         <p><?php esc_html_e('Insurance companies often deny valid claims. We fight back at no cost unless you win.', 'memphislaw'); ?></p>
-                        <a class="button" href="<?php echo esc_url(home_url('/#consultation')); ?>"><?php esc_html_e('Get Help Now', 'memphislaw'); ?></a>
+                        <a class="button" href="<?php echo esc_url(memphislaw_get_page_url_by_path('workers-compensation', home_url('/#workers-comp'))); ?>"><?php esc_html_e('Get Help Now', 'memphislaw'); ?></a>
                         <a class="info-card__phone" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>"><?php echo esc_html($contact['phone']); ?></a>
                     </aside>
                 </div>
@@ -179,7 +179,7 @@ $contact = memphislaw_get_contact_details();
                 <?php foreach ($testimonials as $testimonial) : ?>
                     <article class="testimonial-card">
                         <p class="testimonial-card__rating" aria-label="<?php echo esc_attr(sprintf(__('%d out of 5 stars', 'memphislaw'), $testimonial['rating'])); ?>">
-                            <?php echo esc_html(str_repeat('★', (int) $testimonial['rating'])); ?>
+                            <?php echo wp_kses_post(str_repeat('&#9733;', (int) $testimonial['rating'])); ?>
                         </p>
                         <blockquote><?php echo esc_html($testimonial['quote']); ?></blockquote>
                         <p class="testimonial-card__client"><?php echo esc_html($testimonial['client']); ?></p>

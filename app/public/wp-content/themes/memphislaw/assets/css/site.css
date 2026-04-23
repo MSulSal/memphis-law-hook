@@ -245,10 +245,10 @@ ol {
 .hero {
     position: relative;
     overflow: hidden;
-    min-height: 85vh;
+    min-height: clamp(40rem, 82vh, 52rem);
     background:
-        linear-gradient(90deg, rgba(8, 13, 24, 0.92) 0%, rgba(8, 13, 24, 0.78) 30%, rgba(8, 13, 24, 0.45) 54%, rgba(8, 13, 24, 0.7) 100%),
-        url("../images/hero-courthouse.jpg") center right / cover no-repeat,
+        linear-gradient(90deg, rgba(8, 13, 24, 0.96) 0%, rgba(8, 13, 24, 0.86) 32%, rgba(8, 13, 24, 0.5) 58%, rgba(8, 13, 24, 0.72) 100%),
+        url("../images/hero-courthouse.jpg") 82% center / cover no-repeat,
         linear-gradient(180deg, #10244d, #0a1020);
 }
 
@@ -264,11 +264,13 @@ ol {
     position: relative;
     display: flex;
     align-items: center;
-    min-height: 85vh;
+    min-height: clamp(40rem, 82vh, 52rem);
     padding: 5rem 0 4rem;
 }
 
 .hero__content {
+    position: relative;
+    z-index: 1;
     max-width: 39rem;
 }
 
@@ -302,6 +304,10 @@ ol {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
+}
+
+.hero__stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .hero__stat,
@@ -755,6 +761,213 @@ ol {
     padding: 4rem 0;
 }
 
+.practice-area-page {
+    background: var(--ml-bg);
+}
+
+.practice-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.practice-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 24%),
+        linear-gradient(180deg, rgba(8, 13, 24, 0.1), rgba(8, 13, 24, 0.46));
+}
+
+.practice-hero--bankruptcy {
+    background:
+        radial-gradient(circle at 82% 18%, rgba(239, 183, 37, 0.14), transparent 18%),
+        linear-gradient(135deg, #0c1730 0%, #12244a 48%, #08101f 100%);
+}
+
+.practice-hero--personal-injury {
+    background:
+        radial-gradient(circle at 85% 14%, rgba(255, 149, 76, 0.16), transparent 20%),
+        linear-gradient(135deg, #151b2f 0%, #22355f 46%, #0b1120 100%);
+}
+
+.practice-hero--workers-compensation {
+    background:
+        radial-gradient(circle at 80% 16%, rgba(94, 136, 230, 0.2), transparent 22%),
+        linear-gradient(135deg, #10244d 0%, #2c58a9 46%, #0b1222 100%);
+}
+
+.practice-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(8, 13, 24, 0.28), transparent 54%);
+}
+
+.practice-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+    gap: 1.5rem;
+    align-items: end;
+    min-height: 34rem;
+    padding: 5rem 0 4rem;
+}
+
+.practice-breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+    color: var(--ml-text-soft);
+    font-size: 0.92rem;
+}
+
+.practice-breadcrumbs a {
+    color: var(--ml-text-soft);
+}
+
+.practice-breadcrumbs a:hover,
+.practice-breadcrumbs a:focus-visible {
+    color: white;
+}
+
+.practice-hero__title {
+    max-width: 12ch;
+    color: white;
+    font-size: clamp(2.8rem, 6vw, 4.9rem);
+}
+
+.practice-hero__lead {
+    max-width: 42rem;
+    color: var(--ml-text);
+    font-size: 1.12rem;
+}
+
+.practice-hero__card,
+.practice-cta__panel,
+.practice-cta__related,
+.practice-detail-card,
+.practice-step-card {
+    border: 1px solid var(--ml-border);
+    border-radius: var(--ml-radius);
+    background: var(--ml-panel);
+    box-shadow: var(--ml-shadow);
+}
+
+.practice-hero__card {
+    padding: 1.5rem;
+    background: rgba(10, 16, 32, 0.78);
+    backdrop-filter: blur(14px);
+}
+
+.practice-hero__card h2 {
+    color: white;
+    font-size: 1.7rem;
+}
+
+.practice-bullet-list {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ml-text-soft);
+}
+
+.practice-editor-content {
+    margin-bottom: 1.5rem;
+}
+
+.practice-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.practice-detail-card,
+.practice-step-card {
+    padding: 1.5rem;
+}
+
+.practice-detail-card h3,
+.practice-step-card h3 {
+    color: white;
+    font-size: 1.65rem;
+}
+
+.practice-detail-card p {
+    color: var(--ml-text-soft);
+}
+
+.practice-process {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.practice-process__intro {
+    margin-bottom: 0;
+}
+
+.practice-process__steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.practice-step-card {
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+}
+
+.practice-step-card__index {
+    margin-bottom: 0.8rem;
+    color: #091730;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.practice-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.practice-cta__panel,
+.practice-cta__related {
+    padding: 1.6rem;
+}
+
+.practice-cta__panel h2,
+.practice-cta__related h2,
+.practice-related-card h3 {
+    color: white;
+}
+
+.practice-cta__panel p,
+.practice-cta__related p,
+.practice-related-card p {
+    color: var(--ml-text-soft);
+}
+
+.practice-related-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.practice-related-card {
+    padding: 1.2rem;
+    border: 1px solid var(--ml-border);
+    border-radius: 1.1rem;
+    background: var(--ml-panel-soft);
+}
+
+.practice-related-card a {
+    color: var(--ml-blue);
+    font-weight: 700;
+}
+
 .entry-card {
     padding: 2rem;
 }
@@ -824,6 +1037,10 @@ body.nav-open {
     .attorney-grid,
     .workers-comp,
     .workers-comp__split,
+    .practice-detail-grid,
+    .practice-process__steps,
+    .practice-cta,
+    .practice-hero__inner,
     .site-footer__grid {
         grid-template-columns: 1fr;
     }
@@ -881,7 +1098,7 @@ body.nav-open {
 @media (max-width: 720px) {
     .hero {
         min-height: 38rem;
-        background-position: 74% center;
+        background-position: 76% center;
     }
 
     .hero__inner {
@@ -895,6 +1112,15 @@ body.nav-open {
 
     .attorney-card {
         grid-template-columns: 1fr;
+    }
+
+    .practice-hero__inner {
+        min-height: auto;
+        padding: 4.5rem 0 3rem;
+    }
+
+    .practice-hero__lead {
+        font-size: 1rem;
     }
 
     .consultation-form__grid {

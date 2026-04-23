@@ -37,6 +37,7 @@ The setup script is idempotent and handles the initial site state:
 - activates the `Memphis Law Core` plugin
 - activates the `Memphis Law` theme
 - creates or reuses the `Home` page
+- creates or reuses the three core practice area pages
 - sets WordPress to show a static front page
 - creates and assigns the primary navigation menu
 - removes default starter content

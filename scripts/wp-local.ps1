@@ -51,7 +51,7 @@ if ($null -eq $phpServiceDir) {
 
 $php = Join-Path $phpServiceDir.FullName "bin\win64\php.exe"
 $phpIni = Join-Path $localRoot "run\$($siteMatch.Id)\conf\php\php.ini"
-$tempPhpIni = Join-Path ([System.IO.Path]::GetTempPath()) "codex-wp-local-$($siteMatch.Id).ini"
+$tempPhpIni = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-wp-local-$($siteMatch.Id)-" + [System.Guid]::NewGuid().ToString('N') + ".ini")
 
 if (-not (Test-Path $php)) {
     throw "Local PHP executable not found at $php"
@@ -61,11 +61,15 @@ if (-not (Test-Path $phpIni)) {
     throw "Local site PHP configuration not found at $phpIni"
 }
 
-$phpIniLines = Get-Content $phpIni | Where-Object {
-    $_ -notmatch '^\s*extension\s*=\s*php_imagick\.dll\s*$'
-}
+$phpIniContent = Get-Content -Path $phpIni -Raw
+$phpIniContent = [System.Text.RegularExpressions.Regex]::Replace(
+    $phpIniContent,
+    '^\s*extension\s*=\s*php_imagick\.dll\s*$\r?\n?',
+    '',
+    [System.Text.RegularExpressions.RegexOptions]::Multiline
+)
 
-Set-Content -Path $tempPhpIni -Value $phpIniLines
+[System.IO.File]::WriteAllText($tempPhpIni, $phpIniContent)
 
 try {
     & $php `

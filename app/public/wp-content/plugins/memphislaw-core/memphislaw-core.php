@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.2.0
+ * Version: 0.3.0
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -403,6 +403,18 @@ function memphislaw_core_get_or_create_page(string $title, string $slug): int
     $existing = get_page_by_path($slug, OBJECT, 'page');
 
     if ($existing instanceof WP_Post) {
+        $needs_update = $existing->post_title !== $title || $existing->post_status !== 'publish';
+
+        if ($needs_update) {
+            wp_update_post(
+                [
+                    'ID' => (int) $existing->ID,
+                    'post_title' => $title,
+                    'post_status' => 'publish',
+                ]
+            );
+        }
+
         return (int) $existing->ID;
     }
 
@@ -416,6 +428,23 @@ function memphislaw_core_get_or_create_page(string $title, string $slug): int
     );
 
     return is_wp_error($page_id) ? 0 : (int) $page_id;
+}
+
+function memphislaw_core_ensure_practice_area_pages(): array
+{
+    $pages = [
+        'bankruptcy' => 'Bankruptcy',
+        'personal-injury' => 'Personal Injury',
+        'workers-compensation' => "Workers' Compensation",
+    ];
+
+    $page_ids = [];
+
+    foreach ($pages as $slug => $title) {
+        $page_ids[$slug] = memphislaw_core_get_or_create_page($title, $slug);
+    }
+
+    return $page_ids;
 }
 
 function memphislaw_core_remove_default_content(): void
@@ -505,6 +534,8 @@ function memphislaw_core_apply_site_setup(): array
     update_option('time_format', 'g:i A');
 
     $home_page_id = memphislaw_core_get_or_create_page('Home', 'home');
+    $practice_page_ids = memphislaw_core_ensure_practice_area_pages();
+
     if ($home_page_id > 0) {
         update_option('show_on_front', 'page');
         update_option('page_on_front', $home_page_id);
@@ -520,6 +551,7 @@ function memphislaw_core_apply_site_setup(): array
     return [
         'home_page_id' => $home_page_id,
         'menu_id' => $menu_id,
+        'practice_page_count' => count(array_filter($practice_page_ids)),
     ];
 }
 
@@ -532,9 +564,10 @@ function memphislaw_core_register_wp_cli_commands(): void
 
             WP_CLI::success(
                 sprintf(
-                    'Memphis Law site configured. Home page ID: %1$d. Menu ID: %2$d.',
+                    'Memphis Law site configured. Home page ID: %1$d. Menu ID: %2$d. Practice pages: %3$d.',
                     (int) $result['home_page_id'],
-                    (int) $result['menu_id']
+                    (int) $result['menu_id'],
+                    (int) $result['practice_page_count']
                 )
             );
         }
