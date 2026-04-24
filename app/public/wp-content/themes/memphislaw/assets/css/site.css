@@ -5823,3 +5823,101 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
 html[data-theme="light"] body.memphis-law-page #consultation .consultation-form__footnote {
     color: #566d91 !important;
 }
+
+/* Mobile navbar sizing/spacing polish */
+@media (max-width: 900px) {
+    body.memphis-law-page .site-header__inner {
+        gap: 12px !important;
+    }
+
+    body.memphis-law-page .brand__mark {
+        width: 20px !important;
+        height: 30px !important;
+    }
+
+    body.memphis-law-page .brand__image {
+        height: 30px !important;
+    }
+
+    body.memphis-law-page .brand__text strong {
+        font-size: 12px !important;
+    }
+
+    body.memphis-law-page .brand__subline {
+        font-size: 7px !important;
+    }
+
+    body.memphis-law-page .site-header__actions {
+        gap: 10px !important;
+    }
+
+    body.memphis-law-page .site-header__toggle {
+        margin-left: 6px !important;
+    }
+}
+
+@media (max-width: 520px) {
+    body.memphis-law-page .brand__mark {
+        width: 19px !important;
+        height: 29px !important;
+    }
+
+    body.memphis-law-page .brand__image {
+        height: 29px !important;
+    }
+
+    body.memphis-law-page .brand__text strong {
+        font-size: 11px !important;
+    }
+
+    body.memphis-law-page .site-header__actions {
+        gap: 8px !important;
+    }
+}
+
+/* iOS/Safari touch-state parity for card hover effects */
+@media (hover: none) and (pointer: coarse) {
+    body.memphis-law-page #practice-areas .service-card,
+    body.memphis-law-page #team .attorney-card,
+    body.memphis-law-page #testimonials .testimonial-card {
+        -webkit-tap-highlight-color: rgba(77, 127, 212, 0.22);
+        touch-action: manipulation;
+    }
+
+    body.memphis-law-page #practice-areas .service-card:active,
+    body.memphis-law-page #practice-areas .service-card:has(a:active) {
+        border-color: rgba(77, 127, 212, 0.72) !important;
+        box-shadow: inset 0 0 0 1px rgba(77, 127, 212, 0.34) !important;
+    }
+
+    body.memphis-law-page #practice-areas .service-card:active::before,
+    body.memphis-law-page #practice-areas .service-card:has(a:active)::before {
+        opacity: 1 !important;
+    }
+
+    body.memphis-law-page #practice-areas .service-card:active .service-card__icon,
+    body.memphis-law-page #practice-areas .service-card:has(a:active) .service-card__icon {
+        border-color: rgba(212, 160, 24, 0.58) !important;
+        background: #2f2d24 !important;
+    }
+
+    body.memphis-law-page #team .attorney-card:active {
+        border-color: rgba(77, 127, 212, 0.72) !important;
+        box-shadow: inset 0 0 0 1px rgba(77, 127, 212, 0.34) !important;
+    }
+
+    body.memphis-law-page #team .attorney-card:active::before {
+        background: var(--gold) !important;
+    }
+
+    body.memphis-law-page #team .attorney-card:active .attorney-card__avatar {
+        border-color: rgba(212, 160, 24, 0.58) !important;
+        background: #2f2d24 !important;
+    }
+
+    body.memphis-law-page #testimonials .testimonial-card:active {
+        border-color: rgba(77, 127, 212, 0.72) !important;
+        box-shadow: inset 0 0 0 1px rgba(77, 127, 212, 0.34) !important;
+        transform: translateY(-1px) !important;
+    }
+}
