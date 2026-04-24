@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const header = document.querySelector('.site-header');
     const toggle = document.querySelector('[data-nav-toggle]');
     const panel = document.querySelector('[data-nav-panel]');
     const themeToggle = document.querySelector('[data-theme-toggle]');
-    const header = document.querySelector('.memphis-law-page .site-header');
-    const mobileNavQuery = window.matchMedia('(max-width: 900px)');
+    const mobileQuery = window.matchMedia('(max-width: 900px)');
     const root = document.documentElement;
     let navOpen = false;
     let lastScrollY = window.scrollY;
@@ -29,22 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (!toggle || !panel) {
+    if (!toggle || !panel || !header) {
         return;
     }
 
-    const shouldUseMobileNavBehavior = () => mobileNavQuery.matches;
-
-    const setHeaderHidden = (hidden) => {
-        if (!header) {
+    const setState = (open) => {
+        navOpen = open;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.classList.toggle('is-open', open);
+        body.classList.toggle('nav-open', open);
+        panel.style.removeProperty('top');
+        panel.style.removeProperty('max-height');
+        if (open) {
+            header.classList.remove('is-hidden');
+            lastScrollY = window.scrollY;
             return;
         }
-        header.classList.toggle('is-hidden', hidden);
+
+        header.classList.remove('is-hidden');
     };
 
-    const syncHeaderOnScroll = () => {
-        if (!shouldUseMobileNavBehavior()) {
-            setHeaderHidden(false);
+    const updateHeaderVisibility = () => {
+        if (!mobileQuery.matches) {
+            header.classList.remove('is-hidden');
             lastScrollY = window.scrollY;
             isTicking = false;
             return;
@@ -53,67 +61,61 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentY = window.scrollY;
         const delta = currentY - lastScrollY;
 
-        if (navOpen || currentY < 16 || delta < -2) {
-            setHeaderHidden(false);
-        } else if (delta > 4 && currentY > 80) {
-            setHeaderHidden(true);
+        if (navOpen) {
+            header.classList.remove('is-hidden');
+            lastScrollY = currentY;
+            isTicking = false;
+            return;
+        }
+
+        if (currentY < 8 || delta < -2) {
+            header.classList.remove('is-hidden');
+        } else if (delta > 4 && currentY > 72) {
+            header.classList.add('is-hidden');
         }
 
         lastScrollY = currentY;
         isTicking = false;
     };
 
-    const requestHeaderSync = () => {
+    const requestHeaderUpdate = () => {
         if (isTicking) {
             return;
         }
 
         isTicking = true;
-        window.requestAnimationFrame(syncHeaderOnScroll);
-    };
-
-    const setState = (open) => {
-        navOpen = open;
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        panel.classList.toggle('is-open', open);
-        document.body.classList.toggle('nav-open', open);
-        if (open) {
-            setHeaderHidden(false);
-        }
+        window.requestAnimationFrame(updateHeaderVisibility);
     };
 
     toggle.addEventListener('click', () => {
-        const previousScrollY = window.scrollY;
         const next = toggle.getAttribute('aria-expanded') !== 'true';
+        header.classList.remove('is-hidden');
         setState(next);
-        window.requestAnimationFrame(() => {
-            if (Math.abs(window.scrollY - previousScrollY) > 1) {
-                window.scrollTo(0, previousScrollY);
-            }
-        });
     });
 
     panel.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => setState(false));
     });
 
-    window.addEventListener('scroll', () => {
-        requestHeaderSync();
-    }, { passive: true });
-
-    const onMobileChange = () => {
-        setHeaderHidden(false);
-        if (!shouldUseMobileNavBehavior()) {
+    const onViewportChange = () => {
+        if (!mobileQuery.matches) {
             setState(false);
         }
+        header.classList.remove('is-hidden');
         lastScrollY = window.scrollY;
+        panel.style.removeProperty('top');
+        panel.style.removeProperty('max-height');
     };
 
-    if (typeof mobileNavQuery.addEventListener === 'function') {
-        mobileNavQuery.addEventListener('change', onMobileChange);
-    } else if (typeof mobileNavQuery.addListener === 'function') {
-        mobileNavQuery.addListener(onMobileChange);
+    window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
+    window.addEventListener('resize', onViewportChange, { passive: true });
+    window.addEventListener('orientationchange', onViewportChange);
+
+    if (typeof mobileQuery.addEventListener === 'function') {
+        mobileQuery.addEventListener('change', onViewportChange);
+    } else if (typeof mobileQuery.addListener === 'function') {
+        mobileQuery.addListener(onViewportChange);
     }
 
-    onMobileChange();
+    onViewportChange();
 });
