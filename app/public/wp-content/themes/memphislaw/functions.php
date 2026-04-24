@@ -132,7 +132,6 @@ function memphislaw_render_consultation_map(): string
         return memphislaw_google_maps_render_map(
             [
                 'class_name' => 'consultation__map-embed',
-                'height' => 136,
                 'title' => __('Arthur Ray Law Offices location map', 'memphislaw'),
             ]
         );

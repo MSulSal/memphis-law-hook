@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Google Maps
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Lightweight Google Maps embed plugin for the Memphis Law WordPress build.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -251,7 +251,7 @@ function memphislaw_google_maps_render_map(array $args = []): string
     $class_name = memphislaw_google_maps_build_class_string((string) ($args['class_name'] ?? ''));
 
     return sprintf(
-        '<div class="%1$s"><div class="memphislaw-google-map__frame"><iframe src="%2$s" title="%3$s" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen style="height:%4$dpx;"></iframe></div></div>',
+        '<div class="%1$s"><div class="memphislaw-google-map__frame"><iframe src="%2$s" title="%3$s" loading="eager" referrerpolicy="no-referrer-when-downgrade" allowfullscreen style="height:%4$dpx;"></iframe></div></div>',
         esc_attr($class_name),
         esc_url($embed_url),
         esc_attr($title),

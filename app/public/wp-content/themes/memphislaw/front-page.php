@@ -49,8 +49,9 @@ $sections = memphislaw_get_homepage_sections();
                     <a class="button" href="<?php echo esc_url($hero['primary_button_url']); ?>">
                         <?php echo esc_html($hero['primary_button_label']); ?>
                     </a>
-                    <a class="button button--ghost" href="<?php echo esc_url($hero['secondary_button_url']); ?>">
-                        <?php echo esc_html($hero['secondary_button_label']); ?>
+                    <a class="button button--ghost button--phone" href="<?php echo esc_url($hero['secondary_button_url']); ?>">
+                        <span class="button__icon" aria-hidden="true"><?php echo memphislaw_get_icon_markup('contact-phone'); ?></span>
+                        <span><?php echo esc_html($hero['secondary_button_label']); ?></span>
                     </a>
                 </div>
 
