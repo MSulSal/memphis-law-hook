@@ -4390,23 +4390,23 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .site-footer {
-        min-height: 316px;
-        padding-top: 44px;
-        padding-bottom: 40px;
+        min-height: 340px;
+        padding-top: 50px;
+        padding-bottom: 46px;
     }
 
     .memphis-law-page .site-footer__grid {
-        gap: 46px;
-        padding-bottom: 30px;
+        gap: 56px;
+        padding-bottom: 34px;
         align-items: start;
     }
 
     .memphis-law-page .site-footer__heading {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
     .memphis-law-page .site-footer__list {
-        gap: 8px;
+        gap: 10px;
     }
 
     .memphis-law-page .site-footer__legal {
@@ -4415,6 +4415,8 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
 
     .memphis-law-page .site-header__inner {
         width: min(var(--container), calc(100vw - 48px));
+        margin-inline: auto;
+        padding-inline: 0;
         gap: 32px;
     }
 
@@ -4456,13 +4458,13 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .site-header__theme-toggle {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
     }
 
     .memphis-law-page .site-header__theme-icon {
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
     }
 
     .memphis-law-page .hero {
@@ -4712,15 +4714,16 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .site-footer__heading {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .memphis-law-page .site-footer__blurb,
     .memphis-law-page .site-footer__list,
     .memphis-law-page .site-footer__list a,
     .memphis-law-page .site-footer__legal p {
-        font-size: 14px;
-        line-height: 1.6;
+        color: #a4b2c8;
+        font-size: 15px;
+        line-height: 1.72;
     }
 }
 
@@ -4786,13 +4789,15 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
 
     .memphis-law-page .site-header__nav {
         display: none;
-        position: absolute;
+        position: fixed;
         top: 58px;
         left: 0;
         right: 0;
         width: 100vw;
         z-index: 80;
-        padding: 14px 16px 18px;
+        max-height: calc(100vh - 58px);
+        overflow-y: auto;
+        padding: 14px 0 18px;
         border-top: 1px solid var(--border);
         border-bottom: 1px solid var(--border);
         border-left: 0;
@@ -4818,7 +4823,7 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     .memphis-law-page .menu a {
         display: block;
         width: 100%;
-        padding: 7px 0;
+        padding: 10px 16px;
         font-size: 15px;
         line-height: 1.2;
     }
@@ -4949,7 +4954,7 @@ html[data-theme="light"] .memphis-law-page .hero__pill {
 }
 
 html[data-theme="light"] .memphis-law-page .hero__metric strong {
-    color: #80aaf4;
+    color: #7e9fd4;
 }
 
 html[data-theme="light"] .memphis-law-page .section__intro p:last-child,
@@ -4978,9 +4983,9 @@ html[data-theme="light"] .memphis-law-page #team .attorney-card__role {
 }
 
 html[data-theme="light"] .memphis-law-page #consultation .consultation-form {
-    background: #eaf1fc;
-    border-color: rgba(44, 73, 118, 0.24);
-    box-shadow: 0 20px 38px rgba(31, 56, 94, 0.18);
+    background: #f4f7fc;
+    border-color: rgba(44, 73, 118, 0.2);
+    box-shadow: 0 18px 34px rgba(31, 56, 94, 0.14);
 }
 
 html[data-theme="light"] .memphis-law-page #consultation .consultation-form h3,
@@ -4992,11 +4997,11 @@ html[data-theme="light"] .memphis-law-page #consultation .consultation-form inpu
 html[data-theme="light"] .memphis-law-page #consultation .consultation-form select,
 html[data-theme="light"] .memphis-law-page #consultation .consultation-form textarea {
     color: #17335a;
-    background: #f8fbff;
-    border-color: rgba(44, 73, 118, 0.26);
+    background: #ffffff;
+    border-color: rgba(44, 73, 118, 0.22);
 }
 
 html[data-theme="light"] .memphis-law-page #consultation .consultation-form__consent span,
 html[data-theme="light"] .memphis-law-page #consultation .consultation-form__footnote {
-    color: #4c6488;
+    color: #566d91;
 }
