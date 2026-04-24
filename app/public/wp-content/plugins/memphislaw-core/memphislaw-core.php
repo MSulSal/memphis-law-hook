@@ -856,6 +856,12 @@ function memphislaw_core_apply_site_setup(): array
     update_option('date_format', 'F j, Y');
     update_option('time_format', 'g:i A');
 
+    $map_options = get_option('memphislaw_google_maps_options', null);
+    if (is_array($map_options)) {
+        $map_options['height'] = 168;
+        update_option('memphislaw_google_maps_options', $map_options);
+    }
+
     $home_page_id = memphislaw_core_get_or_create_page('Home', 'home');
     $practice_page_ids = memphislaw_core_ensure_practice_area_pages();
     memphislaw_core_seed_practice_area_page_fields($practice_page_ids);

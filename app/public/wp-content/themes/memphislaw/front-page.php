@@ -110,12 +110,6 @@ $sections = memphislaw_get_homepage_sections();
                         <h3><?php echo esc_html($sections['workers_comp']['covered_heading']); ?></h3>
                         <p><?php echo esc_html($sections['workers_comp']['covered_copy']); ?></p>
                     </div>
-                    <aside class="info-card">
-                        <h3><?php echo esc_html($sections['workers_comp']['denied_title']); ?></h3>
-                        <p><?php echo esc_html($sections['workers_comp']['denied_copy']); ?></p>
-                        <a class="button" href="<?php echo esc_url(memphislaw_get_page_url_by_path('workers-compensation', home_url('/#workers-comp'))); ?>"><?php echo esc_html($sections['workers_comp']['denied_button_label']); ?></a>
-                        <a class="info-card__phone" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>"><?php echo esc_html($contact['phone']); ?></a>
-                    </aside>
                 </div>
 
                 <h3><?php echo esc_html($sections['workers_comp']['benefits_heading']); ?></h3>
@@ -137,17 +131,26 @@ $sections = memphislaw_get_homepage_sections();
                 </div>
             </div>
 
-            <aside class="steps-card">
-                <p class="eyebrow"><?php echo esc_html($sections['workers_comp']['steps_eyebrow']); ?></p>
-                <ol>
-                    <?php foreach ($steps as $step) : ?>
-                        <li>
-                            <strong><?php echo esc_html($step['title']); ?></strong>
-                            <span><?php echo esc_html($step['summary']); ?></span>
-                        </li>
-                    <?php endforeach; ?>
-                </ol>
-            </aside>
+            <div class="workers-comp__side">
+                <aside class="info-card">
+                    <h3><?php echo esc_html($sections['workers_comp']['denied_title']); ?></h3>
+                    <p><?php echo esc_html($sections['workers_comp']['denied_copy']); ?></p>
+                    <a class="button" href="<?php echo esc_url(memphislaw_get_page_url_by_path('workers-compensation', home_url('/#workers-comp'))); ?>"><?php echo esc_html($sections['workers_comp']['denied_button_label']); ?></a>
+                    <a class="info-card__phone" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>"><?php echo esc_html($contact['phone']); ?></a>
+                </aside>
+
+                <aside class="steps-card">
+                    <p class="eyebrow"><?php echo esc_html($sections['workers_comp']['steps_eyebrow']); ?></p>
+                    <ol>
+                        <?php foreach ($steps as $step) : ?>
+                            <li>
+                                <strong><?php echo esc_html($step['title']); ?></strong>
+                                <span><?php echo esc_html($step['summary']); ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </aside>
+            </div>
         </div>
     </section>
 
