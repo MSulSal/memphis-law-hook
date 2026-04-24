@@ -5,9 +5,9 @@ function memphislaw_get_customizer_defaults(): array
 {
     return [
         'accent_color' => '#efb725',
-        'action_color' => '#5e88e6',
-        'background_color' => '#0a1020',
-        'panel_color' => '#111a2d',
+        'action_color' => '#4d7fd4',
+        'background_color' => '#0d1017',
+        'panel_color' => '#161d27',
         'light_background_color' => '#eef3fb',
         'light_panel_color' => '#ffffff',
         'hero_image' => get_theme_file_uri('/assets/images/courthouse.png'),
@@ -33,6 +33,7 @@ function memphislaw_get_customizer_defaults(): array
         'hero_metric_3_value' => __('Free', 'memphislaw'),
         'hero_metric_3_label' => __('Consultation', 'memphislaw'),
         'header_consultation_label' => __('Free Consultation', 'memphislaw'),
+        'footer_logo' => get_theme_file_uri('/assets/images/logo-footer.png'),
         'contact_address_line_1' => __('6244 Poplar Ave, Suite 150', 'memphislaw'),
         'contact_address_line_2' => __('Memphis, TN 38119', 'memphislaw'),
         'contact_phone' => '901-475-8200',
@@ -346,6 +347,7 @@ function memphislaw_customize_register(WP_Customize_Manager $wp_customize): void
         'memphislaw_firm_details',
         [
             ['setting' => 'memphislaw_header_consultation_label', 'label' => __('Header Consultation Button Label', 'memphislaw'), 'default' => $defaults['header_consultation_label']],
+            ['setting' => 'memphislaw_footer_logo', 'label' => __('Footer Logo', 'memphislaw'), 'default' => $defaults['footer_logo'], 'type' => 'image'],
             ['setting' => 'memphislaw_contact_address_line_1', 'label' => __('Address Line 1', 'memphislaw'), 'default' => $defaults['contact_address_line_1']],
             ['setting' => 'memphislaw_contact_address_line_2', 'label' => __('Address Line 2', 'memphislaw'), 'default' => $defaults['contact_address_line_2']],
             ['setting' => 'memphislaw_contact_phone', 'label' => __('Phone Number', 'memphislaw'), 'default' => $defaults['contact_phone']],

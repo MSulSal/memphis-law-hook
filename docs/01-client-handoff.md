@@ -72,6 +72,16 @@ Use these paths during handoff:
 - For review links or screenshot capture, `?theme=light` and `?theme=dark` can be appended to the home URL as non-destructive preview parameters.
 - CSS and JavaScript assets are cache-busted automatically from file timestamps so new visual updates are less likely to get stuck behind stale browser cache.
 
+## Visual fidelity proof assets
+
+- Side-by-side PDF vs live-site comparisons are stored in `docs/visual-qa/`.
+- Open `docs/visual-qa/README.md` first, then review:
+  - `compare-page-1.png`
+  - `compare-page-2.png`
+  - `compare-page-3.png`
+- Regenerate these assets with:
+  - `powershell -ExecutionPolicy Bypass -File scripts/generate-visual-qa.ps1`
+
 ## Recommended client-facing plugin policy
 
 Keep the production plugin footprint minimal. The current custom plugin is intentionally small to protect import size and reduce future plugin breakage risk.

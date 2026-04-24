@@ -9,6 +9,7 @@
 5. Practice-area landing-page copy moved into structured WordPress editing surfaces.
 6. Workers' compensation homepage benefits and step content moved into WordPress-managed controls.
 7. Final polish pass for PDF alignment, icon system, responsive cleanup, light/dark preview support, and a plugin-backed live Google Map.
+8. Pixel-fidelity lock pass with exact PDF palette values plus stored side-by-side visual QA artifacts for proposal/client review.
 
 ## Best next commits if the project continues
 

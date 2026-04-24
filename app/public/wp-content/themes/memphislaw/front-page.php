@@ -14,52 +14,52 @@ $hero = memphislaw_get_homepage_hero_content();
 $hero_image_url = memphislaw_get_homepage_hero_image_url();
 $sections = memphislaw_get_homepage_sections();
 ?>
-<main id="primary" class="site-main">
-    <section class="hero" id="top">
+<main id="primary" class="site-main memphis-law-page">
+    <section class="hero ml-hero" id="top">
         <div class="hero__media" aria-hidden="true">
             <img src="<?php echo esc_url($hero_image_url); ?>" alt="">
         </div>
         <div class="hero__wash" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
-        <div class="container hero__inner">
-            <div class="hero__panel">
-                <p class="hero__pill">
+        <div class="container hero__inner ml-hero-inner ml-container">
+            <div class="hero__panel ml-hero-copy">
+                <p class="hero__pill ml-eyebrow-pill">
                     <span><?php echo esc_html($hero['pill_location']); ?></span>
                     <span aria-hidden="true">&bull;</span>
                     <span><?php echo esc_html($hero['pill_since']); ?></span>
                 </p>
-                <h1 class="hero__title">
+                <h1 class="hero__title ml-hero-title">
                     <span class="hero__title-line"><?php echo esc_html($hero['title_lines'][0]); ?></span>
                     <span class="hero__title-line"><?php echo esc_html($hero['title_lines'][1]); ?></span>
                     <span class="hero__title-line hero__title-line--accent"><?php echo esc_html($hero['title_lines'][2]); ?></span>
                     <span class="hero__title-line hero__title-line--accent"><?php echo esc_html($hero['title_lines'][3]); ?></span>
                 </h1>
                 <div class="hero__summary">
-                    <p class="hero__practice-line">
+                    <p class="hero__practice-line ml-hero-subline">
                         <span><?php echo esc_html($hero['practice_areas'][0]); ?></span>
                         <span aria-hidden="true">&bull;</span>
                         <span><?php echo esc_html($hero['practice_areas'][1]); ?></span>
                         <span aria-hidden="true">&bull;</span>
                     </p>
-                    <p class="hero__practice-line"><?php echo esc_html($hero['practice_areas'][2]); ?></p>
-                    <p class="hero__support-line"><?php echo esc_html($hero['support_lines'][0]); ?></p>
-                    <p class="hero__support-line"><?php echo esc_html($hero['support_lines'][1]); ?></p>
+                    <p class="hero__practice-line ml-hero-subline"><?php echo esc_html($hero['practice_areas'][2]); ?></p>
+                    <p class="hero__support-line ml-hero-text"><?php echo esc_html($hero['support_lines'][0]); ?></p>
+                    <p class="hero__support-line ml-hero-text"><?php echo esc_html($hero['support_lines'][1]); ?></p>
                 </div>
-                <div class="hero__actions">
-                    <a class="button" href="<?php echo esc_url($hero['primary_button_url']); ?>">
+                <div class="hero__actions ml-hero-actions">
+                    <a class="button ml-btn-primary" href="<?php echo esc_url($hero['primary_button_url']); ?>">
                         <?php echo esc_html($hero['primary_button_label']); ?>
                     </a>
-                    <a class="button button--ghost button--phone" href="<?php echo esc_url($hero['secondary_button_url']); ?>">
+                    <a class="button button--ghost button--phone ml-btn-outline" href="<?php echo esc_url($hero['secondary_button_url']); ?>">
                         <span class="button__icon" aria-hidden="true"><?php echo memphislaw_get_icon_markup('contact-phone'); ?></span>
                         <span><?php echo esc_html($hero['secondary_button_label']); ?></span>
                     </a>
                 </div>
 
-                <div class="hero__metrics" aria-label="<?php esc_attr_e('Firm highlights', 'memphislaw'); ?>">
+                <div class="hero__metrics ml-hero-stats" aria-label="<?php esc_attr_e('Firm highlights', 'memphislaw'); ?>">
                     <?php foreach ($hero['metrics'] as $metric) : ?>
                         <div class="hero__metric">
-                            <strong><?php echo esc_html($metric['value']); ?></strong>
-                            <span><?php echo esc_html($metric['label']); ?></span>
+                            <strong class="ml-hero-stat-number"><?php echo esc_html($metric['value']); ?></strong>
+                            <span class="ml-hero-stat-label"><?php echo esc_html($metric['label']); ?></span>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -67,17 +67,17 @@ $sections = memphislaw_get_homepage_sections();
         </div>
     </section>
 
-    <section class="section section--dark" id="practice-areas">
-        <div class="container">
+    <section class="section section--dark ml-practice" id="practice-areas">
+        <div class="container ml-container">
             <div class="section__intro">
                 <p class="eyebrow"><?php echo esc_html($sections['practice']['eyebrow']); ?></p>
                 <h2><?php echo esc_html($sections['practice']['title']); ?></h2>
                 <p><?php echo esc_html($sections['practice']['intro']); ?></p>
             </div>
 
-            <div class="card-grid">
+            <div class="card-grid ml-practice-grid">
                 <?php foreach ($practice_areas as $area) : ?>
-                    <article class="service-card" id="<?php echo esc_attr($area['id']); ?>">
+                    <article class="service-card ml-service-card" id="<?php echo esc_attr($area['id']); ?>">
                         <div class="service-card__icon" aria-hidden="true"><?php echo memphislaw_get_icon_markup((string) $area['icon']); ?></div>
                         <h3><?php echo esc_html($area['title']); ?></h3>
                         <p><?php echo esc_html($area['summary']); ?></p>
@@ -96,8 +96,8 @@ $sections = memphislaw_get_homepage_sections();
         </div>
     </section>
 
-    <section class="section section--blue" id="workers-comp">
-        <div class="container workers-comp">
+    <section class="section section--blue ml-workers" id="workers-comp">
+        <div class="container workers-comp ml-workers-grid ml-container">
             <div class="workers-comp__main">
                 <p class="eyebrow"><?php echo esc_html($sections['workers_comp']['eyebrow']); ?></p>
                 <h2><?php echo esc_html($sections['workers_comp']['title']); ?></h2>
@@ -113,7 +113,7 @@ $sections = memphislaw_get_homepage_sections();
                 </div>
 
                 <h3><?php echo esc_html($sections['workers_comp']['benefits_heading']); ?></h3>
-                <div class="benefit-grid">
+                <div class="benefit-grid ml-benefits-grid">
                     <?php foreach ($benefits as $benefit) : ?>
                         <article class="benefit-card">
                             <div class="benefit-card__icon" aria-hidden="true"><?php echo memphislaw_get_icon_markup((string) $benefit['icon']); ?></div>
@@ -145,7 +145,7 @@ $sections = memphislaw_get_homepage_sections();
                         <?php foreach ($steps as $step) : ?>
                             <li>
                                 <strong><?php echo esc_html($step['title']); ?></strong>
-                                <span><?php echo esc_html($step['summary']); ?></span>
+                                <span>&mdash; <?php echo esc_html((string) $step['summary']); ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ol>
@@ -154,17 +154,17 @@ $sections = memphislaw_get_homepage_sections();
         </div>
     </section>
 
-    <section class="section section--dark" id="team">
-        <div class="container">
+    <section class="section section--dark ml-team" id="team">
+        <div class="container ml-container">
             <div class="section__intro">
                 <p class="eyebrow"><?php echo esc_html($sections['team']['eyebrow']); ?></p>
                 <h2><?php echo esc_html($sections['team']['title']); ?></h2>
                 <p><?php echo esc_html($sections['team']['intro']); ?></p>
             </div>
 
-            <div class="attorney-grid">
+            <div class="attorney-grid ml-attorney-grid">
                 <?php foreach ($attorneys as $attorney) : ?>
-                    <article class="attorney-card">
+                    <article class="attorney-card ml-attorney-card">
                         <div class="attorney-card__meta">
                             <div class="attorney-card__avatar" aria-hidden="true"><?php echo memphislaw_get_icon_markup('attorney-avatar'); ?></div>
                             <?php if (!empty($attorney['badge'])) : ?>
@@ -187,9 +187,9 @@ $sections = memphislaw_get_homepage_sections();
                 <?php endforeach; ?>
             </div>
 
-            <div class="stat-grid">
+            <div class="stat-grid ml-stats-row">
                 <?php foreach ($stats as $stat) : ?>
-                    <article class="stat-card">
+                    <article class="stat-card ml-stat-card">
                         <strong><?php echo esc_html($stat['value']); ?></strong>
                         <span><?php echo esc_html($stat['label']); ?></span>
                     </article>
@@ -198,16 +198,16 @@ $sections = memphislaw_get_homepage_sections();
         </div>
     </section>
 
-    <section class="section section--dark section--testimonials" id="testimonials">
-        <div class="container">
+    <section class="section section--dark section--testimonials ml-testimonials" id="testimonials">
+        <div class="container ml-container">
             <div class="section__intro">
                 <p class="eyebrow"><?php echo esc_html($sections['testimonials']['eyebrow']); ?></p>
                 <h2><?php echo esc_html($sections['testimonials']['title']); ?></h2>
             </div>
 
-            <div class="testimonial-grid">
+            <div class="testimonial-grid ml-testimonial-grid">
                 <?php foreach ($testimonials as $testimonial) : ?>
-                    <article class="testimonial-card">
+                    <article class="testimonial-card ml-testimonial-card">
                         <p class="testimonial-card__rating" aria-label="<?php echo esc_attr(sprintf(__('%d out of 5 stars', 'memphislaw'), $testimonial['rating'])); ?>">
                             <?php echo wp_kses_post(str_repeat('&#9733;', (int) $testimonial['rating'])); ?>
                         </p>
@@ -220,8 +220,8 @@ $sections = memphislaw_get_homepage_sections();
         </div>
     </section>
 
-    <section class="section section--blue" id="consultation">
-        <div class="container consultation">
+    <section class="section section--blue ml-contact" id="consultation">
+        <div class="container consultation ml-contact-grid ml-container">
             <div class="consultation__details">
                 <p class="eyebrow"><?php echo esc_html($sections['consultation']['eyebrow']); ?></p>
                 <h2><?php echo esc_html($sections['consultation']['title']); ?></h2>
@@ -258,7 +258,7 @@ $sections = memphislaw_get_homepage_sections();
                     </div>
                 </dl>
 
-                <div class="consultation__map">
+                <div class="consultation__map ml-map">
                     <?php echo memphislaw_render_consultation_map(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </div>
             </div>

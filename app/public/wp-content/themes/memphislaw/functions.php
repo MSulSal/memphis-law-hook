@@ -51,7 +51,7 @@ function memphislaw_enqueue_assets(): void
 
     wp_enqueue_style(
         'memphislaw-fonts',
-        'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700;1,800&display=swap',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700;1,800&display=swap',
         [],
         null
     );
@@ -74,6 +74,16 @@ function memphislaw_enqueue_assets(): void
     );
 }
 add_action('wp_enqueue_scripts', 'memphislaw_enqueue_assets');
+
+function memphislaw_add_front_page_body_class(array $classes): array
+{
+    if (is_front_page()) {
+        $classes[] = 'memphis-law-page';
+    }
+
+    return $classes;
+}
+add_filter('body_class', 'memphislaw_add_front_page_body_class');
 
 function memphislaw_output_theme_bootstrap_script(): void
 {
@@ -171,6 +181,21 @@ function memphislaw_get_brand_logo_markup(): string
     return sprintf(
         '<img class="brand__image" src="%1$s" alt="%2$s" loading="eager">',
         esc_url(get_theme_file_uri('/assets/images/logo-nobg.png')),
+        esc_attr(get_bloginfo('name'))
+    );
+}
+
+function memphislaw_get_footer_logo_markup(): string
+{
+    $footer_logo_url = memphislaw_get_string_theme_mod('memphislaw_footer_logo', 'footer_logo', 'url');
+
+    if ($footer_logo_url === '') {
+        return memphislaw_get_brand_logo_markup();
+    }
+
+    return sprintf(
+        '<img class="brand__image brand__image--footer" src="%1$s" alt="%2$s" loading="lazy" decoding="async">',
+        esc_url($footer_logo_url),
         esc_attr(get_bloginfo('name'))
     );
 }

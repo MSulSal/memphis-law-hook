@@ -1,0 +1,140 @@
+﻿{
+    "generated_at":  "2026-04-24T19:53:43.0710148Z",
+    "pdf_stack":  "docs/visual-qa/sections/pdf-stacked.png",
+    "source":  {
+                   "pdf_pages":  [
+                                     ".codex-temp/pdf/page-1.png",
+                                     ".codex-temp/pdf/page-2.png",
+                                     ".codex-temp/pdf/page-3.png"
+                                 ],
+                   "live_screenshot":  ".codex-temp/chrome-out/live-home-dark-fidelity-5.png",
+                   "pdf_trim":  {
+                                    "x":  32,
+                                    "y":  45,
+                                    "width":  1211,
+                                    "height":  1565
+                                }
+               },
+    "sections":  [
+                     {
+                         "pdf":  {
+                                     "y":  0,
+                                     "width":  1211,
+                                     "height":  45,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  0,
+                                      "width":  1275,
+                                      "height":  45,
+                                      "x":  0
+                                  },
+                         "name":  "navbar"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  45,
+                                     "width":  1211,
+                                     "height":  608,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  45,
+                                      "width":  1275,
+                                      "height":  608,
+                                      "x":  0
+                                  },
+                         "name":  "hero"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  653,
+                                     "width":  1211,
+                                     "height":  749,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  653,
+                                      "width":  1275,
+                                      "height":  749,
+                                      "x":  0
+                                  },
+                         "name":  "practice-areas"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  1402,
+                                     "width":  1211,
+                                     "height":  757,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  1402,
+                                      "width":  1275,
+                                      "height":  757,
+                                      "x":  0
+                                  },
+                         "name":  "workers-comp"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  2159,
+                                     "width":  1211,
+                                     "height":  878,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  2159,
+                                      "width":  1275,
+                                      "height":  878,
+                                      "x":  0
+                                  },
+                         "name":  "our-team"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  3037,
+                                     "width":  1211,
+                                     "height":  645,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  3037,
+                                      "width":  1275,
+                                      "height":  645,
+                                      "x":  0
+                                  },
+                         "name":  "testimonials"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  3682,
+                                     "width":  1211,
+                                     "height":  742,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  3682,
+                                      "width":  1275,
+                                      "height":  742,
+                                      "x":  0
+                                  },
+                         "name":  "contact"
+                     },
+                     {
+                         "pdf":  {
+                                     "y":  4424,
+                                     "width":  1211,
+                                     "height":  233,
+                                     "x":  0
+                                 },
+                         "live":  {
+                                      "y":  4424,
+                                      "width":  1275,
+                                      "height":  233,
+                                      "x":  0
+                                  },
+                         "name":  "footer"
+                     }
+                 ]
+}

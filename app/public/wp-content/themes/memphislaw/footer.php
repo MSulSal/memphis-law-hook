@@ -4,11 +4,11 @@ declare(strict_types=1);
 $contact = memphislaw_get_contact_details();
 $brand = memphislaw_get_brand_settings();
 ?>
-<footer class="site-footer">
-    <div class="container site-footer__grid">
+<footer class="site-footer ml-footer">
+    <div class="container site-footer__grid ml-footer-grid">
         <div>
             <a class="brand brand--footer" href="<?php echo esc_url(home_url('/')); ?>">
-                <span class="brand__mark" aria-hidden="true"><?php echo wp_kses_post(memphislaw_get_brand_logo_markup()); ?></span>
+                <span class="brand__mark" aria-hidden="true"><?php echo wp_kses_post(memphislaw_get_footer_logo_markup()); ?></span>
                 <span class="brand__text">
                     <strong>Arthur Ray</strong>
                     <span><?php esc_html_e('Law Offices', 'memphislaw'); ?></span>

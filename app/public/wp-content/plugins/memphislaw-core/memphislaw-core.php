@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.6.2
+ * Version: 0.6.3
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -568,7 +568,7 @@ function memphislaw_core_seed_starter_content(): void
     $attorney_id = memphislaw_core_upsert_content_post(
         'ml_attorney',
         'Arthur Ray, Esq.',
-        "Arthur Ray has practiced bankruptcy law in Memphis for over 50 years, filing thousands of cases in the Western District of Tennessee. A dedicated advocate for families facing financial hardship, Mr. Ray is known for his thorough knowledge of bankruptcy procedure, his meticulous handling of trustee filings and creditor claims, and his unwavering commitment to clients in their most vulnerable moments.",
+        "Arthur Ray has practiced bankruptcy law in Memphis for over 50 years, filing thousands of cases in the Western District of Tennessee. A dedicated advocate for families facing financial hardship, Mr. Ray is known for his thorough knowledge of bankruptcy procedure, his meticulous handling of trustee filings and creditor claims, and his unwavering commitment to clients in their most vulnerable moments.\n\nA longtime resident of the Memphis area, Mr. Ray has also built a successful personal injury and workers' compensation practice, recovering millions of dollars for injured clients across the Mid-South. His depth of experience across multiple practice areas allows him to identify every avenue of relief available to each client.",
         0
     );
 
@@ -856,11 +856,13 @@ function memphislaw_core_apply_site_setup(): array
     update_option('date_format', 'F j, Y');
     update_option('time_format', 'g:i A');
 
-    $map_options = get_option('memphislaw_google_maps_options', null);
-    if (is_array($map_options)) {
-        $map_options['height'] = 168;
-        update_option('memphislaw_google_maps_options', $map_options);
+    $map_options = get_option('memphislaw_google_maps_options', []);
+    if (!is_array($map_options)) {
+        $map_options = [];
     }
+
+    $map_options['height'] = 148;
+    update_option('memphislaw_google_maps_options', $map_options);
 
     $home_page_id = memphislaw_core_get_or_create_page('Home', 'home');
     $practice_page_ids = memphislaw_core_ensure_practice_area_pages();
