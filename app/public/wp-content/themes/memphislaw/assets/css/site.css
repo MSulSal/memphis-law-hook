@@ -5716,3 +5716,110 @@ html[data-theme="light"] body.memphis-law-page #team .attorney-card__credentials
 html[data-theme="light"] body.memphis-law-page #team .stat-card span {
     color: #334969 !important;
 }
+
+/* Contact section hard-fidelity overrides */
+body.memphis-law-page #consultation .eyebrow {
+    color: var(--gold) !important;
+}
+
+body.memphis-law-page #consultation .consultation__details h2 {
+    color: #091730 !important;
+}
+
+body.memphis-law-page #consultation .consultation__details > p:not(.eyebrow) {
+    color: #dbe7ff !important;
+}
+
+body.memphis-law-page #consultation .contact-list dt {
+    color: #f5f9ff !important;
+}
+
+body.memphis-law-page #consultation .contact-list dd,
+body.memphis-law-page #consultation .contact-list a {
+    color: #dbe7ff !important;
+    font-weight: 500 !important;
+}
+
+body.memphis-law-page #consultation .consultation-form {
+    background: #161d27 !important;
+    border-color: #192335 !important;
+}
+
+body.memphis-law-page #consultation .consultation-form h3 {
+    color: #f3f7ff !important;
+}
+
+body.memphis-law-page #consultation .consultation-form label {
+    color: #dbe7ff !important;
+    font-weight: 600 !important;
+}
+
+body.memphis-law-page #consultation .consultation-form input,
+body.memphis-law-page #consultation .consultation-form select,
+body.memphis-law-page #consultation .consultation-form textarea {
+    background: var(--field-bg) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: #edf3ff !important;
+}
+
+body.memphis-law-page #consultation .consultation-form input::placeholder,
+body.memphis-law-page #consultation .consultation-form textarea::placeholder {
+    color: #94a7c7 !important;
+}
+
+body.memphis-law-page #consultation .consultation-form__consent span,
+body.memphis-law-page #consultation .consultation-form__footnote {
+    color: #9eb0cc !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation__details h2 {
+    color: #112846 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation__details > p:not(.eyebrow),
+html[data-theme="light"] body.memphis-law-page #consultation .contact-list dd,
+html[data-theme="light"] body.memphis-law-page #consultation .contact-list a {
+    color: #edf3ff !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .contact-list dt {
+    color: #ffffff !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .contact-list__icon {
+    border-color: rgba(222, 234, 255, 0.78) !important;
+    background: rgba(222, 234, 255, 0.24) !important;
+    color: #ffe4a3 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form {
+    background: #f7fbff !important;
+    border-color: rgba(44, 73, 118, 0.2) !important;
+    box-shadow: 0 18px 34px rgba(31, 56, 94, 0.14) !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form h3 {
+    color: #17335a !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form label {
+    color: #26466f !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form input,
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form select,
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form textarea {
+    background: #ffffff !important;
+    border-color: rgba(44, 73, 118, 0.22) !important;
+    color: #17335a !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form input::placeholder,
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form textarea::placeholder {
+    color: #6c82a5 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form__consent span,
+html[data-theme="light"] body.memphis-law-page #consultation .consultation-form__footnote {
+    color: #566d91 !important;
+}
