@@ -18,12 +18,16 @@ Move the remaining homepage sections out of theme fallback copy and into WordPre
 
 ## Commit 5
 
-Move the remaining hardcoded structured content, especially workers' compensation benefits/steps and deeper practice-area page copy, into clearer WordPress-managed editing surfaces.
+Move deeper practice-area landing-page copy into clearer WordPress-managed editing surfaces.
 
 ## Commit 6
 
-SEO polish, favicon, social preview image, legal review pass, and migration rehearsal.
+Move the remaining homepage-only structured content, especially workers' compensation benefits and steps, into WordPress-managed editing surfaces.
 
 ## Commit 7
+
+SEO polish, favicon, social preview image, legal review pass, and migration rehearsal.
+
+## Commit 8
 
 Client handoff packet update after final copy and contact details are approved.

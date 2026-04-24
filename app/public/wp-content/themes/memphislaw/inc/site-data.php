@@ -82,6 +82,37 @@ function memphislaw_get_multiline_meta_values(int $post_id, string $meta_key): a
     );
 }
 
+function memphislaw_get_text_meta_value(int $post_id, string $meta_key, string $sanitize = 'text'): string
+{
+    $value = trim((string) get_post_meta($post_id, $meta_key, true));
+
+    if ($value === '') {
+        return '';
+    }
+
+    return $sanitize === 'textarea'
+        ? sanitize_textarea_field($value)
+        : sanitize_text_field($value);
+}
+
+function memphislaw_get_structured_meta_items(int $post_id, string $prefix, array $fallback_items): array
+{
+    $items = [];
+
+    foreach ($fallback_items as $index => $fallback_item) {
+        $item_number = $index + 1;
+        $title = memphislaw_get_text_meta_value($post_id, sprintf('%s_%d_title', $prefix, $item_number));
+        $summary = memphislaw_get_text_meta_value($post_id, sprintf('%s_%d_summary', $prefix, $item_number), 'textarea');
+
+        $items[] = [
+            'title' => $title !== '' ? $title : (string) ($fallback_item['title'] ?? ''),
+            'summary' => $summary !== '' ? $summary : (string) ($fallback_item['summary'] ?? ''),
+        ];
+    }
+
+    return $items;
+}
+
 function memphislaw_hydrate_practice_area_page(string $slug, array $page): array
 {
     $wp_page = memphislaw_get_site_page_by_slug($slug);
@@ -113,6 +144,38 @@ function memphislaw_hydrate_practice_area_page(string $slug, array $page): array
     if (!empty($bullets)) {
         $page['bullets'] = $bullets;
     }
+
+    $text_fields = [
+        'eyebrow' => ['meta_key' => 'memphislaw_hero_eyebrow'],
+        'hero_title' => ['meta_key' => 'memphislaw_hero_title'],
+        'hero_summary' => ['meta_key' => 'memphislaw_hero_summary', 'sanitize' => 'textarea'],
+        'overview_heading' => ['meta_key' => 'memphislaw_overview_heading'],
+        'overview_copy' => ['meta_key' => 'memphislaw_overview_copy', 'sanitize' => 'textarea'],
+        'process_heading' => ['meta_key' => 'memphislaw_process_heading'],
+        'process_intro_copy' => ['meta_key' => 'memphislaw_process_intro_copy', 'sanitize' => 'textarea'],
+        'cta_title' => ['meta_key' => 'memphislaw_cta_title'],
+        'cta_copy' => ['meta_key' => 'memphislaw_cta_copy', 'sanitize' => 'textarea'],
+    ];
+
+    foreach ($text_fields as $field_key => $field_config) {
+        $value = memphislaw_get_text_meta_value(
+            $wp_page->ID,
+            $field_config['meta_key'],
+            $field_config['sanitize'] ?? 'text'
+        );
+
+        if ($value !== '') {
+            $page[$field_key] = $value;
+        }
+    }
+
+    $support_points = memphislaw_get_multiline_meta_values($wp_page->ID, 'memphislaw_support_points');
+    if (!empty($support_points)) {
+        $page['support_points'] = $support_points;
+    }
+
+    $page['case_cards'] = memphislaw_get_structured_meta_items($wp_page->ID, 'memphislaw_case_card', $page['case_cards']);
+    $page['process_steps'] = memphislaw_get_structured_meta_items($wp_page->ID, 'memphislaw_process_step', $page['process_steps']);
 
     return $page;
 }
@@ -156,6 +219,7 @@ function memphislaw_get_practice_area_pages(): array
                 ],
             ],
             'process_heading' => __('What working with our office looks like', 'memphislaw'),
+            'process_intro_copy' => __('We keep the process clear and paced so you understand what is happening, what documents matter, and what the next decision point will be.', 'memphislaw'),
             'process_steps' => [
                 [
                     'title' => __('Review the full financial picture', 'memphislaw'),
@@ -219,6 +283,7 @@ function memphislaw_get_practice_area_pages(): array
                 ],
             ],
             'process_heading' => __('How we move an injury case forward', 'memphislaw'),
+            'process_intro_copy' => __('A serious injury case should not feel like guesswork. We focus on early evidence, realistic case valuation, and steady communication as the claim develops.', 'memphislaw'),
             'process_steps' => [
                 [
                     'title' => __('Get the facts and records in quickly', 'memphislaw'),
@@ -282,6 +347,7 @@ function memphislaw_get_practice_area_pages(): array
                 ],
             ],
             'process_heading' => __('Key steps after a Tennessee work injury', 'memphislaw'),
+            'process_intro_copy' => __("Early reporting, approved treatment, and clean documentation can shape the strength of a workers' compensation claim from the start.", 'memphislaw'),
             'process_steps' => memphislaw_get_workers_comp_steps(),
             'support_points' => [
                 __('Report deadlines and documentation problems', 'memphislaw'),

@@ -42,6 +42,7 @@ The setup script is idempotent and handles the initial site state:
 - creates and assigns the primary navigation menu
 - removes default starter content
 - seeds starter attorneys and testimonials
+- seeds structured practice-area page fields for the three core landing pages
 
 ## Git remote
 
@@ -58,4 +59,4 @@ Planned GitHub remote:
 
 ## Next recommended commit
 
-The next commit should happen after the Local database is online. That slice should activate the theme/plugin, seed or enter content in WordPress, and split key practice areas into dedicated pages.
+The next commit should move the remaining homepage-only structured content, especially the workers' compensation benefits and steps, into a WordPress-managed editing surface.

@@ -77,7 +77,7 @@ $editor_content = trim((string) get_the_content());
             <div class="section__intro practice-process__intro">
                 <p class="eyebrow"><?php esc_html_e('What to Expect', 'memphislaw'); ?></p>
                 <h2><?php echo esc_html($practice_area['process_heading']); ?></h2>
-                <p><?php esc_html_e('Clear communication and steady next steps matter as much as the legal paperwork. We aim to keep clients informed and moving.', 'memphislaw'); ?></p>
+                <p><?php echo esc_html($practice_area['process_intro_copy']); ?></p>
             </div>
 
             <div class="practice-process__steps">

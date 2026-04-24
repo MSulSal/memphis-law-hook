@@ -27,12 +27,12 @@ The immediate business goal is simple: get a client-ready demo close enough to t
 
 The site must not depend on a page builder or non-WordPress handoff workflow. Homepage content and appearance controls should move into native WordPress editing surfaces wherever practical so the client can update copy, images, and brand styling without code changes.
 
-The current theme now uses the Customizer for hero content and core brand colors. Remaining homepage sections should keep moving away from hardcoded fallback copy and into WordPress-managed fields.
+The current theme now uses the Customizer for hero content and core brand colors. The practice-area landing pages now use a structured WordPress editing surface instead of relying on PHP fallback copy. The main remaining homepage-only structured content is the workers' compensation benefit and step lists.
 
 The homepage editing model is now split in a client-friendly way:
 
 - `Appearance > Customize` handles hero content, section headings, contact details, shared stats, logo replacement, and key brand styling.
-- `Pages > Bankruptcy`, `Pages > Personal Injury`, and `Pages > Workers' Compensation` handle the homepage practice cards through the page title, excerpt, and a small "Practice Area Card Details" meta box.
+- `Pages > Bankruptcy`, `Pages > Personal Injury`, and `Pages > Workers' Compensation` handle both the homepage cards and the deeper landing-page copy through the page title, excerpt, body content, and a structured "Practice Area Page Details" meta box.
 - `Attorneys` and `Testimonials` remain managed through the companion plugin post types.
 
 ## First commit architecture
@@ -50,4 +50,5 @@ The Local WordPress database was not reachable during this session, so the site 
 1. Bring Local online and activate the custom theme and plugin.
 2. Seed demo content into WordPress and verify the home page visually in-browser.
 3. Create dedicated practice area pages for Bankruptcy, Personal Injury, and Workers' Compensation.
-4. Add final client polish: legal disclaimer review, favicon, OG image, and migration export validation.
+4. Move the workers' compensation homepage benefit and step lists into a WordPress-managed editing surface.
+5. Add final client polish: legal disclaimer review, favicon, OG image, and migration export validation.

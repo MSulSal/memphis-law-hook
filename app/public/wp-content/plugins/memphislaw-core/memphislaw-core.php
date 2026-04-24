@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.4.0
+ * Version: 0.5.0
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -89,7 +89,7 @@ function memphislaw_core_register_meta_boxes(): void
 
     add_meta_box(
         'memphislaw_practice_page_details',
-        __('Practice Area Card Details', 'memphislaw-core'),
+        __('Practice Area Page Details', 'memphislaw-core'),
         'memphislaw_core_render_practice_page_meta_box',
         'page',
         'normal',
@@ -110,6 +110,71 @@ function memphislaw_core_is_practice_area_page(WP_Post $post): bool
     }
 
     return in_array($post->post_name, ['bankruptcy', 'personal-injury', 'workers-compensation'], true);
+}
+
+function memphislaw_core_get_post_meta_string(int $post_id, string $meta_key): string
+{
+    return (string) get_post_meta($post_id, $meta_key, true);
+}
+
+function memphislaw_core_render_admin_text_field(
+    int $post_id,
+    string $meta_key,
+    string $label,
+    string $description = '',
+    string $class = 'widefat'
+): void {
+    ?>
+    <p>
+        <label for="<?php echo esc_attr($meta_key); ?>"><strong><?php echo esc_html($label); ?></strong></label><br>
+        <input type="text" class="<?php echo esc_attr($class); ?>" id="<?php echo esc_attr($meta_key); ?>" name="<?php echo esc_attr($meta_key); ?>" value="<?php echo esc_attr(memphislaw_core_get_post_meta_string($post_id, $meta_key)); ?>">
+        <?php if ($description !== '') : ?>
+            <br><small><?php echo esc_html($description); ?></small>
+        <?php endif; ?>
+    </p>
+    <?php
+}
+
+function memphislaw_core_render_admin_textarea_field(
+    int $post_id,
+    string $meta_key,
+    string $label,
+    int $rows = 4,
+    string $description = ''
+): void {
+    ?>
+    <p>
+        <label for="<?php echo esc_attr($meta_key); ?>"><strong><?php echo esc_html($label); ?></strong></label><br>
+        <textarea class="widefat" rows="<?php echo esc_attr((string) $rows); ?>" id="<?php echo esc_attr($meta_key); ?>" name="<?php echo esc_attr($meta_key); ?>"><?php echo esc_textarea(memphislaw_core_get_post_meta_string($post_id, $meta_key)); ?></textarea>
+        <?php if ($description !== '') : ?>
+            <small><?php echo esc_html($description); ?></small>
+        <?php endif; ?>
+    </p>
+    <?php
+}
+
+function memphislaw_core_render_practice_page_pair_fields(WP_Post $post, string $prefix, string $label_base, int $count): void
+{
+    for ($index = 1; $index <= $count; $index++) {
+        ?>
+        <fieldset style="margin:12px 0;padding:12px;border:1px solid #dcdcde;">
+            <legend><strong><?php echo esc_html(sprintf(__('%1$s %2$d', 'memphislaw-core'), $label_base, $index)); ?></strong></legend>
+            <?php
+            memphislaw_core_render_admin_text_field(
+                $post->ID,
+                sprintf('%s_%d_title', $prefix, $index),
+                __('Title', 'memphislaw-core')
+            );
+            memphislaw_core_render_admin_textarea_field(
+                $post->ID,
+                sprintf('%s_%d_summary', $prefix, $index),
+                __('Summary', 'memphislaw-core'),
+                3
+            );
+            ?>
+        </fieldset>
+        <?php
+    }
 }
 
 function memphislaw_core_render_attorney_meta_box(WP_Post $post): void
@@ -164,16 +229,63 @@ function memphislaw_core_render_practice_page_meta_box(WP_Post $post): void
 
     wp_nonce_field('memphislaw_save_practice_page_meta', 'memphislaw_practice_page_meta_nonce');
     ?>
-    <p><?php esc_html_e('Page title controls the card title. Page excerpt controls the homepage card summary. Page content remains available for long-form details on the practice area page itself.', 'memphislaw-core'); ?></p>
-    <p>
-        <label for="memphislaw_card_icon"><strong><?php esc_html_e('Homepage Card Icon', 'memphislaw-core'); ?></strong></label><br>
-        <input type="text" class="regular-text" id="memphislaw_card_icon" name="memphislaw_card_icon" value="<?php echo esc_attr((string) get_post_meta($post->ID, 'memphislaw_card_icon', true)); ?>" maxlength="4">
-    </p>
-    <p>
-        <label for="memphislaw_card_bullets"><strong><?php esc_html_e('Homepage Card Bullets', 'memphislaw-core'); ?></strong></label><br>
-        <textarea class="widefat" rows="6" id="memphislaw_card_bullets" name="memphislaw_card_bullets"><?php echo esc_textarea((string) get_post_meta($post->ID, 'memphislaw_card_bullets', true)); ?></textarea>
-        <small><?php esc_html_e('Enter one bullet per line.', 'memphislaw-core'); ?></small>
-    </p>
+    <p><?php esc_html_e('Page title controls the homepage card title. Page excerpt controls the homepage card summary. Page content remains available for long-form details below the overview section.', 'memphislaw-core'); ?></p>
+
+    <h3><?php esc_html_e('Homepage Card', 'memphislaw-core'); ?></h3>
+    <?php
+    memphislaw_core_render_admin_text_field(
+        $post->ID,
+        'memphislaw_card_icon',
+        __('Homepage Card Icon', 'memphislaw-core'),
+        __('Use 1 to 4 characters, such as B, P, or W.', 'memphislaw-core'),
+        'regular-text'
+    );
+    memphislaw_core_render_admin_textarea_field(
+        $post->ID,
+        'memphislaw_card_bullets',
+        __('Homepage Card Bullets', 'memphislaw-core'),
+        6,
+        __('Enter one bullet per line.', 'memphislaw-core')
+    );
+    ?>
+
+    <hr>
+    <h3><?php esc_html_e('Hero Section', 'memphislaw-core'); ?></h3>
+    <?php
+    memphislaw_core_render_admin_text_field($post->ID, 'memphislaw_hero_eyebrow', __('Hero Eyebrow', 'memphislaw-core'));
+    memphislaw_core_render_admin_text_field($post->ID, 'memphislaw_hero_title', __('Hero Title', 'memphislaw-core'));
+    memphislaw_core_render_admin_textarea_field($post->ID, 'memphislaw_hero_summary', __('Hero Summary', 'memphislaw-core'), 4);
+    memphislaw_core_render_admin_textarea_field(
+        $post->ID,
+        'memphislaw_support_points',
+        __('Hero Sidebar Support Points', 'memphislaw-core'),
+        5,
+        __('Enter one support point per line.', 'memphislaw-core')
+    );
+    ?>
+
+    <hr>
+    <h3><?php esc_html_e('Overview Section', 'memphislaw-core'); ?></h3>
+    <?php
+    memphislaw_core_render_admin_text_field($post->ID, 'memphislaw_overview_heading', __('Overview Heading', 'memphislaw-core'));
+    memphislaw_core_render_admin_textarea_field($post->ID, 'memphislaw_overview_copy', __('Overview Copy', 'memphislaw-core'), 4);
+    memphislaw_core_render_practice_page_pair_fields($post, 'memphislaw_case_card', __('Detail Card', 'memphislaw-core'), 4);
+    ?>
+
+    <hr>
+    <h3><?php esc_html_e('Process Section', 'memphislaw-core'); ?></h3>
+    <?php
+    memphislaw_core_render_admin_text_field($post->ID, 'memphislaw_process_heading', __('Process Heading', 'memphislaw-core'));
+    memphislaw_core_render_admin_textarea_field($post->ID, 'memphislaw_process_intro_copy', __('Process Intro Copy', 'memphislaw-core'), 4);
+    memphislaw_core_render_practice_page_pair_fields($post, 'memphislaw_process_step', __('Process Step', 'memphislaw-core'), 4);
+    ?>
+
+    <hr>
+    <h3><?php esc_html_e('Call To Action Section', 'memphislaw-core'); ?></h3>
+    <?php
+    memphislaw_core_render_admin_text_field($post->ID, 'memphislaw_cta_title', __('CTA Title', 'memphislaw-core'));
+    memphislaw_core_render_admin_textarea_field($post->ID, 'memphislaw_cta_copy', __('CTA Copy', 'memphislaw-core'), 4);
+    ?>
     <?php
 }
 
@@ -237,8 +349,38 @@ function memphislaw_core_save_post_meta(int $post_id): void
             return;
         }
 
-        update_post_meta($post_id, 'memphislaw_card_icon', sanitize_text_field(wp_unslash($_POST['memphislaw_card_icon'] ?? '')));
-        update_post_meta($post_id, 'memphislaw_card_bullets', sanitize_textarea_field(wp_unslash($_POST['memphislaw_card_bullets'] ?? '')));
+        $text_fields = [
+            'memphislaw_card_icon',
+            'memphislaw_hero_eyebrow',
+            'memphislaw_hero_title',
+            'memphislaw_overview_heading',
+            'memphislaw_process_heading',
+            'memphislaw_cta_title',
+        ];
+
+        foreach ($text_fields as $meta_key) {
+            update_post_meta($post_id, $meta_key, sanitize_text_field(wp_unslash($_POST[$meta_key] ?? '')));
+        }
+
+        $textarea_fields = [
+            'memphislaw_card_bullets',
+            'memphislaw_hero_summary',
+            'memphislaw_support_points',
+            'memphislaw_overview_copy',
+            'memphislaw_process_intro_copy',
+            'memphislaw_cta_copy',
+        ];
+
+        foreach ($textarea_fields as $meta_key) {
+            update_post_meta($post_id, $meta_key, sanitize_textarea_field(wp_unslash($_POST[$meta_key] ?? '')));
+        }
+
+        for ($index = 1; $index <= 4; $index++) {
+            update_post_meta($post_id, sprintf('memphislaw_case_card_%d_title', $index), sanitize_text_field(wp_unslash($_POST[sprintf('memphislaw_case_card_%d_title', $index)] ?? '')));
+            update_post_meta($post_id, sprintf('memphislaw_case_card_%d_summary', $index), sanitize_textarea_field(wp_unslash($_POST[sprintf('memphislaw_case_card_%d_summary', $index)] ?? '')));
+            update_post_meta($post_id, sprintf('memphislaw_process_step_%d_title', $index), sanitize_text_field(wp_unslash($_POST[sprintf('memphislaw_process_step_%d_title', $index)] ?? '')));
+            update_post_meta($post_id, sprintf('memphislaw_process_step_%d_summary', $index), sanitize_textarea_field(wp_unslash($_POST[sprintf('memphislaw_process_step_%d_summary', $index)] ?? '')));
+        }
     }
 }
 add_action('save_post', 'memphislaw_core_save_post_meta');
@@ -530,13 +672,29 @@ function memphislaw_core_seed_practice_area_page_fields(array $page_ids): void
         }
 
         update_post_meta($page_id, 'memphislaw_practice_area_key', $slug);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_card_icon', (string) $defaults[$slug]['icon']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_card_bullets', implode("\n", $defaults[$slug]['bullets']));
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_hero_eyebrow', (string) $defaults[$slug]['eyebrow']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_hero_title', (string) $defaults[$slug]['hero_title']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_hero_summary', (string) $defaults[$slug]['hero_summary']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_support_points', implode("\n", $defaults[$slug]['support_points']));
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_overview_heading', (string) $defaults[$slug]['overview_heading']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_overview_copy', (string) $defaults[$slug]['overview_copy']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_process_heading', (string) $defaults[$slug]['process_heading']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_process_intro_copy', (string) ($defaults[$slug]['process_intro_copy'] ?? ''));
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_cta_title', (string) $defaults[$slug]['cta_title']);
+        memphislaw_core_seed_empty_meta_field($page_id, 'memphislaw_cta_copy', (string) $defaults[$slug]['cta_copy']);
 
-        if (trim((string) get_post_meta($page_id, 'memphislaw_card_icon', true)) === '') {
-            update_post_meta($page_id, 'memphislaw_card_icon', $defaults[$slug]['icon']);
+        foreach ($defaults[$slug]['case_cards'] as $index => $card) {
+            $item_number = $index + 1;
+            memphislaw_core_seed_empty_meta_field($page_id, sprintf('memphislaw_case_card_%d_title', $item_number), (string) $card['title']);
+            memphislaw_core_seed_empty_meta_field($page_id, sprintf('memphislaw_case_card_%d_summary', $item_number), (string) $card['summary']);
         }
 
-        if (trim((string) get_post_meta($page_id, 'memphislaw_card_bullets', true)) === '') {
-            update_post_meta($page_id, 'memphislaw_card_bullets', implode("\n", $defaults[$slug]['bullets']));
+        foreach ($defaults[$slug]['process_steps'] as $index => $step) {
+            $item_number = $index + 1;
+            memphislaw_core_seed_empty_meta_field($page_id, sprintf('memphislaw_process_step_%d_title', $item_number), (string) $step['title']);
+            memphislaw_core_seed_empty_meta_field($page_id, sprintf('memphislaw_process_step_%d_summary', $item_number), (string) $step['summary']);
         }
 
         if (trim((string) $page->post_excerpt) === '') {
@@ -547,6 +705,13 @@ function memphislaw_core_seed_practice_area_page_fields(array $page_ids): void
                 ]
             );
         }
+    }
+}
+
+function memphislaw_core_seed_empty_meta_field(int $post_id, string $meta_key, string $value): void
+{
+    if (trim((string) get_post_meta($post_id, $meta_key, true)) === '') {
+        update_post_meta($post_id, $meta_key, $value);
     }
 }
 

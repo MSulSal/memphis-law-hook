@@ -29,7 +29,7 @@ After activation and content entry, the client or operator should be able to:
 - Receive consultation requests without a heavy form plugin
 - Update the homepage hero copy, hero image, and core brand colors in `Appearance > Customize`
 - Update homepage section headings, contact details, footer legal text, and shared firm stats in `Appearance > Customize`
-- Update the practice area cards by editing the corresponding WordPress pages and their excerpts
+- Update each practice-area landing page from its own WordPress editor screen, including hero copy, overview copy, detail cards, process steps, and CTA copy
 - Replace the logo through WordPress custom logo support when needed
 
 Items still best handled by a developer or power user:
@@ -59,7 +59,7 @@ Use these paths during handoff:
 - `Appearance > Customize > Homepage Sections`: section headings and supporting copy
 - `Appearance > Customize > Firm Details`: address, phone, email, office hours, footer disclaimer, and map image
 - `Appearance > Customize > Homepage Stats`: the four firm credibility stats
-- `Pages > Bankruptcy`, `Pages > Personal Injury`, `Pages > Workers' Compensation`: practice page title, excerpt, and homepage card icon/bullets
+- `Pages > Bankruptcy`, `Pages > Personal Injury`, `Pages > Workers' Compensation`: page title, excerpt, body copy, and the structured `Practice Area Page Details` box for card copy, hero copy, overview copy, process steps, and CTA copy
 
 ## Recommended client-facing plugin policy
 
