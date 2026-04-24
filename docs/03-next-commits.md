@@ -1,33 +1,18 @@
 # Suggested Commit Sequence
 
-## Commit 1
+## Completed build sequence
 
-Custom theme, custom plugin, docs, and repo scaffolding.
+1. Custom theme, custom plugin, docs, and repo scaffolding.
+2. Local activation, starter content seeding, menu assignment, and front-page verification.
+3. Dedicated practice area pages and stronger internal linking.
+4. Homepage sections moved into WordPress-managed content and Customizer settings.
+5. Practice-area landing-page copy moved into structured WordPress editing surfaces.
+6. Workers' compensation homepage benefits and step content moved into WordPress-managed controls.
+7. Final polish pass for PDF alignment, icon system, responsive cleanup, and light/dark preview support.
 
-## Commit 2
+## Best next commits if the project continues
 
-Local activation, starter content seeding, menu assignment, and front-page verification.
-
-## Commit 3
-
-Dedicated practice area pages and stronger internal linking.
-
-## Commit 4
-
-Move the remaining homepage sections out of theme fallback copy and into WordPress-managed content that is easier for the client to maintain.
-
-## Commit 5
-
-Move deeper practice-area landing-page copy into clearer WordPress-managed editing surfaces.
-
-## Commit 6
-
-Move the remaining homepage-only structured content, especially workers' compensation benefits and steps, into WordPress-managed editing surfaces.
-
-## Commit 7
-
-SEO polish, favicon, social preview image, legal review pass, and migration rehearsal.
-
-## Commit 8
-
-Client handoff packet update after final copy and contact details are approved.
+1. Add favicon, OG image, and any proposal-specific branded preview assets.
+2. Rehearse the All-in-One WP Migration export and validate the final archive size for Wasmer hosting constraints.
+3. Replace demo testimonials, metrics, or placeholder contact language with approved client copy if the client requests revisions.
+4. Add analytics, form-delivery routing, or production email integrations only after the client approves the demo.

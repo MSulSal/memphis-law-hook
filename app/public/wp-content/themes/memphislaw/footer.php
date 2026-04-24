@@ -31,9 +31,9 @@ $brand = memphislaw_get_brand_settings();
         <div>
             <h2 class="site-footer__heading"><?php esc_html_e('Firm', 'memphislaw'); ?></h2>
             <ul class="site-footer__list">
-                <?php foreach (memphislaw_get_primary_navigation_items() as $item) : ?>
-                    <li><a href="<?php echo esc_url($item['url']); ?>"><?php echo esc_html($item['label']); ?></a></li>
-                <?php endforeach; ?>
+                <li><a href="<?php echo esc_url(home_url('/#team')); ?>"><?php esc_html_e('Our Attorneys', 'memphislaw'); ?></a></li>
+                <li><a href="<?php echo esc_url(home_url('/#testimonials')); ?>"><?php esc_html_e('Client Testimonials', 'memphislaw'); ?></a></li>
+                <li><a href="<?php echo esc_url(home_url('/#consultation')); ?>"><?php esc_html_e('Contact Us', 'memphislaw'); ?></a></li>
             </ul>
         </div>
 

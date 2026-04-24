@@ -8,6 +8,8 @@ function memphislaw_get_customizer_defaults(): array
         'action_color' => '#5e88e6',
         'background_color' => '#0a1020',
         'panel_color' => '#111a2d',
+        'light_background_color' => '#eef3fb',
+        'light_panel_color' => '#ffffff',
         'hero_image' => get_theme_file_uri('/assets/images/courthouse.png'),
         'hero_pill_location' => __('Memphis, Tennessee', 'memphislaw'),
         'hero_pill_since' => __('Since 1974', 'memphislaw'),
@@ -35,9 +37,9 @@ function memphislaw_get_customizer_defaults(): array
         'contact_address_line_2' => __('Memphis, TN 38119', 'memphislaw'),
         'contact_phone' => '901-475-8200',
         'contact_email' => 'info@memphislaw.com',
-        'contact_hours' => __('Mon-Fri: 8:30 AM - 5:30 PM | Sat: By appointment', 'memphislaw'),
+        'contact_hours' => __("Mon-Fri: 8:30 AM - 5:30 PM\nSat: By appointment", 'memphislaw'),
         'contact_map_image' => get_theme_file_uri('/assets/images/office-map.jpg'),
-        'footer_legal_disclaimer' => __('Attorney advertising. This website is for general information only and does not create an attorney-client relationship.', 'memphislaw'),
+        'footer_legal_disclaimer' => __('Attorney advertising. The information on this website is for general informational purposes only and does not constitute legal advice. Viewing this site does not create an attorney-client relationship.', 'memphislaw'),
         'practice_section_eyebrow' => __('Practice Areas', 'memphislaw'),
         'practice_section_title' => __('Comprehensive Legal Services for Memphis Families', 'memphislaw'),
         'practice_section_intro' => __("Whether you're facing financial hardship, recovering from an injury, or navigating a workplace accident, Arthur Ray Law Offices provides experienced, compassionate representation.", 'memphislaw'),
@@ -51,16 +53,36 @@ function memphislaw_get_customizer_defaults(): array
         'workers_section_denied_button_label' => __('Get Help Now', 'memphislaw'),
         'workers_section_benefits_heading' => __('What Benefits Are Available?', 'memphislaw'),
         'workers_section_deadline_label' => __('Important deadline:', 'memphislaw'),
-        'workers_section_deadline_copy' => __("You must report your injury quickly and file your claim within the required time. Don't wait to ask for guidance.", 'memphislaw'),
+        'workers_section_deadline_copy' => __("You must report your work injury to your employer within 15 days and file a claim within one year. Don't wait - contact us today.", 'memphislaw'),
         'workers_section_steps_eyebrow' => __('Steps After a Work Injury', 'memphislaw'),
+        'workers_benefit_1_title' => __('Medical Care', 'memphislaw'),
+        'workers_benefit_1_summary' => __('All necessary and reasonable medical treatment paid in full - doctor visits, surgery, physical therapy, and prescriptions.', 'memphislaw'),
+        'workers_benefit_2_title' => __('Wage Replacement', 'memphislaw'),
+        'workers_benefit_2_summary' => __('Temporary Total Disability (TTD) pays two-thirds of your average weekly wage while you cannot work due to your injury.', 'memphislaw'),
+        'workers_benefit_3_title' => __('Permanent Disability', 'memphislaw'),
+        'workers_benefit_3_summary' => __('If your injury causes a lasting impairment, you may be entitled to Permanent Partial or Total Disability benefits.', 'memphislaw'),
+        'workers_benefit_4_title' => __('Vocational Rehab', 'memphislaw'),
+        'workers_benefit_4_summary' => __('If you cannot return to your former job, vocational rehabilitation may help you retrain for new employment.', 'memphislaw'),
+        'workers_benefit_5_title' => __('Death Benefits', 'memphislaw'),
+        'workers_benefit_5_summary' => __('Surviving family members may receive funeral expenses and ongoing benefits if a work injury proves fatal.', 'memphislaw'),
+        'workers_benefit_6_title' => __('Anti-Retaliation', 'memphislaw'),
+        'workers_benefit_6_summary' => __('Tennessee law prohibits employers from firing or discriminating against workers who file legitimate compensation claims.', 'memphislaw'),
+        'workers_step_1_title' => __('Report immediately', 'memphislaw'),
+        'workers_step_1_summary' => __('Notify your supervisor in writing within 15 days.', 'memphislaw'),
+        'workers_step_2_title' => __('Seek medical care', 'memphislaw'),
+        'workers_step_2_summary' => __("Use your employer's approved provider initially.", 'memphislaw'),
+        'workers_step_3_title' => __('Document everything', 'memphislaw'),
+        'workers_step_3_summary' => __('Keep all medical records, receipts, and correspondence.', 'memphislaw'),
+        'workers_step_4_title' => __('Call us', 'memphislaw'),
+        'workers_step_4_summary' => __('We handle the legal process while you focus on recovery.', 'memphislaw'),
         'team_section_eyebrow' => __('Our Team', 'memphislaw'),
         'team_section_title' => __('Experience You Can Trust', 'memphislaw'),
         'team_section_intro' => __('The attorneys at Arthur Ray Law Offices bring decades of combined experience and a genuine commitment to the people of Memphis and surrounding communities.', 'memphislaw'),
         'testimonials_section_eyebrow' => __('Client Stories', 'memphislaw'),
         'testimonials_section_title' => __('What Our Clients Say', 'memphislaw'),
         'consultation_section_eyebrow' => __('Get in Touch', 'memphislaw'),
-        'consultation_section_title' => __('Free Consultation. No Fees Unless You Win.', 'memphislaw'),
-        'consultation_section_intro' => __("Tell us about your situation. We'll review your case at no charge and advise you on the strongest next step.", 'memphislaw'),
+        'consultation_section_title' => __('Free Consultation — No Fees Unless You Win', 'memphislaw'),
+        'consultation_section_intro' => __("Tell us about your situation. We'll review your case at no charge and advise you on the best path forward.", 'memphislaw'),
         'site_stat_1_value' => '50+',
         'site_stat_1_label' => __('Years of Bankruptcy Practice', 'memphislaw'),
         'site_stat_2_value' => '5,000+',
@@ -187,6 +209,18 @@ function memphislaw_customize_register(WP_Customize_Manager $wp_customize): void
                 'default' => $defaults['panel_color'],
                 'type' => 'color',
             ],
+            [
+                'setting' => 'memphislaw_light_background_color',
+                'label' => __('Light Theme Background', 'memphislaw'),
+                'default' => $defaults['light_background_color'],
+                'type' => 'color',
+            ],
+            [
+                'setting' => 'memphislaw_light_panel_color',
+                'label' => __('Light Theme Panel Surface', 'memphislaw'),
+                'default' => $defaults['light_panel_color'],
+                'type' => 'color',
+            ],
         ]
     );
 
@@ -237,25 +271,55 @@ function memphislaw_customize_register(WP_Customize_Manager $wp_customize): void
         ]
     );
 
-    memphislaw_customize_add_fields(
-        $wp_customize,
-        'memphislaw_homepage_sections',
+    $homepage_section_fields = [
+        ['setting' => 'memphislaw_practice_section_eyebrow', 'label' => __('Practice: Eyebrow', 'memphislaw'), 'default' => $defaults['practice_section_eyebrow']],
+        ['setting' => 'memphislaw_practice_section_title', 'label' => __('Practice: Title', 'memphislaw'), 'default' => $defaults['practice_section_title']],
+        ['setting' => 'memphislaw_practice_section_intro', 'label' => __('Practice: Intro', 'memphislaw'), 'default' => $defaults['practice_section_intro'], 'type' => 'textarea'],
+        ['setting' => 'memphislaw_workers_section_eyebrow', 'label' => __("Workers' Comp: Eyebrow", 'memphislaw'), 'default' => $defaults['workers_section_eyebrow']],
+        ['setting' => 'memphislaw_workers_section_title', 'label' => __("Workers' Comp: Title", 'memphislaw'), 'default' => $defaults['workers_section_title']],
+        ['setting' => 'memphislaw_workers_section_intro', 'label' => __("Workers' Comp: Intro", 'memphislaw'), 'default' => $defaults['workers_section_intro'], 'type' => 'textarea'],
+        ['setting' => 'memphislaw_workers_section_covered_heading', 'label' => __("Workers' Comp: Coverage Heading", 'memphislaw'), 'default' => $defaults['workers_section_covered_heading']],
+        ['setting' => 'memphislaw_workers_section_covered_copy', 'label' => __("Workers' Comp: Coverage Copy", 'memphislaw'), 'default' => $defaults['workers_section_covered_copy'], 'type' => 'textarea'],
+        ['setting' => 'memphislaw_workers_section_denied_title', 'label' => __("Workers' Comp: Denied Card Title", 'memphislaw'), 'default' => $defaults['workers_section_denied_title']],
+        ['setting' => 'memphislaw_workers_section_denied_copy', 'label' => __("Workers' Comp: Denied Card Copy", 'memphislaw'), 'default' => $defaults['workers_section_denied_copy'], 'type' => 'textarea'],
+        ['setting' => 'memphislaw_workers_section_denied_button_label', 'label' => __("Workers' Comp: Denied Card Button", 'memphislaw'), 'default' => $defaults['workers_section_denied_button_label']],
+        ['setting' => 'memphislaw_workers_section_benefits_heading', 'label' => __("Workers' Comp: Benefits Heading", 'memphislaw'), 'default' => $defaults['workers_section_benefits_heading']],
+        ['setting' => 'memphislaw_workers_section_deadline_label', 'label' => __("Workers' Comp: Deadline Label", 'memphislaw'), 'default' => $defaults['workers_section_deadline_label']],
+        ['setting' => 'memphislaw_workers_section_deadline_copy', 'label' => __("Workers' Comp: Deadline Copy", 'memphislaw'), 'default' => $defaults['workers_section_deadline_copy'], 'type' => 'textarea'],
+        ['setting' => 'memphislaw_workers_section_steps_eyebrow', 'label' => __("Workers' Comp: Steps Eyebrow", 'memphislaw'), 'default' => $defaults['workers_section_steps_eyebrow']],
+    ];
+
+    for ($index = 1; $index <= 6; $index++) {
+        $homepage_section_fields[] = [
+            'setting' => "memphislaw_workers_benefit_{$index}_title",
+            'label' => sprintf(__("Workers' Comp: Benefit %d Title", 'memphislaw'), $index),
+            'default' => $defaults["workers_benefit_{$index}_title"],
+        ];
+        $homepage_section_fields[] = [
+            'setting' => "memphislaw_workers_benefit_{$index}_summary",
+            'label' => sprintf(__("Workers' Comp: Benefit %d Summary", 'memphislaw'), $index),
+            'default' => $defaults["workers_benefit_{$index}_summary"],
+            'type' => 'textarea',
+        ];
+    }
+
+    for ($index = 1; $index <= 4; $index++) {
+        $homepage_section_fields[] = [
+            'setting' => "memphislaw_workers_step_{$index}_title",
+            'label' => sprintf(__("Workers' Comp: Step %d Title", 'memphislaw'), $index),
+            'default' => $defaults["workers_step_{$index}_title"],
+        ];
+        $homepage_section_fields[] = [
+            'setting' => "memphislaw_workers_step_{$index}_summary",
+            'label' => sprintf(__("Workers' Comp: Step %d Summary", 'memphislaw'), $index),
+            'default' => $defaults["workers_step_{$index}_summary"],
+            'type' => 'textarea',
+        ];
+    }
+
+    $homepage_section_fields = array_merge(
+        $homepage_section_fields,
         [
-            ['setting' => 'memphislaw_practice_section_eyebrow', 'label' => __('Practice: Eyebrow', 'memphislaw'), 'default' => $defaults['practice_section_eyebrow']],
-            ['setting' => 'memphislaw_practice_section_title', 'label' => __('Practice: Title', 'memphislaw'), 'default' => $defaults['practice_section_title']],
-            ['setting' => 'memphislaw_practice_section_intro', 'label' => __('Practice: Intro', 'memphislaw'), 'default' => $defaults['practice_section_intro'], 'type' => 'textarea'],
-            ['setting' => 'memphislaw_workers_section_eyebrow', 'label' => __("Workers' Comp: Eyebrow", 'memphislaw'), 'default' => $defaults['workers_section_eyebrow']],
-            ['setting' => 'memphislaw_workers_section_title', 'label' => __("Workers' Comp: Title", 'memphislaw'), 'default' => $defaults['workers_section_title']],
-            ['setting' => 'memphislaw_workers_section_intro', 'label' => __("Workers' Comp: Intro", 'memphislaw'), 'default' => $defaults['workers_section_intro'], 'type' => 'textarea'],
-            ['setting' => 'memphislaw_workers_section_covered_heading', 'label' => __("Workers' Comp: Coverage Heading", 'memphislaw'), 'default' => $defaults['workers_section_covered_heading']],
-            ['setting' => 'memphislaw_workers_section_covered_copy', 'label' => __("Workers' Comp: Coverage Copy", 'memphislaw'), 'default' => $defaults['workers_section_covered_copy'], 'type' => 'textarea'],
-            ['setting' => 'memphislaw_workers_section_denied_title', 'label' => __("Workers' Comp: Denied Card Title", 'memphislaw'), 'default' => $defaults['workers_section_denied_title']],
-            ['setting' => 'memphislaw_workers_section_denied_copy', 'label' => __("Workers' Comp: Denied Card Copy", 'memphislaw'), 'default' => $defaults['workers_section_denied_copy'], 'type' => 'textarea'],
-            ['setting' => 'memphislaw_workers_section_denied_button_label', 'label' => __("Workers' Comp: Denied Card Button", 'memphislaw'), 'default' => $defaults['workers_section_denied_button_label']],
-            ['setting' => 'memphislaw_workers_section_benefits_heading', 'label' => __("Workers' Comp: Benefits Heading", 'memphislaw'), 'default' => $defaults['workers_section_benefits_heading']],
-            ['setting' => 'memphislaw_workers_section_deadline_label', 'label' => __("Workers' Comp: Deadline Label", 'memphislaw'), 'default' => $defaults['workers_section_deadline_label']],
-            ['setting' => 'memphislaw_workers_section_deadline_copy', 'label' => __("Workers' Comp: Deadline Copy", 'memphislaw'), 'default' => $defaults['workers_section_deadline_copy'], 'type' => 'textarea'],
-            ['setting' => 'memphislaw_workers_section_steps_eyebrow', 'label' => __("Workers' Comp: Steps Eyebrow", 'memphislaw'), 'default' => $defaults['workers_section_steps_eyebrow']],
             ['setting' => 'memphislaw_team_section_eyebrow', 'label' => __('Team: Eyebrow', 'memphislaw'), 'default' => $defaults['team_section_eyebrow']],
             ['setting' => 'memphislaw_team_section_title', 'label' => __('Team: Title', 'memphislaw'), 'default' => $defaults['team_section_title']],
             ['setting' => 'memphislaw_team_section_intro', 'label' => __('Team: Intro', 'memphislaw'), 'default' => $defaults['team_section_intro'], 'type' => 'textarea'],
@@ -266,6 +330,8 @@ function memphislaw_customize_register(WP_Customize_Manager $wp_customize): void
             ['setting' => 'memphislaw_consultation_section_intro', 'label' => __('Consultation: Intro', 'memphislaw'), 'default' => $defaults['consultation_section_intro'], 'type' => 'textarea'],
         ]
     );
+
+    memphislaw_customize_add_fields($wp_customize, 'memphislaw_homepage_sections', $homepage_section_fields);
 
     $wp_customize->add_section(
         'memphislaw_firm_details',
@@ -324,6 +390,8 @@ function memphislaw_get_theme_palette(): array
     return [
         'background' => sanitize_hex_color((string) get_theme_mod('memphislaw_background_color', $defaults['background_color'])) ?: $defaults['background_color'],
         'panel' => sanitize_hex_color((string) get_theme_mod('memphislaw_panel_color', $defaults['panel_color'])) ?: $defaults['panel_color'],
+        'light_background' => sanitize_hex_color((string) get_theme_mod('memphislaw_light_background_color', $defaults['light_background_color'])) ?: $defaults['light_background_color'],
+        'light_panel' => sanitize_hex_color((string) get_theme_mod('memphislaw_light_panel_color', $defaults['light_panel_color'])) ?: $defaults['light_panel_color'],
         'action' => sanitize_hex_color((string) get_theme_mod('memphislaw_action_color', $defaults['action_color'])) ?: $defaults['action_color'],
         'accent' => sanitize_hex_color((string) get_theme_mod('memphislaw_accent_color', $defaults['accent_color'])) ?: $defaults['accent_color'],
     ];
@@ -334,11 +402,13 @@ function memphislaw_get_dynamic_styles(): string
     $palette = memphislaw_get_theme_palette();
 
     return sprintf(
-        ':root { --ml-bg: %1$s; --ml-panel: %2$s; --ml-panel-soft: %2$s; --ml-surface: %2$s; --ml-blue: %3$s; --ml-blue-deep: %3$s; --ml-gold: %4$s; }',
+        ':root { --ml-bg: %1$s; --ml-panel: %2$s; --ml-panel-soft: %2$s; --ml-surface: %2$s; --ml-blue: %3$s; --ml-blue-deep: %3$s; --ml-gold: %4$s; --ml-bg-light: %5$s; --ml-panel-light: %6$s; } html[data-theme="light"] { --ml-bg: %5$s; --ml-panel: %6$s; --ml-panel-soft: #e5ecf8; --ml-surface: #ffffff; --ml-text: #13203a; --ml-text-soft: #52607a; --ml-border: rgba(19, 32, 58, 0.12); --ml-shadow: 0 24px 48px rgba(76, 101, 152, 0.16); }',
         $palette['background'],
         $palette['panel'],
         $palette['action'],
-        $palette['accent']
+        $palette['accent'],
+        $palette['light_background'],
+        $palette['light_panel']
     );
 }
 

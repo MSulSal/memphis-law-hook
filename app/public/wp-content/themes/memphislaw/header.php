@@ -64,11 +64,10 @@ $brand = memphislaw_get_brand_settings();
             <a class="button button--small site-header__cta" href="<?php echo esc_url(home_url('/#consultation')); ?>">
                 <?php echo esc_html($brand['header_consultation_label']); ?>
             </a>
-            <span class="site-header__utility" aria-hidden="true">
-                <svg class="site-header__utility-icon" viewBox="0 0 24 24" focusable="false">
-                    <path d="M14.7 3.5a8.8 8.8 0 1 0 5.8 15.4 7.4 7.4 0 1 1-5.8-15.4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
+            <button class="site-header__theme-toggle" type="button" aria-pressed="false" aria-label="<?php esc_attr_e('Toggle light and dark theme', 'memphislaw'); ?>" data-theme-toggle>
+                <span class="site-header__theme-icon site-header__theme-icon--moon" aria-hidden="true"><?php echo memphislaw_get_icon_markup('theme-toggle'); ?></span>
+                <span class="site-header__theme-icon site-header__theme-icon--sun" aria-hidden="true"><?php echo memphislaw_get_icon_markup('theme-sun'); ?></span>
+            </button>
         </div>
     </div>
 </header>

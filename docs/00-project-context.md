@@ -27,13 +27,14 @@ The immediate business goal is simple: get a client-ready demo close enough to t
 
 The site must not depend on a page builder or non-WordPress handoff workflow. Homepage content and appearance controls should move into native WordPress editing surfaces wherever practical so the client can update copy, images, and brand styling without code changes.
 
-The current theme now uses the Customizer for hero content and core brand colors. The practice-area landing pages now use a structured WordPress editing surface instead of relying on PHP fallback copy. The main remaining homepage-only structured content is the workers' compensation benefit and step lists.
+The current theme now uses the Customizer for hero content, homepage section copy, contact details, workers' compensation benefit cards and step list copy, shared firm stats, logo replacement, and the core dark/light palette colors. The practice-area landing pages use structured WordPress editing surfaces instead of relying on PHP fallback copy.
 
 The homepage editing model is now split in a client-friendly way:
 
-- `Appearance > Customize` handles hero content, section headings, contact details, shared stats, logo replacement, and key brand styling.
+- `Appearance > Customize` handles hero content, section headings, workers' compensation section copy, benefit cards, next-step items, contact details, shared stats, logo replacement, and key brand styling.
 - `Pages > Bankruptcy`, `Pages > Personal Injury`, and `Pages > Workers' Compensation` handle both the homepage cards and the deeper landing-page copy through the page title, excerpt, body content, and a structured "Practice Area Page Details" meta box.
 - `Attorneys` and `Testimonials` remain managed through the companion plugin post types.
+- The front-end header toggle switches between the dark and light visual treatments without requiring a separate theme.
 
 ## First commit architecture
 
@@ -41,14 +42,13 @@ The homepage editing model is now split in a client-friendly way:
 - Companion plugin handles structured content and contact intake.
 - Content-heavy areas use sensible fallback data so the front-end can be built before the database is active.
 
-## Current blocker noted during build
+## Current build status
 
-The Local WordPress database was not reachable during this session, so the site could not yet be activated or seeded through WP-CLI. Code was still written safely around that constraint.
+The Local site is running, the custom theme and plugin activate cleanly, starter content is seeded through the setup script, and the homepage has been visually checked against the redesign PDF in both desktop and mobile layouts.
 
 ## Next commits to preserve momentum
 
-1. Bring Local online and activate the custom theme and plugin.
-2. Seed demo content into WordPress and verify the home page visually in-browser.
-3. Create dedicated practice area pages for Bankruptcy, Personal Injury, and Workers' Compensation.
-4. Move the workers' compensation homepage benefit and step lists into a WordPress-managed editing surface.
-5. Add final client polish: legal disclaimer review, favicon, OG image, and migration export validation.
+1. Add favicon and OG/share image assets if they are needed for the client presentation.
+2. Run a final migration export rehearsal and confirm the All-in-One WP Migration package stays within the Wasmer-friendly size target.
+3. Replace any remaining demo-only content after client copy approval.
+4. Package proposal screenshots and handoff notes from the current live demo state.

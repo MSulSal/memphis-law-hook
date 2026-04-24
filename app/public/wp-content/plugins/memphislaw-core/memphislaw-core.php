@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.5.0
+ * Version: 0.6.1
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -406,7 +406,7 @@ function memphislaw_core_render_consultation_form(): string
         <h3><?php esc_html_e('Request Your Free Consultation', 'memphislaw-core'); ?></h3>
 
         <?php if ($status === 'success') : ?>
-            <p class="consultation-form__status consultation-form__status--success"><?php esc_html_e("Message received. We'll be in touch within one business day.", 'memphislaw-core'); ?></p>
+            <p class="consultation-form__status consultation-form__status--success"><?php esc_html_e("Message received. We'll be in touch within one business day to schedule your free consultation.", 'memphislaw-core'); ?></p>
         <?php elseif ($status === 'error') : ?>
             <p class="consultation-form__status consultation-form__status--error"><?php esc_html_e('Please complete the required fields and try again.', 'memphislaw-core'); ?></p>
         <?php endif; ?>
@@ -418,23 +418,24 @@ function memphislaw_core_render_consultation_form(): string
             <div class="consultation-form__grid">
                 <div class="consultation-form__field">
                     <label for="ml-first-name"><?php esc_html_e('First Name', 'memphislaw-core'); ?> *</label>
-                    <input id="ml-first-name" name="first_name" type="text" required>
+                    <input id="ml-first-name" name="first_name" type="text" placeholder="<?php esc_attr_e('John', 'memphislaw-core'); ?>" required>
                 </div>
                 <div class="consultation-form__field">
                     <label for="ml-last-name"><?php esc_html_e('Last Name', 'memphislaw-core'); ?> *</label>
-                    <input id="ml-last-name" name="last_name" type="text" required>
+                    <input id="ml-last-name" name="last_name" type="text" placeholder="<?php esc_attr_e('Smith', 'memphislaw-core'); ?>" required>
                 </div>
                 <div class="consultation-form__field consultation-form__field--full">
                     <label for="ml-email"><?php esc_html_e('Email Address', 'memphislaw-core'); ?> *</label>
-                    <input id="ml-email" name="email" type="email" required>
+                    <input id="ml-email" name="email" type="email" placeholder="<?php esc_attr_e('your@email.com', 'memphislaw-core'); ?>" required>
                 </div>
                 <div class="consultation-form__field consultation-form__field--full">
                     <label for="ml-phone"><?php esc_html_e('Phone Number', 'memphislaw-core'); ?> *</label>
-                    <input id="ml-phone" name="phone" type="tel" required>
+                    <input id="ml-phone" name="phone" type="tel" placeholder="<?php esc_attr_e('(901) 555-0100', 'memphislaw-core'); ?>" required>
                 </div>
                 <div class="consultation-form__field consultation-form__field--full">
                     <label for="ml-legal-need"><?php esc_html_e('Area of Legal Need', 'memphislaw-core'); ?></label>
                     <select id="ml-legal-need" name="legal_need">
+                        <option value=""><?php esc_html_e('Select a practice area...', 'memphislaw-core'); ?></option>
                         <?php foreach (memphislaw_core_get_legal_need_options() as $option) : ?>
                             <option value="<?php echo esc_attr($option); ?>"><?php echo esc_html($option); ?></option>
                         <?php endforeach; ?>
@@ -442,7 +443,7 @@ function memphislaw_core_render_consultation_form(): string
                 </div>
                 <div class="consultation-form__field consultation-form__field--full">
                     <label for="ml-description"><?php esc_html_e('Brief Description of Your Situation', 'memphislaw-core'); ?></label>
-                    <textarea id="ml-description" name="description" placeholder="<?php esc_attr_e('Tell us what happened, when it happened, and any immediate concerns.', 'memphislaw-core'); ?>"></textarea>
+                    <textarea id="ml-description" name="description" placeholder="<?php esc_attr_e('Tell us a little about your case - what happened, when it occurred, and any immediate concerns...', 'memphislaw-core'); ?>"></textarea>
                 </div>
             </div>
 
@@ -451,7 +452,7 @@ function memphislaw_core_render_consultation_form(): string
                 <span><?php esc_html_e('I understand that submitting this form does not create an attorney-client relationship and that my information will be kept confidential.', 'memphislaw-core'); ?></span>
             </label>
 
-            <button class="button" type="submit"><?php esc_html_e('Send My Request', 'memphislaw-core'); ?></button>
+            <button class="button" type="submit"><?php esc_html_e('Send My Request', 'memphislaw-core'); ?><span aria-hidden="true"> ↗</span></button>
 
             <p class="consultation-form__footnote"><?php esc_html_e('Attorney advertising. Results vary by case. No attorney-client relationship is formed by submitting this form.', 'memphislaw-core'); ?></p>
         </form>
@@ -523,83 +524,129 @@ function memphislaw_core_handle_consultation_submission(): void
 add_action('admin_post_nopriv_memphislaw_submit_consultation', 'memphislaw_core_handle_consultation_submission');
 add_action('admin_post_memphislaw_submit_consultation', 'memphislaw_core_handle_consultation_submission');
 
-function memphislaw_core_seed_starter_content(): void
+function memphislaw_core_upsert_content_post(string $post_type, string $title, string $excerpt, int $menu_order = 0): int
 {
-    if ((int) wp_count_posts('ml_attorney')->publish === 0) {
-        $attorney_id = wp_insert_post(
+    $existing = get_page_by_path(sanitize_title($title), OBJECT, $post_type);
+
+    if ($existing instanceof WP_Post) {
+        wp_update_post(
             [
-                'post_type' => 'ml_attorney',
+                'ID' => (int) $existing->ID,
                 'post_status' => 'publish',
-                'post_title' => 'Arthur Ray, Esq.',
-                'post_excerpt' => "Arthur Ray has practiced bankruptcy law in Memphis for decades and built a respected personal injury and workers' compensation practice serving the Mid-South.",
-                'menu_order' => 0,
+                'post_title' => $title,
+                'post_excerpt' => $excerpt,
+                'menu_order' => $menu_order,
             ]
         );
 
-        if (!is_wp_error($attorney_id) && $attorney_id > 0) {
-            update_post_meta($attorney_id, 'memphislaw_role', 'Founding Attorney');
-            update_post_meta($attorney_id, 'memphislaw_badge', 'Lead Attorney');
-            update_post_meta($attorney_id, 'memphislaw_credentials', "University of Memphis Cecil C. Humphreys School of Law\nTennessee Bar Association member\nWestern District of Tennessee bankruptcy practice\nMemphis Bar Association member");
-        }
-
-        $associate_id = wp_insert_post(
-            [
-                'post_type' => 'ml_attorney',
-                'post_status' => 'publish',
-                'post_title' => 'Associate Attorney',
-                'post_excerpt' => "Focused personal injury and workers' compensation advocacy backed by attentive case preparation and responsive client care.",
-                'menu_order' => 1,
-            ]
-        );
-
-        if (!is_wp_error($associate_id) && $associate_id > 0) {
-            update_post_meta($associate_id, 'memphislaw_role', "Personal Injury and Workers' Compensation");
-            update_post_meta($associate_id, 'memphislaw_badge', '');
-            update_post_meta($associate_id, 'memphislaw_credentials', "Licensed in Tennessee\nPersonal injury litigation\nWorkers' compensation claims and appeals");
-        }
+        return (int) $existing->ID;
     }
 
-    if ((int) wp_count_posts('ml_testimonial')->publish === 0) {
-        $items = [
-            [
-                'title' => 'Bankruptcy Testimonial One',
-                'excerpt' => 'Mr. Ray helped me through Chapter 7 bankruptcy when I felt like I had nowhere to turn. He explained everything clearly and handled the paperwork from start to finish.',
-                'client' => 'D. Johnson',
-                'location' => 'Memphis, TN',
-                'matter' => 'Bankruptcy Client',
-            ],
-            [
-                'title' => 'Personal Injury Testimonial One',
-                'excerpt' => 'Arthur Ray Law Offices took my car accident case, handled the insurance company, and recovered far more than I expected.',
-                'client' => 'M. Williams',
-                'location' => 'Germantown, TN',
-                'matter' => 'Personal Injury Client',
-            ],
-            [
-                'title' => 'Workers Compensation Testimonial One',
-                'excerpt' => "My workers' compensation claim was denied after a serious back injury on the job. Mr. Ray appealed the decision and we won.",
-                'client' => 'R. Thomas',
-                'location' => 'Bartlett, TN',
-                'matter' => "Workers' Compensation Client",
-            ],
-        ];
+    $post_id = wp_insert_post(
+        [
+            'post_type' => $post_type,
+            'post_status' => 'publish',
+            'post_title' => $title,
+            'post_excerpt' => $excerpt,
+            'menu_order' => $menu_order,
+        ]
+    );
 
-        foreach ($items as $item) {
-            $testimonial_id = wp_insert_post(
-                [
-                    'post_type' => 'ml_testimonial',
-                    'post_status' => 'publish',
-                    'post_title' => $item['title'],
-                    'post_excerpt' => $item['excerpt'],
-                ]
-            );
+    return is_wp_error($post_id) ? 0 : (int) $post_id;
+}
 
-            if (!is_wp_error($testimonial_id) && $testimonial_id > 0) {
-                update_post_meta($testimonial_id, 'memphislaw_testimonial_client', $item['client']);
-                update_post_meta($testimonial_id, 'memphislaw_testimonial_location', $item['location']);
-                update_post_meta($testimonial_id, 'memphislaw_testimonial_matter', $item['matter']);
-                update_post_meta($testimonial_id, 'memphislaw_testimonial_rating', 5);
-            }
+function memphislaw_core_seed_starter_content(): void
+{
+    $attorney_id = memphislaw_core_upsert_content_post(
+        'ml_attorney',
+        'Arthur Ray, Esq.',
+        "Arthur Ray has practiced bankruptcy law in Memphis for over 50 years, filing thousands of cases in the Western District of Tennessee. A dedicated advocate for families facing financial hardship, Mr. Ray is known for his thorough knowledge of bankruptcy procedure, his meticulous handling of trustee filings and creditor claims, and his unwavering commitment to clients in their most vulnerable moments.",
+        0
+    );
+
+    if ($attorney_id > 0) {
+        update_post_meta($attorney_id, 'memphislaw_role', 'Founding Attorney');
+        update_post_meta($attorney_id, 'memphislaw_badge', 'Lead Attorney');
+        update_post_meta($attorney_id, 'memphislaw_credentials', "University of Memphis Cecil C. Humphreys School of Law\nTennessee Bar Association, Member\n50+ Years Bankruptcy Practice, Western District of TN\nMemphis Bar Association, Member");
+    }
+
+    $associate_id = memphislaw_core_upsert_content_post(
+        'ml_attorney',
+        'Associate Attorney',
+        "Our associate attorneys bring focused expertise in personal injury litigation and workers' compensation claims. Working under Mr. Ray's supervision, they provide clients with attentive, case-specific guidance and vigorous courtroom representation.",
+        1
+    );
+
+    if ($associate_id > 0) {
+        update_post_meta($associate_id, 'memphislaw_role', "Personal Injury and Workers' Compensation");
+        update_post_meta($associate_id, 'memphislaw_badge', '');
+        update_post_meta($associate_id, 'memphislaw_credentials', "Licensed, State of Tennessee\nPersonal Injury & Workers' Comp Litigation");
+    }
+
+    $items = [
+        [
+            'title' => 'Bankruptcy Testimonial One',
+            'excerpt' => "Mr. Ray helped me through Chapter 7 bankruptcy when I felt like I had nowhere to turn. He explained everything clearly, handled all the paperwork, and within months I had a fresh start. I can't thank him enough.",
+            'client' => 'D. Johnson',
+            'location' => 'Memphis, TN',
+            'matter' => 'Bankruptcy Client',
+            'menu_order' => 0,
+        ],
+        [
+            'title' => 'Personal Injury Testimonial One',
+            'excerpt' => "I was injured in a car accident and didn't know where to start. Arthur Ray Law Offices took my case, handled everything with the insurance company, and recovered far more than I expected. They truly fight for you.",
+            'client' => 'M. Williams',
+            'location' => 'Germantown, TN',
+            'matter' => 'Personal Injury Client',
+            'menu_order' => 1,
+        ],
+        [
+            'title' => 'Workers Compensation Testimonial One',
+            'excerpt' => "My workers' comp claim was denied after a serious back injury on the job. Mr. Ray appealed the decision and we won. He knew exactly what to do and kept me informed every step of the way.",
+            'client' => 'R. Thomas',
+            'location' => 'Bartlett, TN',
+            'matter' => "Workers' Compensation Client",
+            'menu_order' => 2,
+        ],
+        [
+            'title' => 'Bankruptcy Testimonial Two',
+            'excerpt' => 'Filing Chapter 13 bankruptcy saved my home from foreclosure. The team at Arthur Ray Law walked me through the repayment plan and kept creditors off my back. Professional, compassionate, and effective.',
+            'client' => 'L. Brown',
+            'location' => 'Collierville, TN',
+            'matter' => 'Bankruptcy Client',
+            'menu_order' => 3,
+        ],
+        [
+            'title' => 'Personal Injury Testimonial Two',
+            'excerpt' => "After my slip-and-fall at a local business, I wasn't sure I had a case. Mr. Ray reviewed everything and helped me recover compensation for my medical bills and lost income. Outstanding attorney.",
+            'client' => 'C. Harris',
+            'location' => 'Memphis, TN',
+            'matter' => 'Personal Injury Client',
+            'menu_order' => 4,
+        ],
+        [
+            'title' => 'Long-Term Client Testimonial',
+            'excerpt' => "I've referred several friends to Arthur Ray over the years. Every single one has come back grateful. He's the most knowledgeable and trustworthy attorney I've ever worked with - and I've worked with many.",
+            'client' => 'J. Davis',
+            'location' => 'Memphis, TN',
+            'matter' => 'Long-Term Client',
+            'menu_order' => 5,
+        ],
+    ];
+
+    foreach ($items as $item) {
+        $testimonial_id = memphislaw_core_upsert_content_post(
+            'ml_testimonial',
+            $item['title'],
+            $item['excerpt'],
+            $item['menu_order']
+        );
+
+        if ($testimonial_id > 0) {
+            update_post_meta($testimonial_id, 'memphislaw_testimonial_client', $item['client']);
+            update_post_meta($testimonial_id, 'memphislaw_testimonial_location', $item['location']);
+            update_post_meta($testimonial_id, 'memphislaw_testimonial_matter', $item['matter']);
+            update_post_meta($testimonial_id, 'memphislaw_testimonial_rating', 5);
         }
     }
 }

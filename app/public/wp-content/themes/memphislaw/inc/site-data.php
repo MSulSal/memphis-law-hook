@@ -185,14 +185,15 @@ function memphislaw_get_practice_area_pages(): array
     return [
         'bankruptcy' => [
             'slug' => 'bankruptcy',
-            'icon' => 'B',
+            'icon' => 'service-bankruptcy',
             'title' => __('Bankruptcy', 'memphislaw'),
-            'summary' => __('Over 50 years of experience filing bankruptcies in the Western District of Tennessee, guiding clients through Chapter 7 and Chapter 13 with clarity and care.', 'memphislaw'),
+            'summary' => __('Over 50 years of experience filing bankruptcies in the Western District of Tennessee. We guide you through Chapter 7 and Chapter 13 filings, trustee proceedings, creditor claims, and court documentation - giving you the fresh financial start you deserve.', 'memphislaw'),
             'bullets' => [
-                __('Chapter 7 liquidation filings', 'memphislaw'),
-                __('Chapter 13 repayment plans', 'memphislaw'),
-                __('Automatic stay protection', 'memphislaw'),
-                __('Trustee filing and creditor negotiation', 'memphislaw'),
+                __('Chapter 7 — Liquidation bankruptcy', 'memphislaw'),
+                __('Chapter 13 — Repayment plan', 'memphislaw'),
+                __('Automatic stay on creditor harassment', 'memphislaw'),
+                __('Discharge of unsecured debt', 'memphislaw'),
+                __('Trustee filing & creditor negotiations', 'memphislaw'),
             ],
             'fallback_link' => memphislaw_get_consultation_url(),
             'eyebrow' => __('Memphis Debt Relief Counsel', 'memphislaw'),
@@ -249,14 +250,15 @@ function memphislaw_get_practice_area_pages(): array
         ],
         'personal-injury' => [
             'slug' => 'personal-injury',
-            'icon' => 'P',
+            'icon' => 'service-personal-injury',
             'title' => __('Personal Injury', 'memphislaw'),
-            'summary' => __('Injury representation built around medical recovery, lost wages, and long-term accountability. No fees unless you win.', 'memphislaw'),
+            'summary' => __("Injured through someone else's negligence? We fight to recover maximum compensation for your medical bills, lost wages, pain and suffering, and long-term damages. No fees unless we win.", 'memphislaw'),
             'bullets' => [
-                __('Auto and truck accidents', 'memphislaw'),
+                __('Auto & truck accidents', 'memphislaw'),
                 __('Slip and fall injuries', 'memphislaw'),
                 __('Medical malpractice', 'memphislaw'),
                 __('Wrongful death claims', 'memphislaw'),
+                __('Product liability', 'memphislaw'),
             ],
             'fallback_link' => memphislaw_get_consultation_url(),
             'eyebrow' => __('Memphis Injury Representation', 'memphislaw'),
@@ -313,13 +315,14 @@ function memphislaw_get_practice_area_pages(): array
         ],
         'workers-compensation' => [
             'slug' => 'workers-compensation',
-            'icon' => 'W',
+            'icon' => 'service-workers-compensation',
             'title' => __("Workers' Compensation", 'memphislaw'),
-            'summary' => __('Representation for injured employees dealing with denied claims, wage replacement disputes, disability benefits, and return-to-work issues.', 'memphislaw'),
+            'summary' => __("Hurt on the job in Tennessee? You may be entitled to medical care, wage replacement, and long-term disability benefits. We hold employers and insurers accountable so you get what you've earned.", 'memphislaw'),
             'bullets' => [
                 __('Work injury claims', 'memphislaw'),
                 __('Denied claim appeals', 'memphislaw'),
-                __('Permanent disability questions', 'memphislaw'),
+                __('Permanent disability', 'memphislaw'),
+                __('Occupational disease claims', 'memphislaw'),
                 __('Third-party liability claims', 'memphislaw'),
             ],
             'fallback_link' => home_url('/#workers-comp'),
@@ -406,34 +409,34 @@ function memphislaw_get_workers_comp_benefits(): array
 {
     return [
         [
-            'icon' => 'M',
-            'title' => __('Medical Care', 'memphislaw'),
-            'summary' => __('Necessary and reasonable medical treatment paid in full, including visits, surgery, therapy, and prescriptions.', 'memphislaw'),
+            'icon' => 'benefit-medical',
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_1_title', 'workers_benefit_1_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_1_summary', 'workers_benefit_1_summary', 'textarea'),
         ],
         [
-            'icon' => 'W',
-            'title' => __('Wage Replacement', 'memphislaw'),
-            'summary' => __('Temporary Total Disability benefits can replace part of your wages while you are unable to work.', 'memphislaw'),
+            'icon' => 'benefit-wage',
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_2_title', 'workers_benefit_2_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_2_summary', 'workers_benefit_2_summary', 'textarea'),
         ],
         [
-            'icon' => 'D',
-            'title' => __('Permanent Disability', 'memphislaw'),
-            'summary' => __('Lasting impairment may qualify you for permanent partial or total disability benefits.', 'memphislaw'),
+            'icon' => 'benefit-disability',
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_3_title', 'workers_benefit_3_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_3_summary', 'workers_benefit_3_summary', 'textarea'),
         ],
         [
-            'icon' => 'V',
-            'title' => __('Vocational Rehab', 'memphislaw'),
-            'summary' => __('If you cannot return to your prior role, vocational support may help with retraining and reemployment.', 'memphislaw'),
+            'icon' => 'benefit-vocational',
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_4_title', 'workers_benefit_4_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_4_summary', 'workers_benefit_4_summary', 'textarea'),
         ],
         [
-            'icon' => 'F',
-            'title' => __('Death Benefits', 'memphislaw'),
-            'summary' => __('Surviving family members may receive funeral expenses and ongoing support after a fatal work injury.', 'memphislaw'),
+            'icon' => 'benefit-death',
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_5_title', 'workers_benefit_5_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_5_summary', 'workers_benefit_5_summary', 'textarea'),
         ],
         [
-            'icon' => 'R',
-            'title' => __('Anti-Retaliation', 'memphislaw'),
-            'summary' => __('Tennessee law prohibits employers from firing or discriminating against workers for filing legitimate claims.', 'memphislaw'),
+            'icon' => 'benefit-retaliation',
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_6_title', 'workers_benefit_6_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_benefit_6_summary', 'workers_benefit_6_summary', 'textarea'),
         ],
     ];
 }
@@ -442,20 +445,20 @@ function memphislaw_get_workers_comp_steps(): array
 {
     return [
         [
-            'title' => __('Report the injury immediately', 'memphislaw'),
-            'summary' => __('Notify your supervisor in writing as soon as possible.', 'memphislaw'),
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_step_1_title', 'workers_step_1_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_step_1_summary', 'workers_step_1_summary', 'textarea'),
         ],
         [
-            'title' => __('Seek approved medical care', 'memphislaw'),
-            'summary' => __('Use the employer-approved panel physician when required.', 'memphislaw'),
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_step_2_title', 'workers_step_2_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_step_2_summary', 'workers_step_2_summary', 'textarea'),
         ],
         [
-            'title' => __('Document everything', 'memphislaw'),
-            'summary' => __('Keep records, receipts, correspondence, and work restrictions.', 'memphislaw'),
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_step_3_title', 'workers_step_3_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_step_3_summary', 'workers_step_3_summary', 'textarea'),
         ],
         [
-            'title' => __('Call us early', 'memphislaw'),
-            'summary' => __('We can protect the claim while you focus on healing.', 'memphislaw'),
+            'title' => memphislaw_get_string_theme_mod('memphislaw_workers_step_4_title', 'workers_step_4_title'),
+            'summary' => memphislaw_get_string_theme_mod('memphislaw_workers_step_4_summary', 'workers_step_4_summary', 'textarea'),
         ],
     ];
 }
@@ -472,12 +475,12 @@ function memphislaw_get_attorneys(): array
             'name' => __('Arthur Ray, Esq.', 'memphislaw'),
             'role' => __('Founding Attorney', 'memphislaw'),
             'badge' => __('Lead Attorney', 'memphislaw'),
-            'summary' => __("Arthur Ray has practiced bankruptcy law in Memphis for decades while also building a trusted personal injury and workers' compensation practice for Mid-South families.", 'memphislaw'),
+            'summary' => __('Arthur Ray has practiced bankruptcy law in Memphis for over 50 years, filing thousands of cases in the Western District of Tennessee. A dedicated advocate for families facing financial hardship, Mr. Ray is known for his thorough knowledge of bankruptcy procedure, his meticulous handling of trustee filings and creditor claims, and his unwavering commitment to clients in their most vulnerable moments.', 'memphislaw'),
             'credentials' => [
                 __('University of Memphis Cecil C. Humphreys School of Law', 'memphislaw'),
-                __('Tennessee Bar Association member', 'memphislaw'),
-                __('Western District of Tennessee bankruptcy practice', 'memphislaw'),
-                __('Memphis Bar Association member', 'memphislaw'),
+                __('Tennessee Bar Association, Member', 'memphislaw'),
+                __('50+ Years Bankruptcy Practice, Western District of TN', 'memphislaw'),
+                __('Memphis Bar Association, Member', 'memphislaw'),
             ],
             'initials' => 'AR',
         ],
@@ -485,11 +488,10 @@ function memphislaw_get_attorneys(): array
             'name' => __('Associate Attorney', 'memphislaw'),
             'role' => __("Personal Injury and Workers' Compensation", 'memphislaw'),
             'badge' => '',
-            'summary' => __("The associate attorney team supports focused personal injury and workers' compensation litigation with attentive case management and courtroom preparation.", 'memphislaw'),
+            'summary' => __("Our associate attorneys bring focused expertise in personal injury litigation and workers' compensation claims. Working under Mr. Ray's supervision, they provide clients with attentive, case-specific guidance and vigorous courtroom representation.", 'memphislaw'),
             'credentials' => [
-                __('Licensed in Tennessee', 'memphislaw'),
-                __('Personal injury litigation', 'memphislaw'),
-                __("Workers' compensation claims and appeals", 'memphislaw'),
+                __('Licensed, State of Tennessee', 'memphislaw'),
+                __("Personal Injury & Workers' Comp Litigation", 'memphislaw'),
             ],
             'initials' => 'AA',
         ],
@@ -581,37 +583,37 @@ function memphislaw_get_testimonials(): array
 {
     $defaults = [
         [
-            'quote' => __('Mr. Ray helped me through Chapter 7 bankruptcy when I felt like I had nowhere to turn. He explained everything clearly and handled the paperwork from start to finish.', 'memphislaw'),
+            'quote' => __("Mr. Ray helped me through Chapter 7 bankruptcy when I felt like I had nowhere to turn. He explained everything clearly, handled all the paperwork, and within months I had a fresh start. I can't thank him enough.", 'memphislaw'),
             'client' => __('D. Johnson, Memphis, TN', 'memphislaw'),
             'matter' => __('Bankruptcy Client', 'memphislaw'),
             'rating' => 5,
         ],
         [
-            'quote' => __('I was injured in a car accident and did not know where to start. Arthur Ray Law Offices took my case, handled the insurance company, and recovered far more than I expected.', 'memphislaw'),
+            'quote' => __("I was injured in a car accident and didn't know where to start. Arthur Ray Law Offices took my case, handled everything with the insurance company, and recovered far more than I expected. They truly fight for you.", 'memphislaw'),
             'client' => __('M. Williams, Germantown, TN', 'memphislaw'),
             'matter' => __('Personal Injury Client', 'memphislaw'),
             'rating' => 5,
         ],
         [
-            'quote' => __("My workers' compensation claim was denied after a serious back injury on the job. Mr. Ray appealed the decision and we won.", 'memphislaw'),
+            'quote' => __("My workers' comp claim was denied after a serious back injury on the job. Mr. Ray appealed the decision and we won. He knew exactly what to do and kept me informed every step of the way.", 'memphislaw'),
             'client' => __('R. Thomas, Bartlett, TN', 'memphislaw'),
             'matter' => __("Workers' Compensation Client", 'memphislaw'),
             'rating' => 5,
         ],
         [
-            'quote' => __('Filing Chapter 13 bankruptcy saved my home from foreclosure. The team walked me through the repayment plan and kept creditors off my back.', 'memphislaw'),
+            'quote' => __('Filing Chapter 13 bankruptcy saved my home from foreclosure. The team at Arthur Ray Law walked me through the repayment plan and kept creditors off my back. Professional, compassionate, and effective.', 'memphislaw'),
             'client' => __('L. Brown, Collierville, TN', 'memphislaw'),
             'matter' => __('Bankruptcy Client', 'memphislaw'),
             'rating' => 5,
         ],
         [
-            'quote' => __('After my slip-and-fall, the firm helped me recover compensation for medical bills and lost income. Compassionate and highly professional.', 'memphislaw'),
+            'quote' => __("After my slip-and-fall at a local business, I wasn't sure I had a case. Mr. Ray reviewed everything and helped me recover compensation for my medical bills and lost income. Outstanding attorney.", 'memphislaw'),
             'client' => __('C. Harris, Memphis, TN', 'memphislaw'),
             'matter' => __('Personal Injury Client', 'memphislaw'),
             'rating' => 5,
         ],
         [
-            'quote' => __('I have referred several friends to Arthur Ray over the years. Every one of them came back grateful for the care and professionalism.', 'memphislaw'),
+            'quote' => __("I've referred several friends to Arthur Ray over the years. Every single one has come back grateful. He's the most knowledgeable and trustworthy attorney I've ever worked with - and I've worked with many.", 'memphislaw'),
             'client' => __('J. Davis, Memphis, TN', 'memphislaw'),
             'matter' => __('Long-Term Client', 'memphislaw'),
             'rating' => 5,
@@ -627,8 +629,8 @@ function memphislaw_get_testimonials(): array
             'post_type' => 'ml_testimonial',
             'posts_per_page' => 6,
             'post_status' => 'publish',
-            'orderby' => 'date',
-            'order' => 'DESC',
+            'orderby' => 'menu_order date',
+            'order' => 'ASC',
         ]
     );
 
