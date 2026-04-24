@@ -35,15 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const shouldUseMobileNavBehavior = () => mobileNavQuery.matches;
 
-    const syncMobilePanelOffset = () => {
-        if (!panel || !header || !shouldUseMobileNavBehavior()) {
-            panel.style.removeProperty('top');
-            return;
-        }
-        const headerBottom = Math.max(0, Math.round(header.getBoundingClientRect().bottom));
-        panel.style.top = `${headerBottom}px`;
-    };
-
     const setHeaderHidden = (hidden) => {
         if (!header) {
             return;
@@ -89,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (open) {
             setHeaderHidden(false);
         }
-        syncMobilePanelOffset();
     };
 
     toggle.addEventListener('click', () => {
@@ -109,12 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         requestHeaderSync();
-        if (navOpen) {
-            syncMobilePanelOffset();
-        }
     }, { passive: true });
-
-    window.addEventListener('resize', syncMobilePanelOffset);
 
     const onMobileChange = () => {
         setHeaderHidden(false);
@@ -122,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setState(false);
         }
         lastScrollY = window.scrollY;
-        syncMobilePanelOffset();
     };
 
     if (typeof mobileNavQuery.addEventListener === 'function') {
