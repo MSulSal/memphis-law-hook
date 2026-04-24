@@ -5551,3 +5551,168 @@ body.memphis-law-page .site-footer {
         height: 17px !important;
     }
 }
+
+/* Final polish pass: spacing/alignment + light-theme parity */
+.memphis-law-page .hero__metric strong,
+.memphis-law-page .ml-hero-stat-number {
+    display: block !important;
+    margin-bottom: 4px !important;
+}
+
+body.memphis-law-page #team .container,
+body.memphis-law-page #team .ml-container {
+    width: min(var(--container), calc(100vw - 48px)) !important;
+    margin-inline: auto !important;
+}
+
+.memphis-law-page #practice-areas .service-card a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    line-height: 1.2 !important;
+}
+
+.memphis-law-page #practice-areas .service-card__link-icon {
+    display: inline-grid !important;
+    place-items: center !important;
+    width: 14px !important;
+    height: 14px !important;
+    flex: 0 0 14px !important;
+}
+
+.memphis-law-page #practice-areas .service-card__link-icon svg {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+body.memphis-law-page #consultation .consultation-form h3 {
+    color: var(--gold) !important;
+}
+
+body.memphis-law-page #consultation .consultation-form label {
+    color: #c0cfe6 !important;
+    font-weight: 600 !important;
+}
+
+body.memphis-law-page #consultation .consultation-form input,
+body.memphis-law-page #consultation .consultation-form select,
+body.memphis-law-page #consultation .consultation-form textarea {
+    color: #e6efff !important;
+}
+
+body.memphis-law-page #consultation .contact-list {
+    gap: 12px !important;
+}
+
+body.memphis-law-page #consultation .contact-list div {
+    gap: 4px !important;
+}
+
+body.memphis-law-page #consultation .contact-list__icon {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 7px !important;
+}
+
+body.memphis-law-page #consultation .contact-list__icon svg {
+    width: 13px !important;
+    height: 13px !important;
+}
+
+body.memphis-law-page #consultation .contact-list dd,
+body.memphis-law-page #consultation .contact-list a {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+    letter-spacing: 0.01em !important;
+}
+
+@media (min-width: 901px) {
+    body.memphis-law-page #team .section__intro,
+    body.memphis-law-page #team .attorney-grid,
+    body.memphis-law-page #team .stat-grid {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    body.memphis-law-page #consultation .contact-list dt {
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+    }
+
+    body.memphis-law-page #consultation .contact-list dd,
+    body.memphis-law-page #consultation .contact-list a {
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        line-height: 1.45 !important;
+    }
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas {
+    background: #eef3fb !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card {
+    background: #ffffff !important;
+    border-color: rgba(26, 54, 95, 0.18) !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card h3 {
+    color: #122948 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card p,
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card li,
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card a {
+    color: #334969 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card__icon {
+    background: #eef4ff !important;
+    border-color: #b8c9e4 !important;
+    color: #2f5ea8 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card:hover,
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card:focus-within {
+    border-color: rgba(77, 127, 212, 0.62) !important;
+    box-shadow: inset 0 0 0 1px rgba(77, 127, 212, 0.24) !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card:hover .service-card__icon,
+html[data-theme="light"] body.memphis-law-page #practice-areas .service-card:focus-within .service-card__icon {
+    background: #dce8fb !important;
+    border-color: #6f92d2 !important;
+    color: #254f92 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #team {
+    background: #e6edf9 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #team .attorney-card,
+html[data-theme="light"] body.memphis-law-page #team .stat-card {
+    background: #ffffff !important;
+    border-color: rgba(26, 54, 95, 0.18) !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #team .attorney-card__avatar {
+    background: #eef4ff !important;
+    border-color: #b8c9e4 !important;
+    color: #2f5ea8 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #team .attorney-card h3,
+html[data-theme="light"] body.memphis-law-page #team .section__intro h2 {
+    color: #122948 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page #team .attorney-card__body > p:not(.attorney-card__role),
+html[data-theme="light"] body.memphis-law-page #team .attorney-card__credentials li,
+html[data-theme="light"] body.memphis-law-page #team .stat-card span {
+    color: #334969 !important;
+}
