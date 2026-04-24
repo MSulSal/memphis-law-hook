@@ -2,7 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('[data-nav-toggle]');
     const panel = document.querySelector('[data-nav-panel]');
     const themeToggle = document.querySelector('[data-theme-toggle]');
+    const header = document.querySelector('.memphis-law-page .site-header');
+    const mobileNavQuery = window.matchMedia('(max-width: 900px)');
     const root = document.documentElement;
+    let navOpen = false;
+    let lastScrollY = window.scrollY;
+    let isTicking = false;
 
     const applyTheme = (theme) => {
         root.dataset.theme = theme;
@@ -28,10 +33,53 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    const shouldUseMobileNavBehavior = () => mobileNavQuery.matches;
+
+    const setHeaderHidden = (hidden) => {
+        if (!header) {
+            return;
+        }
+        header.classList.toggle('is-hidden', hidden);
+    };
+
+    const syncHeaderOnScroll = () => {
+        if (!shouldUseMobileNavBehavior()) {
+            setHeaderHidden(false);
+            lastScrollY = window.scrollY;
+            isTicking = false;
+            return;
+        }
+
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollY;
+
+        if (navOpen || currentY < 16 || delta < -2) {
+            setHeaderHidden(false);
+        } else if (delta > 4 && currentY > 80) {
+            setHeaderHidden(true);
+        }
+
+        lastScrollY = currentY;
+        isTicking = false;
+    };
+
+    const requestHeaderSync = () => {
+        if (isTicking) {
+            return;
+        }
+
+        isTicking = true;
+        window.requestAnimationFrame(syncHeaderOnScroll);
+    };
+
     const setState = (open) => {
+        navOpen = open;
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         panel.classList.toggle('is-open', open);
         document.body.classList.toggle('nav-open', open);
+        if (open) {
+            setHeaderHidden(false);
+        }
     };
 
     toggle.addEventListener('click', () => {
@@ -42,4 +90,22 @@ document.addEventListener('DOMContentLoaded', () => {
     panel.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => setState(false));
     });
+
+    window.addEventListener('scroll', requestHeaderSync, { passive: true });
+
+    const onMobileChange = () => {
+        setHeaderHidden(false);
+        if (!shouldUseMobileNavBehavior()) {
+            setState(false);
+        }
+        lastScrollY = window.scrollY;
+    };
+
+    if (typeof mobileNavQuery.addEventListener === 'function') {
+        mobileNavQuery.addEventListener('change', onMobileChange);
+    } else if (typeof mobileNavQuery.addListener === 'function') {
+        mobileNavQuery.addListener(onMobileChange);
+    }
+
+    onMobileChange();
 });
