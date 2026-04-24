@@ -4344,8 +4344,8 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
 /* Desktop sizing normalization (fixes zoomed-out appearance) */
 @media (min-width: 901px) {
     .memphis-law-page {
-        --container: 742px;
-        --nav-container: 776px;
+        --container: 860px;
+        --nav-container: 960px;
     }
 
     .memphis-law-page #practice-areas,
@@ -4383,7 +4383,7 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .site-header__inner {
-        gap: 30px;
+        gap: 32px;
     }
 
     .memphis-law-page .brand__mark {
@@ -4404,11 +4404,11 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .menu a {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .memphis-law-page .site-header__phone {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .memphis-law-page .site-header__phone-icon {
@@ -4417,10 +4417,10 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .site-header__cta {
-        height: 35px;
-        min-height: 35px;
-        padding: 0 22px;
-        font-size: 12px;
+        height: 37px;
+        min-height: 37px;
+        padding: 0 24px;
+        font-size: 13px;
     }
 
     .memphis-law-page .site-header__theme-toggle {
@@ -4433,10 +4433,20 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
         height: 15px;
     }
 
+    .memphis-law-page .hero {
+        min-height: 680px;
+    }
+
+    .memphis-law-page .hero__inner {
+        height: 680px;
+        min-height: 680px;
+        padding-top: 66px;
+    }
+
     .memphis-law-page .hero__panel {
-        width: 470px;
-        max-width: 470px;
-        margin-left: 142px;
+        width: 500px;
+        max-width: 500px;
+        margin-left: 152px;
     }
 
     .memphis-law-page .hero__pill {
@@ -4446,34 +4456,34 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     }
 
     .memphis-law-page .hero__title {
-        font-size: 62px;
+        font-size: 68px;
     }
 
     .memphis-law-page .hero__practice-line,
     .memphis-law-page .hero__support-line {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .memphis-law-page .hero__actions .button {
-        height: 44px;
-        min-height: 44px;
+        height: 46px;
+        min-height: 46px;
     }
 
     .memphis-law-page .hero__actions .button:first-child,
     .memphis-law-page .hero__actions .button--ghost {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .memphis-law-page .hero__metric strong {
-        font-size: 26px;
+        font-size: 30px;
     }
 
     .memphis-law-page .hero__metric span {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .memphis-law-page .section__intro .eyebrow {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .memphis-law-page #practice-areas .section__intro h2,
@@ -4481,120 +4491,153 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     .memphis-law-page #team .section__intro h2,
     .memphis-law-page #testimonials .section__intro h2,
     .memphis-law-page #consultation .consultation__details h2 {
-        font-size: 32px;
+        font-size: 36px;
     }
 
     .memphis-law-page .section__intro p:last-child,
     .memphis-law-page #workers-comp .workers-comp__main > p,
     .memphis-law-page #workers-comp .workers-comp__split > div p,
     .memphis-law-page #consultation .consultation__details > p:not(.eyebrow) {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.52;
     }
 
+    .memphis-law-page #practice-areas .card-grid {
+        grid-template-columns: repeat(3, 250px);
+    }
+
     .memphis-law-page #practice-areas .service-card {
-        min-height: 452px;
-        padding: 22px 18px 20px;
+        width: 250px;
+        min-height: 500px;
+        padding: 24px 20px 22px;
     }
 
     .memphis-law-page .service-card__icon {
-        width: 46px;
-        height: 46px;
+        width: 50px;
+        height: 50px;
     }
 
     .memphis-law-page #practice-areas .service-card h3 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .memphis-law-page #practice-areas .service-card p,
     .memphis-law-page #practice-areas .service-card li,
     .memphis-law-page #practice-areas .service-card a {
-        font-size: 11px;
+        font-size: 12px;
+    }
+
+    .memphis-law-page #workers-comp .workers-comp {
+        grid-template-columns: 520px 290px;
+        gap: 50px;
     }
 
     .memphis-law-page #workers-comp .workers-comp__split > div h3,
     .memphis-law-page #workers-comp .workers-comp__main > h3,
     .memphis-law-page #workers-comp .info-card h3 {
-        font-size: 25px;
+        font-size: 28px;
     }
 
     .memphis-law-page #workers-comp .steps-card strong,
     .memphis-law-page #workers-comp .steps-card span,
     .memphis-law-page #workers-comp .benefit-card p,
     .memphis-law-page #workers-comp .deadline-note {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .memphis-law-page #workers-comp .benefit-card h4 {
-        font-size: 14px;
+        font-size: 15px;
+    }
+
+    .memphis-law-page #team .attorney-grid {
+        grid-template-columns: 530px 315px;
     }
 
     .memphis-law-page #team .attorney-card {
-        min-height: 528px;
-        padding: 20px 16px 16px;
+        min-height: 560px;
+        padding: 22px 18px 18px;
     }
 
     .memphis-law-page #team .attorney-card__avatar {
-        width: 78px;
-        height: 96px;
+        width: 84px;
+        height: 104px;
     }
 
     .memphis-law-page #team .attorney-card__badge {
-        min-height: 18px;
-        font-size: 7px;
-    }
-
-    .memphis-law-page #team .attorney-card h3 {
-        font-size: 19px;
-    }
-
-    .memphis-law-page #team .attorney-card__role {
-        font-size: 10px;
-    }
-
-    .memphis-law-page #team .attorney-card__body > p:not(.attorney-card__role) {
-        font-size: 12px;
-    }
-
-    .memphis-law-page #team .stat-card strong {
-        font-size: 30px;
-    }
-
-    .memphis-law-page #team .stat-card span {
+        min-height: 20px;
         font-size: 8px;
     }
 
+    .memphis-law-page #team .attorney-card h3 {
+        font-size: 21px;
+    }
+
+    .memphis-law-page #team .attorney-card__role {
+        font-size: 11px;
+    }
+
+    .memphis-law-page #team .attorney-card__body > p:not(.attorney-card__role) {
+        font-size: 13px;
+    }
+
+    .memphis-law-page #team .stat-card strong {
+        font-size: 34px;
+    }
+
+    .memphis-law-page #team .stat-card span {
+        font-size: 9px;
+    }
+
+    .memphis-law-page #testimonials .testimonial-grid {
+        grid-template-columns: repeat(3, 250px);
+    }
+
     .memphis-law-page #testimonials .testimonial-card {
-        min-height: 194px;
+        width: 250px;
+        min-height: 210px;
     }
 
     .memphis-law-page #testimonials .testimonial-card__rating {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .memphis-law-page #testimonials .testimonial-card blockquote {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .memphis-law-page #testimonials .testimonial-card__client {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .memphis-law-page #testimonials .testimonial-card__matter {
-        font-size: 10px;
+        font-size: 11px;
+    }
+
+    .memphis-law-page #consultation .consultation {
+        grid-template-columns: 390px 420px;
+        gap: 50px;
+    }
+
+    .memphis-law-page #consultation .consultation__map {
+        width: 390px;
+    }
+
+    .memphis-law-page #consultation .consultation__form,
+    .memphis-law-page #consultation .consultation-form {
+        width: 420px;
     }
 
     .memphis-law-page #consultation .contact-list dt {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .memphis-law-page #consultation .contact-list dd,
     .memphis-law-page #consultation .contact-list a {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .memphis-law-page #consultation .consultation-form h3 {
-        font-size: 19px;
+        font-size: 22px;
     }
 
     .memphis-law-page #consultation .consultation-form label,
@@ -4604,7 +4647,7 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     .memphis-law-page #consultation .consultation-form__consent span,
     .memphis-law-page #consultation .consultation-form .button,
     .memphis-law-page #consultation .consultation-form__footnote {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .memphis-law-page .brand--footer .brand__text strong {
@@ -4623,7 +4666,7 @@ html[data-theme="light"] .memphis-law-page .site-header__theme-icon--sun {
     .memphis-law-page .site-footer__list,
     .memphis-law-page .site-footer__list a,
     .memphis-law-page .site-footer__legal p {
-        font-size: 11px;
+        font-size: 12px;
     }
 }
 
