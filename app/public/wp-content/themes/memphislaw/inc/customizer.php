@@ -38,7 +38,6 @@ function memphislaw_get_customizer_defaults(): array
         'contact_phone' => '901-475-8200',
         'contact_email' => 'info@memphislaw.com',
         'contact_hours' => __("Mon-Fri: 8:30 AM - 5:30 PM\nSat: By appointment", 'memphislaw'),
-        'contact_map_image' => get_theme_file_uri('/assets/images/office-map.jpg'),
         'footer_legal_disclaimer' => __('Attorney advertising. The information on this website is for general informational purposes only and does not constitute legal advice. Viewing this site does not create an attorney-client relationship.', 'memphislaw'),
         'practice_section_eyebrow' => __('Practice Areas', 'memphislaw'),
         'practice_section_title' => __('Comprehensive Legal Services for Memphis Families', 'memphislaw'),
@@ -352,7 +351,6 @@ function memphislaw_customize_register(WP_Customize_Manager $wp_customize): void
             ['setting' => 'memphislaw_contact_phone', 'label' => __('Phone Number', 'memphislaw'), 'default' => $defaults['contact_phone']],
             ['setting' => 'memphislaw_contact_email', 'label' => __('Contact Email', 'memphislaw'), 'default' => $defaults['contact_email'], 'type' => 'email'],
             ['setting' => 'memphislaw_contact_hours', 'label' => __('Office Hours', 'memphislaw'), 'default' => $defaults['contact_hours'], 'type' => 'textarea'],
-            ['setting' => 'memphislaw_contact_map_image', 'label' => __('Consultation Map Image', 'memphislaw'), 'default' => $defaults['contact_map_image'], 'type' => 'image'],
             ['setting' => 'memphislaw_footer_legal_disclaimer', 'label' => __('Footer Legal Disclaimer', 'memphislaw'), 'default' => $defaults['footer_legal_disclaimer'], 'type' => 'textarea'],
         ]
     );
@@ -513,13 +511,11 @@ function memphislaw_get_homepage_sections(): array
 
 function memphislaw_get_brand_settings(): array
 {
-    $defaults = memphislaw_get_customizer_defaults();
     $tagline = get_bloginfo('description');
 
     return [
         'tagline' => is_string($tagline) && $tagline !== '' ? $tagline : __('Trusted legal counsel for Memphis families since 1974.', 'memphislaw'),
         'header_consultation_label' => memphislaw_get_string_theme_mod('memphislaw_header_consultation_label', 'header_consultation_label'),
         'footer_disclaimer' => memphislaw_get_string_theme_mod('memphislaw_footer_legal_disclaimer', 'footer_legal_disclaimer', 'textarea'),
-        'contact_map_image' => memphislaw_get_string_theme_mod('memphislaw_contact_map_image', 'contact_map_image', 'url') ?: $defaults['contact_map_image'],
     ];
 }

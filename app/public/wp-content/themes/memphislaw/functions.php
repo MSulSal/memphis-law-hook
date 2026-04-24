@@ -126,6 +126,23 @@ function memphislaw_render_consultation_form(): string
         '</p></div>';
 }
 
+function memphislaw_render_consultation_map(): string
+{
+    if (function_exists('memphislaw_google_maps_render_map')) {
+        return memphislaw_google_maps_render_map(
+            [
+                'class_name' => 'consultation__map-embed',
+                'height' => 136,
+                'title' => __('Arthur Ray Law Offices location map', 'memphislaw'),
+            ]
+        );
+    }
+
+    return '<div class="consultation__map-fallback"><p>' .
+        esc_html__('Activate the Memphis Law Google Maps plugin to display the live office map.', 'memphislaw') .
+        '</p></div>';
+}
+
 function memphislaw_get_phone_href(): string
 {
     return 'tel:' . preg_replace('/[^0-9+]/', '', memphislaw_get_contact_details()['phone']);

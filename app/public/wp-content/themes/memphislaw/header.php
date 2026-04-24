@@ -56,9 +56,7 @@ $brand = memphislaw_get_brand_settings();
 
         <div class="site-header__actions">
             <a class="site-header__phone" href="<?php echo esc_url(memphislaw_get_phone_href()); ?>">
-                <svg class="site-header__phone-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M7.6 10.8a15 15 0 0 0 5.6 5.6l1.9-1.9a1.2 1.2 0 0 1 1.2-.3c1 .3 2 .5 3.1.5a1.2 1.2 0 0 1 1.2 1.2V19a1.2 1.2 0 0 1-1.2 1.2C10.5 20.2 3.8 13.5 3.8 5.2A1.2 1.2 0 0 1 5 4h3.1a1.2 1.2 0 0 1 1.2 1.2c0 1.1.2 2.1.5 3.1a1.2 1.2 0 0 1-.3 1.2l-1.9 1.3Z" fill="currentColor"/>
-                </svg>
+                <span class="site-header__phone-icon" aria-hidden="true"><?php echo memphislaw_get_icon_markup('contact-phone'); ?></span>
                 <?php echo esc_html($contact['phone']); ?>
             </a>
             <a class="button button--small site-header__cta" href="<?php echo esc_url(home_url('/#consultation')); ?>">

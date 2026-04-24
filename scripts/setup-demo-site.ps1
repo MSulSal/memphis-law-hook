@@ -9,6 +9,11 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
+& $wpScript plugin activate memphislaw-google-maps
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
+
 & $wpScript theme activate memphislaw
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE

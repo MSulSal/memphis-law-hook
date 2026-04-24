@@ -13,12 +13,14 @@ Lightweight WordPress build for Arthur Ray Law Offices, aligned to the approved 
 
 - Theme: `app/public/wp-content/themes/memphislaw`
 - Plugin: `app/public/wp-content/plugins/memphislaw-core`
+- Plugin: `app/public/wp-content/plugins/memphislaw-google-maps`
 - WP-CLI helper: `scripts/wp-local.ps1`
 
-## What this first slice includes
+## What this build includes
 
 - A lightweight custom theme implementing the approved one-page homepage direction.
 - A companion plugin for attorneys, testimonials, and consultation request handling.
+- A lightweight Google Maps plugin for the live office map without adding third-party plugin bloat.
 - Starter docs for handoff, deployment discipline, and next commits.
 - Git hygiene that tracks only the custom WordPress surface, not core or Local runtime files.
 
@@ -35,6 +37,7 @@ If the Local site is down, WP-CLI will fail with a database connection error unt
 The setup script is idempotent and handles the initial site state:
 
 - activates the `Memphis Law Core` plugin
+- activates the `Memphis Law Google Maps` plugin
 - activates the `Memphis Law` theme
 - creates or reuses the `Home` page
 - creates or reuses the three core practice area pages
@@ -54,9 +57,12 @@ Planned GitHub remote:
 
 - `app/public/wp-content/themes/memphislaw`: presentation layer and homepage layout.
 - `app/public/wp-content/plugins/memphislaw-core`: structured content and form handling.
+- `app/public/wp-content/plugins/memphislaw-google-maps`: live Google Maps embed settings and shortcode rendering.
 - `docs`: continuity, handoff, and deployment notes.
 - `scripts`: local helper scripts for WordPress operations.
 
-## Next recommended commit
+## Proposal-ready checks
 
-The next commit should move the remaining homepage-only structured content, especially the workers' compensation benefits and steps, into a WordPress-managed editing surface.
+- Confirm the final office map settings in `Settings > Memphis Law Map`.
+- Rehearse the All-in-One WP Migration export and verify the archive size stays safe for Wasmer hosting.
+- Replace any remaining placeholder content only after client feedback requires it.

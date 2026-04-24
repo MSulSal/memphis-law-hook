@@ -8,7 +8,7 @@
 4. Homepage sections moved into WordPress-managed content and Customizer settings.
 5. Practice-area landing-page copy moved into structured WordPress editing surfaces.
 6. Workers' compensation homepage benefits and step content moved into WordPress-managed controls.
-7. Final polish pass for PDF alignment, icon system, responsive cleanup, and light/dark preview support.
+7. Final polish pass for PDF alignment, icon system, responsive cleanup, light/dark preview support, and a plugin-backed live Google Map.
 
 ## Best next commits if the project continues
 

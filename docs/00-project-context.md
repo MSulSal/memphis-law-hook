@@ -27,11 +27,12 @@ The immediate business goal is simple: get a client-ready demo close enough to t
 
 The site must not depend on a page builder or non-WordPress handoff workflow. Homepage content and appearance controls should move into native WordPress editing surfaces wherever practical so the client can update copy, images, and brand styling without code changes.
 
-The current theme now uses the Customizer for hero content, homepage section copy, contact details, workers' compensation benefit cards and step list copy, shared firm stats, logo replacement, and the core dark/light palette colors. The practice-area landing pages use structured WordPress editing surfaces instead of relying on PHP fallback copy.
+The current theme now uses the Customizer for hero content, homepage section copy, contact details, workers' compensation benefit cards and step list copy, shared firm stats, logo replacement, and the core dark/light palette colors. The live office map is now handled by a dedicated lightweight WordPress plugin instead of a static image. The practice-area landing pages use structured WordPress editing surfaces instead of relying on PHP fallback copy.
 
 The homepage editing model is now split in a client-friendly way:
 
 - `Appearance > Customize` handles hero content, section headings, workers' compensation section copy, benefit cards, next-step items, contact details, shared stats, logo replacement, and key brand styling.
+- `Settings > Memphis Law Map` handles the Google Maps query or client-supplied embed URL for the live office map.
 - `Pages > Bankruptcy`, `Pages > Personal Injury`, and `Pages > Workers' Compensation` handle both the homepage cards and the deeper landing-page copy through the page title, excerpt, body content, and a structured "Practice Area Page Details" meta box.
 - `Attorneys` and `Testimonials` remain managed through the companion plugin post types.
 - The front-end header toggle switches between the dark and light visual treatments without requiring a separate theme.
@@ -44,7 +45,7 @@ The homepage editing model is now split in a client-friendly way:
 
 ## Current build status
 
-The Local site is running, the custom theme and plugin activate cleanly, starter content is seeded through the setup script, and the homepage has been visually checked against the redesign PDF in both desktop and mobile layouts.
+The Local site is running, the custom theme and plugins activate cleanly, starter content is seeded through the setup script, and the homepage has been visually checked against the redesign PDF in both desktop and mobile layouts.
 
 ## Next commits to preserve momentum
 

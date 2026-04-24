@@ -18,6 +18,7 @@
 /app/public/wp-content/plugins/*
 !/app/public/wp-content/plugins/index.php
 !/app/public/wp-content/plugins/memphislaw-core/
+!/app/public/wp-content/plugins/memphislaw-google-maps/
 
 /app/public/wp-content/uploads/
 /app/public/wp-config.php

@@ -3,7 +3,7 @@
  * Plugin Name: Memphis Law Core
  * Plugin URI: https://github.com/MSulSal/memphis-law-hook
  * Description: Structured content and lightweight consultation handling for the Memphis Law WordPress build.
- * Version: 0.6.1
+ * Version: 0.6.2
  * Requires at least: 6.7
  * Requires PHP: 8.1
  * Author: Sul + Codex
@@ -452,7 +452,15 @@ function memphislaw_core_render_consultation_form(): string
                 <span><?php esc_html_e('I understand that submitting this form does not create an attorney-client relationship and that my information will be kept confidential.', 'memphislaw-core'); ?></span>
             </label>
 
-            <button class="button" type="submit"><?php esc_html_e('Send My Request', 'memphislaw-core'); ?><span aria-hidden="true"> ↗</span></button>
+            <button class="button" type="submit">
+                <span><?php esc_html_e('Send My Request', 'memphislaw-core'); ?></span>
+                <span class="consultation-form__submit-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M4 12 20 4l-3.8 16-4.1-5.1L4 12Z"></path>
+                        <path d="M20 4 10.8 14.9"></path>
+                    </svg>
+                </span>
+            </button>
 
             <p class="consultation-form__footnote"><?php esc_html_e('Attorney advertising. Results vary by case. No attorney-client relationship is formed by submitting this form.', 'memphislaw-core'); ?></p>
         </form>

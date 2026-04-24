@@ -13,7 +13,6 @@ $contact = memphislaw_get_contact_details();
 $hero = memphislaw_get_homepage_hero_content();
 $hero_image_url = memphislaw_get_homepage_hero_image_url();
 $sections = memphislaw_get_homepage_sections();
-$brand = memphislaw_get_brand_settings();
 ?>
 <main id="primary" class="site-main">
     <section class="hero" id="top">
@@ -256,7 +255,7 @@ $brand = memphislaw_get_brand_settings();
                 </dl>
 
                 <div class="consultation__map">
-                    <img src="<?php echo esc_url($brand['contact_map_image']); ?>" alt="<?php esc_attr_e('Map showing the office area around Arthur Ray Law Offices in Memphis.', 'memphislaw'); ?>">
+                    <?php echo memphislaw_render_consultation_map(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </div>
             </div>
 
