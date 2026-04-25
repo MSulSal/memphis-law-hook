@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('[data-nav-toggle]');
     const panel = document.querySelector('[data-nav-panel]');
     const themeToggle = document.querySelector('[data-theme-toggle]');
-    const mobileQuery = window.matchMedia('(max-width: 900px)');
+    const mobileQuery = window.matchMedia('(max-width: 1024px)');
     const root = document.documentElement;
     let navOpen = false;
     let lastScrollY = window.scrollY;
@@ -98,9 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const onViewportChange = () => {
-        if (!mobileQuery.matches) {
-            setState(false);
-        }
+        setState(false);
         header.classList.remove('is-hidden');
         lastScrollY = window.scrollY;
         panel.style.removeProperty('top');
