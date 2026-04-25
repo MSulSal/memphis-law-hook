@@ -6030,6 +6030,30 @@ html[data-theme="light"] body.memphis-law-page .site-footer .brand--footer .bran
     color: #51678a !important;
 }
 
+/* Footer copy contrast boost */
+body.memphis-law-page .site-footer .site-footer__blurb,
+body.memphis-law-page .site-footer .site-footer__list,
+body.memphis-law-page .site-footer .site-footer__list a,
+body.memphis-law-page .site-footer .site-footer__legal p {
+    color: #aab8cc !important;
+}
+
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__heading {
+    color: #17335a !important;
+}
+
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__blurb,
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list,
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a,
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__legal p {
+    color: #2f4768 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a:hover,
+html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a:focus-visible {
+    color: #17335a !important;
+}
+
 /* iOS/Safari touch-state parity for card hover effects */
 @media (hover: none) and (pointer: coarse) {
     body.memphis-law-page #practice-areas .service-card,
