@@ -5919,6 +5919,9 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
         justify-content: flex-end !important;
         gap: 11px !important;
         width: auto !important;
+        grid-column: 2 / 3 !important;
+        grid-row: 1 !important;
+        justify-self: end !important;
     }
 
     body.memphis-law-page .site-header__cta {
@@ -5952,6 +5955,9 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
         border-radius: 8px !important;
         background: rgba(255, 255, 255, 0.02) !important;
         overflow: hidden !important;
+        grid-column: 3 / 4 !important;
+        grid-row: 1 !important;
+        justify-self: end !important;
     }
 
     body.memphis-law-page .site-header__toggle span {
@@ -6008,6 +6014,16 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
         line-height: 1.2 !important;
         white-space: normal !important;
     }
+}
+
+/* Light theme footer logo readability */
+html[data-theme="light"] body.memphis-law-page .site-footer .brand__image--footer,
+html[data-theme="light"] body.memphis-law-page .site-footer .brand__image {
+    filter: brightness(0) saturate(100%) opacity(0.9) !important;
+}
+
+html[data-theme="light"] body.memphis-law-page .site-footer .brand__mark {
+    background: transparent !important;
 }
 
 /* iOS/Safari touch-state parity for card hover effects */
