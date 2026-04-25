@@ -6299,6 +6299,43 @@ html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a
         gap: 12px !important;
     }
 
+    body.home .site-header.ml-navbar .brand,
+    body.memphis-law-page .site-header.ml-navbar .brand,
+    body.home .site-header.ml-navbar .site-header__actions,
+    body.memphis-law-page .site-header.ml-navbar .site-header__actions,
+    body.home .site-header.ml-navbar .site-header__toggle,
+    body.memphis-law-page .site-header.ml-navbar .site-header__toggle {
+        align-self: center !important;
+    }
+
+    body.home .site-header.ml-navbar .brand,
+    body.memphis-law-page .site-header.ml-navbar .brand {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    body.home .site-header.ml-navbar .brand__mark,
+    body.memphis-law-page .site-header.ml-navbar .brand__mark {
+        width: 24px !important;
+        height: 36px !important;
+    }
+
+    body.home .site-header.ml-navbar .brand__image,
+    body.memphis-law-page .site-header.ml-navbar .brand__image {
+        height: 36px !important;
+    }
+
+    body.home .site-header.ml-navbar .brand__text strong,
+    body.memphis-law-page .site-header.ml-navbar .brand__text strong {
+        font-size: 14px !important;
+    }
+
+    body.home .site-header.ml-navbar .brand__subline,
+    body.memphis-law-page .site-header.ml-navbar .brand__subline {
+        font-size: 8px !important;
+    }
+
     body.home .site-header.ml-navbar .site-header__phone,
     body.memphis-law-page .site-header.ml-navbar .site-header__phone {
         display: none !important;
@@ -6314,6 +6351,32 @@ html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a
         grid-row: 1 !important;
         justify-self: end !important;
         width: auto !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__cta,
+    body.memphis-law-page .site-header.ml-navbar .site-header__cta {
+        height: 32px !important;
+        min-height: 32px !important;
+        padding: 0 14px !important;
+        font-size: 11px !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__theme-toggle,
+    body.memphis-law-page .site-header.ml-navbar .site-header__theme-toggle {
+        display: inline-grid !important;
+        place-items: center !important;
+        width: 28px !important;
+        height: 28px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__theme-icon,
+    body.memphis-law-page .site-header.ml-navbar .site-header__theme-icon {
+        width: 20px !important;
+        height: 20px !important;
     }
 
     body.home .site-header.ml-navbar .site-header__toggle,
@@ -6397,6 +6460,38 @@ html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a
 }
 
 @media (min-width: 1367px) {
+    body.home #primary,
+    body.memphis-law-page #primary {
+        padding-top: 0 !important;
+    }
+
+    body.home.nav-open,
+    body.memphis-law-page.nav-open {
+        overflow: visible !important;
+    }
+
+    body.home .site-header.ml-navbar,
+    body.memphis-law-page .site-header.ml-navbar {
+        --ml-header-h: 45px !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 320 !important;
+        min-height: 45px !important;
+        transform: none !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__inner,
+    body.memphis-law-page .site-header.ml-navbar .site-header__inner {
+        display: grid !important;
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        align-items: center !important;
+        width: min(1240px, calc(100vw - 64px)) !important;
+        height: 45px !important;
+        min-height: 45px !important;
+        margin-inline: auto !important;
+        gap: 26px !important;
+    }
+
     body.home .site-header.ml-navbar .site-header__toggle,
     body.memphis-law-page .site-header.ml-navbar .site-header__toggle {
         display: none !important;
@@ -6405,11 +6500,59 @@ html[data-theme="light"] body.memphis-law-page .site-footer .site-footer__list a
     body.home .site-header.ml-navbar .site-header__nav,
     body.memphis-law-page .site-header.ml-navbar .site-header__nav {
         position: static !important;
-        display: block !important;
-        width: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
         max-height: none !important;
         overflow: visible !important;
+        padding: 0 !important;
         border: 0 !important;
         background: transparent !important;
+    }
+
+    body.home .site-header.ml-navbar .menu,
+    body.memphis-law-page .site-header.ml-navbar .menu {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 26px !important;
+        flex-wrap: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    body.home .site-header.ml-navbar .menu a,
+    body.memphis-law-page .site-header.ml-navbar .menu a {
+        font-size: 10px !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__actions,
+    body.memphis-law-page .site-header.ml-navbar .site-header__actions {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        justify-self: end !important;
+        width: auto !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__phone,
+    body.memphis-law-page .site-header.ml-navbar .site-header__phone {
+        display: inline-flex !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__theme-toggle,
+    body.memphis-law-page .site-header.ml-navbar .site-header__theme-toggle {
+        width: 34px !important;
+        height: 34px !important;
+    }
+
+    body.home .site-header.ml-navbar .site-header__theme-icon,
+    body.memphis-law-page .site-header.ml-navbar .site-header__theme-icon {
+        width: 24px !important;
+        height: 24px !important;
     }
 }
