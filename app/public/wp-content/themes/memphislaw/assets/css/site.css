@@ -5824,67 +5824,8 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
     color: #566d91 !important;
 }
 
-/* Mobile navbar sizing/spacing polish */
-@media (max-width: 900px) {
-    body.memphis-law-page .site-header__inner {
-        gap: 12px !important;
-    }
-
-    body.memphis-law-page .brand__mark {
-        width: 24px !important;
-        height: 36px !important;
-    }
-
-    body.memphis-law-page .brand__image {
-        height: 36px !important;
-    }
-
-    body.memphis-law-page .brand__text strong {
-        font-size: 14px !important;
-    }
-
-    body.memphis-law-page .brand__subline {
-        font-size: 8px !important;
-    }
-
-    body.memphis-law-page .site-header__actions {
-        gap: 11px !important;
-    }
-
-    body.memphis-law-page .site-header__theme-toggle {
-        margin-right: 4px !important;
-    }
-
-    body.memphis-law-page .site-header__toggle {
-        margin-left: 0 !important;
-    }
-}
-
-@media (max-width: 520px) {
-    body.memphis-law-page .brand__mark {
-        width: 23px !important;
-        height: 35px !important;
-    }
-
-    body.memphis-law-page .brand__image {
-        height: 35px !important;
-    }
-
-    body.memphis-law-page .brand__text strong {
-        font-size: 13px !important;
-    }
-
-    body.memphis-law-page .site-header__actions {
-        gap: 11px !important;
-    }
-
-    body.memphis-law-page .site-header__theme-toggle {
-        margin-right: 4px !important;
-    }
-}
-
-/* Navbar mode cleanup: desktop (>=1025), burger mode (<=1024) */
-@media (min-width: 1025px) {
+/* Navbar mode cleanup: desktop (>=1367), burger mode (<=1366) */
+@media (min-width: 1367px) {
     body.memphis-law-page #primary {
         padding-top: 0 !important;
     }
@@ -5932,7 +5873,7 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1366px) {
     body.memphis-law-page #primary {
         padding-top: var(--ml-header-h, 58px) !important;
     }
@@ -5963,6 +5904,35 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
         gap: 12px !important;
     }
 
+    body.memphis-law-page .brand,
+    body.memphis-law-page .site-header__actions,
+    body.memphis-law-page .site-header__toggle {
+        align-self: center !important;
+    }
+
+    body.memphis-law-page .brand {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    body.memphis-law-page .brand__mark {
+        width: 24px !important;
+        height: 36px !important;
+    }
+
+    body.memphis-law-page .brand__image {
+        height: 36px !important;
+    }
+
+    body.memphis-law-page .brand__text strong {
+        font-size: 14px !important;
+    }
+
+    body.memphis-law-page .brand__subline {
+        font-size: 8px !important;
+    }
+
     body.memphis-law-page .site-header__phone {
         display: none !important;
     }
@@ -5984,13 +5954,14 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
         min-height: 32px !important;
         padding: 0 14px !important;
         font-size: 11px !important;
+        line-height: 1 !important;
         white-space: nowrap !important;
     }
 
     body.memphis-law-page .site-header__theme-toggle {
         width: 28px !important;
         height: 28px !important;
-        margin-right: 4px !important;
+        margin-right: 0 !important;
     }
 
     body.memphis-law-page .site-header__theme-icon {
@@ -6066,6 +6037,21 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
         font-size: 15px !important;
         line-height: 1.2 !important;
         white-space: normal !important;
+    }
+}
+
+@media (max-width: 520px) {
+    body.memphis-law-page .brand__mark {
+        width: 23px !important;
+        height: 35px !important;
+    }
+
+    body.memphis-law-page .brand__image {
+        height: 35px !important;
+    }
+
+    body.memphis-law-page .brand__text strong {
+        font-size: 13px !important;
     }
 }
 
