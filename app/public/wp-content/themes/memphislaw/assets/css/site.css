@@ -6019,11 +6019,15 @@ html[data-theme="light"] body.memphis-law-page #consultation .consultation-form_
 /* Light theme footer logo readability */
 html[data-theme="light"] body.memphis-law-page .site-footer .brand__image--footer,
 html[data-theme="light"] body.memphis-law-page .site-footer .brand__image {
-    filter: brightness(0) saturate(100%) opacity(0.9) !important;
+    filter: none !important;
 }
 
-html[data-theme="light"] body.memphis-law-page .site-footer .brand__mark {
-    background: transparent !important;
+html[data-theme="light"] body.memphis-law-page .site-footer .brand--footer .brand__text strong {
+    color: #122948 !important;
+}
+
+html[data-theme="light"] body.memphis-law-page .site-footer .brand--footer .brand__text span {
+    color: #51678a !important;
 }
 
 /* iOS/Safari touch-state parity for card hover effects */
